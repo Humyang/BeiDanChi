@@ -116,7 +116,7 @@ section.refresh { color: #ffffff; text-align: center; margin-top: 45px; padding-
 .search_wrap p { background-color: white; margin: 0 auto; width: 6.2rem; height: 45px; border-radius: 2px; }
 .search_wrap img { padding: 14px; float: left; }
 .search_wrap input[type="text"] { font-size: 14px; line-height: 45px; padding: 0; margin: 0; color: #000000; width: 5.2rem; border: 0;}
-section.word_card { overflow: hidden; width: 6.2rem; padding: 0 0.1rem; }
+section.word_card { overflow: hidden;  }
 .detail_tabs li { font-size: 18px;float: left; width: 2.13rem; text-align: center; color: white; padding: 15px 0; }
 .detail_tabs ul { overflow: hidden; background-color: #00BBD3;border-radius: 1px; }
 section.detail_tabs { margin-top: 10px; }

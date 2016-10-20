@@ -74,83 +74,23 @@ export default {
 </style>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#Index{
-  height: 100%;
-}
-.right_btn {}
-.container{
-    background-color: #36474F;
-    overflow: auto;
-    display: block;
-    /* padding-top: 50px; */
-    height: 100%;
-    padding-bottom: 50px;
-}
+#Index { height: 100%; }
+
+.container { background-color: #36474F; overflow: auto; display: block;height: 100%; padding-bottom: 50px;}
 
 /* 搜索框 */
-.search_wrap{
-  margin-top: 1rem;
-}
-.search_wrap p {
-    background-color: white;
-    margin: 0 auto;
-    width: 6.2rem;
-    height: 45px;
-    /* font-size: 26px; */
-    border-radius: 2px;
-}
-.search_wrap img {
-    padding: 14px;
-    float: left;
-}
-.search_wrap input[type="text"] {
-    font-size: 14px;
-    line-height: 45px;
-    padding: 0;
-    margin: 0;
-    color: #000000;
-    /* opacity: 0.5; */
-    width: 5.2rem;
-    border: 0;
-    /* float: left; */
-}
+.search_wrap { margin-top: 1rem; }
+.search_wrap p { background-color: white; margin: 0 auto; width: 6.2rem; height: 45px;border-radius: 2px; }
+.search_wrap img { padding: 14px; float: left; }
+.search_wrap input[type="text"] { font-size: 14px; line-height: 45px; padding: 0; margin: 0; color: #000000;width: 5.2rem; border: 0;}
 
-.detail_tabs li {
-    font-size: 18px;
-    float: left;
-    width: 2.13rem;
-    text-align: center;
-    color: white;
-    padding: 15px 0;
-}
 
-.detail_tabs ul {
-    overflow: hidden;
-    background-color: #00BBD3;
-    border-radius: 1px;
-}
+.detail_tabs ul { overflow: hidden; background-color: #00BBD3; border-radius: 1px; }
+section.detail_tabs { margin-top: 10px; }
+.detail_tabs ul li { font-size: 18px; float: left; width: 2.13rem; text-align: center; color: white; padding: 15px 0; }
+.detail_tabs li.active { border-bottom: 2px solid #FFFF8C; }
 
-section.detail_tabs {
-    margin-top: 10px;
-}
+.describe textarea { width: 6.3rem; border: 0; margin: 0; padding: 0; background-color: #36474f; border-bottom: 2px solid #80CBC4; margin-left: 5px; color: white; font-size: 16px; }
+section.detail_container.describe { margin-top: 40px; }
 
-.describe textarea {
-    width: 6.3rem;
-    border: 0;
-    margin: 0;
-    padding: 0;
-    background-color: #36474f;
-    border-bottom: 2px solid #80CBC4;
-    margin-left: 5px;
-    color: white;
-    font-size: 16px;
-}
-
-section.detail_container.describe {
-    margin-top: 40px;
-}
-
-.detail_tabs li.active {
-    border-bottom: 2px solid #FFFF8C;
-}
 </style>
