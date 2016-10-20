@@ -13,7 +13,7 @@
         <section class="search_wrap">
           <p>
             <img src="./images/搜索图标.png" alt="">
-            <input type="text" placeholder="新增或搜索单词" v-model="search_text">
+            <input v-model="word" type="text" placeholder="新增或搜索单词" v-model="search_text">
           </p>
         </section>
         <section class="detail_tabs">
@@ -24,7 +24,7 @@
           </ul>
         </section>
         <section class="detail_container describe">
-          <textarea name="" id="" cols="30" rows="10"></textarea>
+          <textarea v-model="describe" name="" id="" cols="30" rows="10"></textarea>
         </section>
       </content>
     </div>
@@ -36,6 +36,7 @@ import navbar from './common/navbar'
 import card from './common/card'
 import loadmore from 'mint-loadmore';
 // import hambraug from './hambraug'
+import API from '../api/main.js'
 export default {
   components:{
     navbar
@@ -47,18 +48,28 @@ export default {
       history.back()
     },
     navbar_btn_right:function(){
+      // 添加单词
+      API.wordAdd(this.word,this.describe,function(err,res){
+        if(err){
+          console.log("添加失败：",err)
+        }else{
+          console.log("添加成功")
+        }
+      })
     }
   },
   events:{
   },
   data () {
     return {
+      word:"",
+      describe:""
     }
   },
   ready:function(){
-    var container = document.getElementsByClassName("container")[0];
-    container.scrollTop=50;
-    console.log(container.scrollTop)
+    // var container = document.getElementsByClassName("container")[0];
+    // container.scrollTop=50;
+    // console.log(container.scrollTop)
   }
   
 }
