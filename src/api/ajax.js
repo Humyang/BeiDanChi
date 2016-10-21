@@ -17,12 +17,12 @@ const preProcessRsp = function(rsp, callback) {
 };
 export const mAjax = function(type,url,data,callback) {
     let token = BASE.getToken()
-    let data = Object.assgin(data,{token})
+    let comb_data = Object.assgin(data,{token})
     $.ajax({
         url:url,
         type,
         dataType: 'json',
-        data,
+        comb_data,
         complete:function(rsp){
             if(!preProcessRsp(rsp,callback)){
                 callback(null,rsp.responseText)

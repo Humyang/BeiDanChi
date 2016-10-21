@@ -19,6 +19,7 @@ var drop_down = {
         this.startY = event.touches[0].clientY;
         // 获取滚动条头部位置
         this.startScrollTop = this.getScrollTop(this.scrollEventTarget);
+        return true
     },
     handleTouchMove:function(event){
         // 当前点击位置
@@ -45,6 +46,7 @@ var drop_down = {
             // console.log(this.translate)
             // this.topStatus = this.translate >= this.topDistance ? 'drop' : 'pull';
         }
+        return true
     },
     handleTouchEnd:function(event){
         
@@ -55,6 +57,7 @@ var drop_down = {
             }
             // 
         }
+        return true
     },
 
     getScrollEventTarget:function(element){

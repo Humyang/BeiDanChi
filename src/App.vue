@@ -12,7 +12,7 @@
 // import Hello from './components/Hello'
 import navbar from './components/common/navbar'
 import hambraug from './components/hambraug'
-import Index from './components/Index'
+// import Index from './components/wordList'
 import './css/common.css'
 import './css/animal.css'
 export default {

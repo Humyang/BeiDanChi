@@ -7,7 +7,7 @@ const USERNAME = FLAG+'USERNAME' //用户名
 const SESSION_TOKEN = FLAG+'SESSION_TOKEN' //token
 const SESSION_EXPIRED = FLAG+'SESSION_EXPIRED' //session过期时间
 const ACCOUNT_STATE = FLAG+'ACCOUNT_STATE' //账户状态
-const SESSION_EXPIRED = FLAG+'SESSION_EXPIRED'
+
 export const removeToken = function(page_this) {
     // storage.sessionToken = '',
     // storage.sessionExpired = new Date();
