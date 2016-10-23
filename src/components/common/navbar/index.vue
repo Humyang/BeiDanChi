@@ -1,7 +1,7 @@
 <template>
   <header class="nav_bar">
       <div class="_btn left">
-        <p @click.prevent="left">
+        <p @click.prevent="back">
           <img v-if="left_type==='hambraug'" :src="img_url2" alt="">
           <img v-if="left_type==='back'" :src="img_url3" alt="">
         </p>
@@ -10,7 +10,7 @@
         <p>{{title}}</p>
       </div>
       <div class="_btn right">
-        <p @click.prevent="right">
+        <p @click.prevent="go">
           <img v-if="right_type==='add'" :src="img_url" alt="">
           <span v-if="right_type==='done'">完成</span>
         </p>
@@ -32,6 +32,16 @@ export default {
     right:Function,
     right_type:{
       default:"add"
+    }
+  },
+  methods:{
+    go:function(){
+      this.$root.transition_type = true
+      this.right()
+    },
+    back:function(){
+      this.$root.transition_type = false
+      this.left()
     }
   },
   data () {

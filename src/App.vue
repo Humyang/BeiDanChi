@@ -1,10 +1,12 @@
 <template>
   <div id="wrapper">
     <router-view
-      class="view"
+      class="view animated"
       keep-alive
-      transition></router-view>
-    <hambraug :show.sync="show_hambraug"></hambraug>
+      :transition="transition_type?'slide_go':'slide_back'"
+
+      ></router-view>
+    <hambraug :is_show.sync="show_hambraug"></hambraug>
   </div>
 </template>
 
@@ -18,22 +20,21 @@ import './css/animal.css'
 export default {
   data:function(){
     return {
-      show_hambraug:false  
+      show_hambraug:false,
+      transition_type:true
     }
-    
   },
   components: {
     navbar,
     hambraug
-  },
-  methods:{
-    navbar_btn_left:function(){
-      this.show_hambraug=true
-    }
   }
 }
 </script>
-
+<style scrope>
+  div.view{
+    animation-duration: 0.5s;
+  }
+</style>
 <style>
 #wrapper{
   height: 100%

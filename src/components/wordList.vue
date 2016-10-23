@@ -1,5 +1,5 @@
 <template>
-  <div id="index">
+  <div class="wrapper">
       <navbar title="首页" :left="navbar_btn_left" :right="navbar_btn_right"></navbar>
       <content class="container">
         <loadmore :top-method="loadTop" >
@@ -24,22 +24,23 @@ import navbar from './common/navbar'
 import card from './common/card'
 import loadmore from 'mint-loadmore';
 import drop_down from '../vendor/drop_down.js'
+
+import * as API from '../api/main.js'
 // import hambraug from './hambraug'
 export default {
   data () {
     return {
       search_text:'',
-      show_hambraug:false,
       show_search:false,
       lists:[
-          {describe:'1111111',size:0},
-          {describe:'222222222',size:1},
-          {describe:'aaaaa',size:1},
-          {describe:'a1acxba1aa',size:1},
-          {describe:'aa2qwgzaaa2',size:1},
-          {describe:'aaahjla3a',size:1},
-          {describe:'bbq2bbs4b',size:1},
-          {describe:'cc1caacc3c',size:1}
+          // {describe:'1111111',size:0},
+          // {describe:'222222222',size:1},
+          // {describe:'aaaaa',size:1},
+          // {describe:'a1acxba1aa',size:1},
+          // {describe:'aa2qwgzaaa2',size:1},
+          // {describe:'aaahjla3a',size:1},
+          // {describe:'bbq2bbs4b',size:1},
+          // {describe:'cc1caacc3c',size:1}
       ]
     }
   },
@@ -51,6 +52,10 @@ export default {
   },
   computed:{
     liste_filter:function(){
+      console.log(this.lists)
+      if(!this.lists){
+        return []
+      }
       var new_list = []
       for (var i = this.lists.length - 1; i >= 0; i--) {
         if(this.lists[i].describe.indexOf(this.search_text)!=-1){
@@ -71,21 +76,27 @@ export default {
       }, 2000);
     },
     navbar_btn_left:function(){
-
-      this.$root.show_hambraug=true
+      this.$root.show_hambraug = true
     },
     navbar_btn_right:function(){
-      this.$router.go('/add_word')
+      this.$router.go('/word/add')
     }
   },
   events:{
   },
-
   ready:function(){
     var self = this
     drop_down.listen("word_card",function(){
       self.show_search = true
-      console.log(true)
+      // console.log(true)
+    })
+    // 获取单词列表
+    API.listGet(0,20,function(err,res){
+      if(err){
+
+      }
+      self.lists = JSON.parse(res)
+      console.log("返回数据",res)
     })
   }
   
@@ -102,8 +113,8 @@ export default {
 </style>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#index { height: 100%; overflow: hidden; }
-.container { background-color: #36474F; overflow: auto; display: block; height: 100%; padding-bottom: 50px; }
+
+.container { background-color: #36474F; overflow: auto; display: block; height: 100%; padding-bottom: 50px;    margin-top: 0.21rem; }
 /* 下拉刷新 */
 section.refresh { color: #ffffff; text-align: center; margin-top: 45px; padding-top: 5px; }
 section.refresh p { margin: 10px; }

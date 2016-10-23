@@ -1,6 +1,6 @@
 import {mAjax} from './ajax.js'
-const IP = 'ipaddress'
-window.API_URL = IP + '/api.php/h5';
+const IP = 'http://localhost:8081'
+window.API_URL = IP + '';
 // const remote_code = ip + '/WheatInterface/in?';
 const FLAG="APP_"
 const USERNAME = FLAG+'USERNAME' //用户名

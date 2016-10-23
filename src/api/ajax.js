@@ -15,20 +15,22 @@ const preProcessRsp = function(rsp, callback) {
     }
     return false;
 };
-export const mAjax = function(type,url,data,callback) {
+ const mAjax = function(type,url,data,callback) {
     let token = BASE.getToken()
-    let comb_data = Object.assgin(data,{token})
+    let comb_data = Object.assign(data,{token})
     $.ajax({
         url:url,
         type,
         dataType: 'json',
-        comb_data,
+        data:comb_data,
         complete:function(rsp){
             if(!preProcessRsp(rsp,callback)){
                 callback(null,rsp.responseText)
-            }else{
-                callback(rsp)
             }
+            // else{
+            //     callback(rsp)
+            // }
         }
     });
 };
+export default mAjax

@@ -22,3 +22,4 @@ ul{
 li{
 	list-style: none;
 }
+.wrapper { height: 100%; overflow: hidden;position: absolute;top: 0;}

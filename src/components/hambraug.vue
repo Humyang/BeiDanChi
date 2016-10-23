@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section v-show="show" transition="slide" class="animated humbrag">
+    <section v-show="is_show" transition="slide" class="animated humbrag">
         <content >
         <!-- 头部账户信息 -->
           <header>
@@ -23,7 +23,7 @@
         </content>
     </section>
     <div
-          v-show="show"
+          v-show="is_show"
           transition="fade"
           @click="hidden"
           class="animated zhezhao">
@@ -35,9 +35,7 @@
 import '../css/animal.css'
 export default {
   props:{
-    show:{
-      default:false
-    }
+    is_show:false
   },
   data () {
     return {
@@ -46,7 +44,7 @@ export default {
   },
   methods: {
     hidden:function(){
-      this.show = false
+      this.is_show = false
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div id="Index">
+  <div class="wrapper">
       <navbar 
       title="新词" 
       :left="navbar_btn_left" 
@@ -36,7 +36,7 @@ import navbar from './common/navbar'
 import card from './common/card'
 import loadmore from 'mint-loadmore';
 // import hambraug from './hambraug'
-import API from '../api/main.js'
+import * as API from '../api/main.js'
 export default {
   components:{
     navbar
@@ -48,12 +48,14 @@ export default {
       history.back()
     },
     navbar_btn_right:function(){
+      let self = this
       // 添加单词
       API.wordAdd(this.word,this.describe,function(err,res){
         if(err){
           console.log("添加失败：",err)
         }else{
           console.log("添加成功")
+          self.$router.go('/word/list')
         }
       })
     }
@@ -85,7 +87,7 @@ export default {
 </style>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#Index { height: 100%; }
+
 
 .container { background-color: #36474F; overflow: auto; display: block;height: 100%; padding-bottom: 50px;}
 

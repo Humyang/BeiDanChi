@@ -15,10 +15,10 @@ Vue.use(Router)
 var router = new Router()
 
 router.map({
-  '/word_list':{
+  '/word/list':{
         component: word_list
     },
-  '/word_add': {
+  '/word/add': {
     component: add_word
   },
   // '/user/:id': {

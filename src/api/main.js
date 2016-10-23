@@ -27,13 +27,13 @@ export const wordAdd = function(word,describe,callback){
 
 
 // 获取单词列表
-export const listGet = function(index,number){
+export const listGet = function(index,number,callback){
     let data={
         index,
         number
     }
     mAjax('POST'
-            ,API_URL + '/list/get'
+            ,API_URL + '/word/list'
             ,data
             ,callback) 
 }
