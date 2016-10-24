@@ -1,14 +1,13 @@
 // 主要的业务逻辑
 // 项目太小时不分文件
-import mAjax from './ajax.js'
+import mFetch from './ajax.js'
 // 登录
 export const login = function(username, password, callback) {
     let data={
         username,
         password
     }
-    mAjax('POST'
-            ,API_URL + '/login/send_login'
+    mFetch('/login/send_login'
             ,data
             ,callback)
 }
@@ -19,8 +18,7 @@ export const wordAdd = function(word,describe,callback){
         word,
         describe
     }
-    mAjax('POST'
-            ,API_URL + '/word/add'
+    mFetch('/word/add'
             ,data
             ,callback)
 }
@@ -32,8 +30,7 @@ export const listGet = function(index,number,callback){
         index,
         number
     }
-    mAjax('POST'
-            ,API_URL + '/word/list'
+    mFetch('/word/list'
             ,data
             ,callback) 
 }

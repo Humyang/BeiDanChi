@@ -1,0 +1,10 @@
+export const IP = 'http://localhost:8081'
+export const API_URL = IP + '';
+export const FLAG="APP_"
+export const USERNAME = FLAG+'USERNAME' //用户名
+export const SESSION_TOKEN = FLAG+'SESSION_TOKEN' //token
+export const SESSION_EXPIRED = FLAG+'SESSION_EXPIRED' //session过期时间
+export const ACCOUNT_STATE = FLAG+'ACCOUNT_STATE' //账户状态
+export const TIMEOUT = 3000000;//超时时间
+export const HTTP_FAIL = "与服务器通信失败，请检查手机网络"
+export const DATA_INVALID = "无法识别服务器返回的数据包"
