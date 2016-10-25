@@ -3,12 +3,12 @@
       <navbar title="首页" :left="navbar_btn_left" :right="navbar_btn_right"></navbar>
       <content class="container">
         <loadmore :top-method="loadTop" >
-          <section v-show="show_search" class="search_wrap">
+          <!-- <section v-show="show_search" class="search_wrap">
             <p>
               <img src="./images/搜索图标.png" alt="">
               <input type="text" placeholder="过滤单词" v-model="search_text">
             </p>
-          </section>
+          </section> -->
           <!-- <loadmore> -->
           <!-- 单词列表 -->
           <section id="word_card" class="word_card">
@@ -95,7 +95,7 @@ export default {
 
       }
 
-      self.lists = res
+      self.lists = res.list
       console.log("返回数据",res)
     })
   }
@@ -116,5 +116,6 @@ section.search_wrap {    margin-top: 0.1rem;}
 section.search_wrap p { background-color: white; margin: 0 auto; width: 6.2rem; height: 45px; border-radius: 2px; }
 section.search_wrap img { padding: 14px; float: left; }
 section.search_wrap input[type="text"] { font-size: 14px; line-height: 45px; padding: 0; margin: 0; color: #000000; width: 5.2rem; border: 0;}
-section.word_card { overflow: hidden;min-height: 9rem;}
+section.word_card { overflow: hidden;min-height: 9rem;margin-bottom: 0.5rem;
+    margin-top: 0.2rem;}
 </style>
