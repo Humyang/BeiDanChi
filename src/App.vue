@@ -39,6 +39,9 @@ export default {
 #wrapper{
   height: 100%
 }
+#wrapper .view{
+  width: 100%
+}
 /* html {
   height: 100%;
 }

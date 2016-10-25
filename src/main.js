@@ -33,7 +33,7 @@ router.beforeEach(function () {
 })
 
 router.redirect({
-  '*': '/word_list'
+  '*': '/word/list'
 })
 
 router.start(App, '#app')

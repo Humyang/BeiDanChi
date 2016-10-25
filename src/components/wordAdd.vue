@@ -77,14 +77,6 @@ export default {
 }
 </script>
 
-<style>
-  .mint-loadmore-top {
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    padding: 14px 0;
-  }
-</style>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 

@@ -6,8 +6,8 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "api_test":"babel-node src/api/test.js",
-    "api_build":"babel src --out-dir lib",
+    "api_test": "babel-node src/api/test.js",
+    "api_build": "babel src --out-dir lib",
     "build": "node build/build.js",
     "unit": "karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
@@ -73,6 +73,7 @@
     "karma-spec-reporter": "0.0.24",
     "karma-webpack": "^1.7.0",
     "lolex": "^1.4.0",
+    "mint-loadmore": "^0.1.2",
     "mocha": "^2.4.5",
     "nightwatch": "^0.8.18",
     "ora": "^0.2.0",
