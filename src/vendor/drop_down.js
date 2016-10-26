@@ -52,7 +52,7 @@ var drop_down = {
         
         if (this.direction === 'down' && this.getScrollTop(this.scrollEventTarget) === 0 && this.translate > 0) {
             // console.log(this.translate)
-            if(this.translate > 50){
+            if(this.translate > 15){
                 this.callback()
             }
             // 

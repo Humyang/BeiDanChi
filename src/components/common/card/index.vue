@@ -2,7 +2,11 @@
   <div 
     :class="size"
     class="card">
-    <p>{{describe}}</p>
+    <p>
+    {{word}}
+    <br/>
+    {{describe}}
+    </p>
     <footer>
       <a @click.prevent="events[0]" href=""><img :src="img1" alt=""></a>
       <a @click.prevent="events[1]" href=""><img :src="img2" alt=""></a>
@@ -17,7 +21,8 @@ import img2 from './images/书签.png'
 import img3 from './images/分享.png'
 export default {
   props:{
-    describe:String,
+    describe:"",
+    word:"",
     size:{
       coerce:function(val){
         return {

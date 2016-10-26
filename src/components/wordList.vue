@@ -3,12 +3,12 @@
       <navbar title="首页" :left="navbar_btn_left" :right="navbar_btn_right"></navbar>
       <content class="container">
         <loadmore :top-method="loadTop" >
-          <section v-show="show_search" class="search_wrap">
+<!--           <section  class="search_wrap" >
             <p>
               <img src="./images/搜索图标.png" alt="">
               <input type="text" placeholder="过滤单词" v-model="search_text">
             </p>
-          </section>
+          </section> -->
           <!-- <loadmore> -->
           <!-- 单词列表 -->
           <section id="word_card" class="word_card">
@@ -50,16 +50,16 @@ export default {
   computed:{
     // 过滤单词
     liste_filter:function(){
-      if(!this.lists){
-        return []
-      }
-      var new_list = []
-      for (var i = this.lists.length - 1; i >= 0; i--) {
-        if(this.lists[i].describe.indexOf(this.search_text)!=-1){
-          new_list.push(this.lists[i])
-        }
-      }
-      return new_list
+      // if(!this.lists){
+      //   return []
+      // }
+      // var new_list = []
+      // for (var i = this.lists.length - 1; i >= 0; i--) {
+      //   if(this.lists[i].describe.indexOf(this.search_text)!=-1){
+      //     new_list.push(this.lists[i])
+      //   }
+      // }
+      return this.lists
     }
   },
   methods:{
@@ -84,10 +84,10 @@ export default {
   ready:function(){
     var self = this
 
-    drop_down.listen("word_card",function(){
-      console.log(50)
-      self.show_search = true
-    })
+    // drop_down.listen("word_card",function(){
+    //   console.log(50)
+    //   self.show_search = true
+    // })
 
     // 获取单词列表
     API.listGet(0,20,function(err,res){
@@ -95,7 +95,7 @@ export default {
 
       }
 
-      self.lists = res
+      self.lists = res.list
       console.log("返回数据",res)
     })
   }
@@ -113,8 +113,14 @@ export default {
 section.refresh { color: #ffffff; text-align: center; margin-top: 45px; padding-top: 5px; }
 section.refresh p { margin: 10px; }
 section.search_wrap {    margin-top: 0.1rem;}
-section.search_wrap p { background-color: white; margin: 0 auto; width: 6.2rem; height: 45px; border-radius: 2px; }
-section.search_wrap img { padding: 14px; float: left; }
-section.search_wrap input[type="text"] { font-size: 14px; line-height: 45px; padding: 0; margin: 0; color: #000000; width: 5.2rem; border: 0;}
-section.word_card { overflow: hidden;min-height: 9rem;}
+section.search_wrap p { background-color: white; margin: 0 auto; width: 6.2rem; height: 20px; border-radius: 2px;padding-left: 0.4rem; }
+section.search_wrap img { padding: 2px; float: left; }
+section.search_wrap input[type="text"] { font-size: 14px; line-height: 20px; padding: 0; margin: 0; color: #000000; width: 5.2rem; border: 0;
+    margin-left: 0.4rem;}
+section.word_card { overflow: hidden;
+    min-height: 9rem;
+    left: 0px;
+    float: left;
+    width: 100%;
+}
 </style>
