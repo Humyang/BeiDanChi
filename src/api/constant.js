@@ -8,3 +8,4 @@ export const ACCOUNT_STATE = FLAG+'ACCOUNT_STATE' //账户状态
 export const TIMEOUT = 3000000;//超时时间
 export const HTTP_FAIL = "与服务器通信失败，请检查手机网络"
 export const DATA_INVALID = "无法识别服务器返回的数据包"
+export const DAY = 86399500
