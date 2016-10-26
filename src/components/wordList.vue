@@ -3,7 +3,7 @@
       <navbar title="首页" :left="navbar_btn_left" :right="navbar_btn_right"></navbar>
       <content class="container">
         <loadmore :top-method="loadTop" >
-<!--           <section  class="search_wrap" >
+          <!-- <section v-show="show_search" class="search_wrap">
             <p>
               <img src="./images/搜索图标.png" alt="">
               <input type="text" placeholder="过滤单词" v-model="search_text">
@@ -122,5 +122,7 @@ section.word_card { overflow: hidden;
     left: 0px;
     float: left;
     width: 100%;
+    margin-bottom: 0.5rem;
+    margin-top: 0.2rem;
 }
 </style>
