@@ -6,7 +6,7 @@
     id,
     word,
     describe,
-    hide_time
+    end_time
 }
 
 ```

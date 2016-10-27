@@ -4,36 +4,40 @@ var router = require('koa-router')()
 var cors = require('koa-cors');
 var mongo = require('koa-mongo')
 var ObjectId = require('mongodb').ObjectId
+var $gt = require('mongodb').$gt
+
 app.use(cors());
 
 // 添加单词
 router.post('/word/add',body(),function * (next){
     let word = this.request.fields.word
     let describe = this.request.fields.describe
+
+    let now_time = new Date()
+    let end_time = now_time.getTime()
+
     let res = yield this.mongo
                         .db('BeiDanChi')
                         .collection('word_list')
-                        .insert({word,describe})
-    // console.log(res)
-    // let res = yield this.mongo
-    //         .db('BeiDanChi')
-    //         .collection('store')
-    //         .update({'app_id':10000},
-    //                 {'$set':{app_id:10000,list:list}},
-    //                 {'upsert':true});
+                        .insert({word,describe,end_time})
 
     this.body = res.result
 })
 
 
 // 获取列表
-router.post('/word/list',function *(next){
+router.post('/word/list',body(),function *(next){
     let page_index = this.request.fields.page_index
     let page_number = this.request.fields.page_number
 
-    let list =yield this.mongo .db('BeiDanChi')
-                          .collection('word_list')
-                          .find({}).toArray();
+    // 获取所有 end_time 小于当天的单词
+    let now_time = new Date()
+    let time = now_time.getTime()
+    console.log(time)
+    let list = yield this.mongo 
+                            .db('BeiDanChi')
+                            .collection('word_list')
+                            .find({"end_time":{ $lt: time }}).toArray();
 
     console.log('list',list)
 
@@ -42,16 +46,10 @@ router.post('/word/list',function *(next){
       list
     }
 })
-// 获取列表
+// 隐藏单词
 router.post('/word/hide',body(),function *(next){
-    console.log(this.request.fields)
     let id = this.request.fields.id
     let end_time = this.request.fields.end_time
-
-    // let list =yield this.mongo
-    //                         .db('BeiDanChi')
-    //                         .collection('word_list')
-    //                         .find({}).toArray();
 
     let res = yield this.mongo
             .db('BeiDanChi')
@@ -60,13 +58,13 @@ router.post('/word/hide',body(),function *(next){
                     {'$set':{end_time}},
                     {'upsert':true});
 
-    // console.log('list',list)
-
     this.body = {
       status:true,
       res
     }
 })
+
+
 app.use(mongo())
 app.use(router.routes())
 

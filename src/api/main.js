@@ -28,8 +28,8 @@ export const wordAdd = function(word,describe,callback){
 // 获取单词列表
 export const listGet = function(index,number,callback){
     let data={
-        index,
-        number
+        page_index:index,
+        page_number:number
     }
     mFetch('/word/list'
             ,data
