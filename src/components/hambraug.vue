@@ -16,9 +16,18 @@
           </header>
           <!-- 菜单 -->
           <ul>
-            <li class="active"><img src="../assets/images/汉堡菜单.png" alt="">首页</li>
-            <li><img src="../assets/images/汉堡菜单.png" height="12" width="17" alt="">设置</li>
-            <li><img src="../assets/images/汉堡菜单.png" alt="">退出登录</li>
+            <li 
+              @click="hidden"
+              v-link="{ path: '/word/list', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" alt="">首页</li>
+            <li 
+              @click="hidden"
+              v-link="{ path: '/word/add', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" height="12" width="17" alt="">所有单词</li>
+            <li 
+              @click="hidden"
+              v-link="{ path: '/word/add', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" height="12" width="17" alt="">设置</li>
+            <li 
+              @click="hidden"
+              v-link="{ path: '/word/add', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" alt="">退出登录</li>
           </ul>
         </content>
     </section>
@@ -39,14 +48,34 @@ export default {
   },
   data () {
     return {
-
+      index:0
     }
   },
   methods: {
+
+    go:function(index,path){
+      console.log(this.$router)
+      this.index = index
+      this.is_show = false
+      this.$router.go(path)
+    },
     hidden:function(){
       this.is_show = false
     }
+  },
+  computed:{
+    // active:function(){
+    //     switch(this.$router._currentRoute.path){
+    //       case '/word/list':
+    //       return 0
+    //       break;
+    //       case '/word/add':
+    //       return 1
+    //       break;          
+    //     }
+    // },
   }
+
 }
 </script>
 

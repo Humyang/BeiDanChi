@@ -36,6 +36,24 @@ export const listGet = function(index,number,callback){
             ,callback) 
 }
 
+// 获取所有单词列表
+export const listGetAll = function(index,number,callback){
+    let data={
+        page_index:index,
+        page_number:number
+    }
+    function preSet(err,res){
+        if(res){
+        for (var i = res.list.length - 1; i >= 0; i--) {
+            res.list[i].end_time = new Date(res.list[i].end_time)
+        }
+        callback(err,res)
+    }
+    mFetch('/word/all'
+            ,data
+            ,preSet) 
+}
+
 // 隐藏单词
 // type
 // 0 1~10 天

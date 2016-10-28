@@ -12,7 +12,14 @@
           <!-- <loadmore> -->
           <!-- 单词列表 -->
           <section id="word_card" class="word_card">
-            <card v-for="item in liste_filter" :word="item.word" :describe="item.describe" :size="1"></card>
+            <card 
+            v-for="item in liste_filter" 
+            :word="item.word"
+            :id="item._id"
+            :describe="item.describe" 
+            :size="1"
+            :events="events"
+            ></card>
           </section>
         </loadmore>
       </content>
@@ -38,6 +45,38 @@ export default {
             //   word: 'test word',
             //   describe: 'some word on here'
             // }
+      ],
+      events:[
+      function(id){
+        API.hideWord(id,0,function(err,res){
+            console.log("隐藏单词，结果：")
+            if(err){
+                console.log("some error：",err)
+                return false
+            }
+            console.log("success",res)
+        })
+      },
+      function(id){
+        API.hideWord(id,1,function(err,res){
+            console.log("隐藏单词，结果：")
+            if(err){
+                console.log("some error：",err)
+                return false
+            }
+            console.log("success",res)
+        })
+      },
+      function(id){
+        API.hideWord(id,2,function(err,res){
+            console.log("隐藏单词，结果：")
+            if(err){
+                console.log("some error：",err)
+                return false
+            }
+            console.log("success",res)
+        })
+      }
       ]
     }
   },
@@ -107,7 +146,7 @@ export default {
   
 </style>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 .container { background-color: #36474F; overflow: auto; display: block; height: 100%; padding-bottom: 50px;    margin-top: 0.21rem; }
 /* 下拉刷新 */
 section.refresh { color: #ffffff; text-align: center; margin-top: 45px; padding-top: 5px; }

@@ -46,6 +46,23 @@ router.post('/word/list',body(),function *(next){
       list
     }
 })
+// 获取所有
+router.post('/word/all',body(),function *(next){
+    let page_index = this.request.fields.page_index
+    let page_number = this.request.fields.page_number
+
+    let list = yield this.mongo 
+                            .db('BeiDanChi')
+                            .collection('word_list')
+                            .find({}).toArray();
+
+    console.log('list',list)
+
+    this.body = {
+      status:true,
+      list
+    }
+})
 // 隐藏单词
 router.post('/word/hide',body(),function *(next){
     let id = this.request.fields.id
@@ -63,7 +80,23 @@ router.post('/word/hide',body(),function *(next){
       res
     }
 })
+// 移除单词
+router.post('/word/move',body(),function *(next){
+    let id = this.request.fields.id
+    let end_time = this.request.fields.end_time
 
+    let res = yield this.mongo
+            .db('BeiDanChi')
+            .collection('word_list')
+            .update({'_id':ObjectId(id)},
+                    {'$set':{end_time,is_move:true}},
+                    {'upsert':true});
+
+    this.body = {
+      status:true,
+      res
+    }
+})
 
 app.use(mongo())
 app.use(router.routes())
