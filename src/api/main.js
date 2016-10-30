@@ -104,3 +104,13 @@ export const hideWord = function(id,type,callback){
             ,callback)
 
 }
+
+export const moveWord = function(id,callback){
+    let data = {
+        id
+    }
+    mFetch('/word/move'
+            ,data
+            ,callback)
+
+}

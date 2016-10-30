@@ -12,7 +12,7 @@
         <!-- 搜索框 -->
         <section class="search_wrap">
           <p>
-            <img src="./images/搜索图标.png" alt="">
+            <!-- <img src="./images/搜索图标.png" alt=""> -->
             <input v-model="word" type="text" placeholder="新增或搜索单词" v-model="search_text">
           </p>
         </section>

@@ -5,7 +5,7 @@ var cors = require('koa-cors');
 var mongo = require('koa-mongo')
 var ObjectId = require('mongodb').ObjectId
 var $gt = require('mongodb').$gt
-
+console.log($gt)
 app.use(cors());
 
 // 添加单词
@@ -54,7 +54,7 @@ router.post('/word/all',body(),function *(next){
     let list = yield this.mongo 
                             .db('BeiDanChi')
                             .collection('word_list')
-                            .find({}).toArray();
+                            .find({'is_move':{}}).toArray();
 
     console.log('list',list)
 

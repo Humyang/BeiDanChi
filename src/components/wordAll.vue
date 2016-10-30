@@ -15,7 +15,7 @@
                 <p class="line"></p>
                 <footer>
                   <a @click.prevent="" class="a1" href="">编辑</a>
-                  <a @click.prevent="" class="a2" href="">删除</a>
+                  <a @click.prevent="moveItem(item)" class="a2" href="">删除</a>
                 </footer>
               </template>
             </div>
@@ -52,6 +52,10 @@ export default {
     
   },
   methods:{
+    // 移除 item
+    moveItem:function(item){
+
+    },
     setItem:function(item){
       for (var i = this.lists.length - 1; i >= 0; i--) {
           this.lists[i].show = false
