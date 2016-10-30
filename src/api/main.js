@@ -45,7 +45,11 @@ export const listGetAll = function(index,number,callback){
     function preSet(err,res){
         if(res){
         for (var i = res.list.length - 1; i >= 0; i--) {
-            res.list[i].end_time = new Date(res.list[i].end_time)
+                if(res.list[i].end_time!=undefined){
+                    let source_time = new Date(res.list[i].end_time) 
+                    res.list[i].end_time = source_time.toLocaleDateString() +" "+ source_time.toLocaleTimeString()
+                }
+            }
         }
         callback(err,res)
     }
@@ -59,6 +63,7 @@ export const listGetAll = function(index,number,callback){
 // 0 1~10 天
 // 1 10~100 天
 // 2 很久
+
 export const hideWord = function(id,type,callback){
 
 
@@ -86,7 +91,7 @@ export const hideWord = function(id,type,callback){
     let now_time = new Date()
     let end_time = now_time.getTime() + hide_time
 
-    let data={
+    let data = {
         id,
         end_time
     }

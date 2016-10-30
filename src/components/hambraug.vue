@@ -21,7 +21,7 @@
               v-link="{ path: '/word/list', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" alt="">首页</li>
             <li 
               @click="hidden"
-              v-link="{ path: '/word/add', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" height="12" width="17" alt="">所有单词</li>
+              v-link="{ path: '/word/all', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" height="12" width="17" alt="">所有单词</li>
             <li 
               @click="hidden"
               v-link="{ path: '/word/add', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" height="12" width="17" alt="">设置</li>
