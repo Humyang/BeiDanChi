@@ -5,7 +5,7 @@ var cors = require('koa-cors');
 var mongo = require('koa-mongo')
 var ObjectId = require('mongodb').ObjectId
 var $gt = require('mongodb').$gt
-console.log($gt)
+
 app.use(cors());
 
 // 添加单词
@@ -37,7 +37,9 @@ router.post('/word/list',body(),function *(next){
     let list = yield this.mongo 
                             .db('BeiDanChi')
                             .collection('word_list')
-                            .find({"end_time":{ $lt: time }}).toArray();
+                            .find({ "end_time":{ $lt: time },
+                                    'is_move':{$ne:true}})
+                            .toArray();
 
     console.log('list',list)
 
@@ -54,7 +56,7 @@ router.post('/word/all',body(),function *(next){
     let list = yield this.mongo 
                             .db('BeiDanChi')
                             .collection('word_list')
-                            .find({'is_move':{}}).toArray();
+                            .find({'is_move':{$ne:true}}).toArray();
 
     console.log('list',list)
 

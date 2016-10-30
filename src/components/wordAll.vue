@@ -54,7 +54,14 @@ export default {
   methods:{
     // 移除 item
     moveItem:function(item){
-
+      API.moveWord(item._id,function(err,res){
+          console.log("移除单词，结果：")
+          if(err){
+              console.log("some error：",err)
+              return false
+          }
+          console.log("success",res)
+      })
     },
     setItem:function(item){
       for (var i = this.lists.length - 1; i >= 0; i--) {
