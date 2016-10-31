@@ -15,7 +15,7 @@
                 <p class="line"></p>
                 <footer>
                   <a @click.prevent="" class="a1" href="">编辑</a>
-                  <a @click.prevent="moveItem(item)" class="a2" href="">删除</a>
+                  <a @click.prevent="moveItem(item,$index)" class="a2" href="">删除</a>
                 </footer>
               </template>
             </div>
@@ -28,10 +28,8 @@
 <script>
 import navbar from './common/navbar'
 import loadmore from 'mint-loadmore';
-// import drop_down from '../vendor/drop_down.js'
 
 import * as API from '../api/main.js'
-// import hambraug from './hambraug'
 export default {
   data () {
     return {
@@ -53,13 +51,19 @@ export default {
   },
   methods:{
     // 移除 item
-    moveItem:function(item){
+    moveItem:function(item,index){
+      let self = this
       API.moveWord(item._id,function(err,res){
           console.log("移除单词，结果：")
           if(err){
               console.log("some error：",err)
               return false
           }
+          self.lists = self.lists.slice(index,index+1)
+          // [
+          //                 ...self.lists.slice(0, index),
+          //                 ...self.lists.slice(index + 1)
+          //               ]
           console.log("success",res)
       })
     },

@@ -49,7 +49,7 @@ export default {
       events:[
       function(id){
         API.hideWord(id,0,function(err,res){
-            console.log("隐藏单词，结果：")
+            console.log("隐藏单词 1，结果：")
             if(err){
                 console.log("some error：",err)
                 return false
@@ -59,7 +59,7 @@ export default {
       },
       function(id){
         API.hideWord(id,1,function(err,res){
-            console.log("隐藏单词，结果：")
+            console.log("隐藏单词 2，结果：")
             if(err){
                 console.log("some error：",err)
                 return false
@@ -69,7 +69,7 @@ export default {
       },
       function(id){
         API.hideWord(id,2,function(err,res){
-            console.log("隐藏单词，结果：")
+            console.log("隐藏单词 3，结果：")
             if(err){
                 console.log("some error：",err)
                 return false
@@ -122,18 +122,11 @@ export default {
   },
   ready:function(){
     var self = this
-
-    // drop_down.listen("word_card",function(){
-    //   console.log(50)
-    //   self.show_search = true
-    // })
-
     // 获取单词列表
     API.listGet(0,20,function(err,res){
       if(err){
 
       }
-
       self.lists = res.list
       console.log("返回数据",res)
     })

@@ -1,3 +1,7 @@
+// drop_down.listen("word_card",function(){
+//   console.log(50)
+//   self.show_search = true
+// })
 var drop_down = {
     startY:0,
     startScrollTop:0,
