@@ -24,6 +24,7 @@ router.post('/word/add',body(),function * (next){
     this.body = res.result
 })
 
+const QUERY_BASE = {'is_move':{$ne:true}}
 
 // 获取列表
 router.post('/word/list',body(),function *(next){
@@ -33,15 +34,16 @@ router.post('/word/list',body(),function *(next){
     // 获取所有 end_time 小于当天的单词
     let now_time = new Date()
     let time = now_time.getTime()
-    console.log(time)
+
+    let query_filter = Object.assgin({ "end_time":{ $lt: time }},QUERY_BASE)
+
     let list = yield this.mongo 
                             .db('BeiDanChi')
                             .collection('word_list')
-                            .find({ "end_time":{ $lt: time },
-                                    'is_move':{$ne:true}})
+                            .find(query_filter)
                             .toArray();
 
-    console.log('list',list)
+    console.log('/word/list：',list)
 
     this.body = {
       status:true,
@@ -52,13 +54,14 @@ router.post('/word/list',body(),function *(next){
 router.post('/word/all',body(),function *(next){
     let page_index = this.request.fields.page_index
     let page_number = this.request.fields.page_number
+    let query_filter = Object.assgin(QUERY_BASE)
 
     let list = yield this.mongo 
                             .db('BeiDanChi')
                             .collection('word_list')
-                            .find({'is_move':{$ne:true}}).toArray();
+                            .find(query_filter).toArray();
 
-    console.log('list',list)
+    console.log('/word/all：',list)
 
     this.body = {
       status:true,
