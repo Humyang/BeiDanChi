@@ -23,7 +23,8 @@
           </section>
         </loadmore>
       </content>
-    </div>
+      <add-word v-show="ui.addword"></add-word>
+  </div>
 </template>
 
 <script>
@@ -31,7 +32,7 @@ import navbar from './common/navbar'
 import card from './common/card'
 import loadmore from 'mint-loadmore';
 import drop_down from '../vendor/drop_down.js'
-
+import addWord from './components/wordAdd.vue'
 import * as API from '../api/main.js'
 // import hambraug from './hambraug'
 export default {
@@ -77,7 +78,10 @@ export default {
             console.log("success",res)
         })
       }
-      ]
+      ],
+      ui:{
+        addword:false
+      }
     }
   },
   components:{
@@ -115,7 +119,7 @@ export default {
       this.$root.show_hambraug = true
     },
     navbar_btn_right:function(){
-      this.$router.go('/word/add')
+      // this.$router.go('/word/add')
     }
   },
   events:{

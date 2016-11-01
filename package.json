@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
+    "serve": "babel-node serve/index",
     "api_test": "babel-node src/api/test.js",
     "api_build": "babel src --out-dir lib",
     "build": "node build/build.js",
@@ -25,6 +26,7 @@
     "koa-cors": "0.0.16",
     "koa-mongo": "^0.6.0",
     "koa-router": "^5.4.0",
+    "object-assign": "^4.1.0",
     "vue": "^1.0.28",
     "vue-router": "^0.7.13"
   },

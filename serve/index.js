@@ -4,8 +4,7 @@ var router = require('koa-router')()
 var cors = require('koa-cors');
 var mongo = require('koa-mongo')
 var ObjectId = require('mongodb').ObjectId
-var $gt = require('mongodb').$gt
-
+var objectAssign = require('object-assign');
 app.use(cors());
 
 // 添加单词
@@ -21,12 +20,15 @@ router.post('/word/add',body(),function * (next){
                         .collection('word_list')
                         .insert({word,describe,end_time})
 
-    this.body = res.result
+    this.body = {
+      status:true,
+      result:res.result
+    }
 })
 
 const QUERY_BASE = {'is_move':{$ne:true}}
 
-// 获取列表
+// 获取列表（以到达显示时间）
 router.post('/word/list',body(),function *(next){
     let page_index = this.request.fields.page_index
     let page_number = this.request.fields.page_number
@@ -35,7 +37,7 @@ router.post('/word/list',body(),function *(next){
     let now_time = new Date()
     let time = now_time.getTime()
 
-    let query_filter = Object.assgin({ "end_time":{ $lt: time }},QUERY_BASE)
+    let query_filter = objectAssign({ "end_time":{ $lt: time }},QUERY_BASE)
 
     let list = yield this.mongo 
                             .db('BeiDanChi')
@@ -54,7 +56,7 @@ router.post('/word/list',body(),function *(next){
 router.post('/word/all',body(),function *(next){
     let page_index = this.request.fields.page_index
     let page_number = this.request.fields.page_number
-    let query_filter = Object.assgin(QUERY_BASE)
+    let query_filter = objectAssign(QUERY_BASE)
 
     let list = yield this.mongo 
                             .db('BeiDanChi')
@@ -68,6 +70,26 @@ router.post('/word/all',body(),function *(next){
       list
     }
 })
+// 获取单个
+router.post('/word/id',body(),function *(next){
+
+    let id = this.request.fields.id
+
+    let query_filter = objectAssign({'_id':ObjectId(id)},QUERY_BASE)
+
+    let word = yield this.mongo 
+                            .db('BeiDanChi')
+                            .collection('word_list')
+                            .findOne(query_filter);
+
+    console.log('/word/id：',word)
+
+    this.body = objectAssign({
+      status:true},
+      word)
+    
+})
+
 // 隐藏单词
 router.post('/word/hide',body(),function *(next){
     let id = this.request.fields.id

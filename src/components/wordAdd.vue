@@ -27,8 +27,8 @@
           <textarea v-model="describe" name="" id="" cols="30" rows="10"></textarea>
         </section>
       </content>
-    </div>
-    <!-- <hambraug :show.sync="show_hambraug"></hambraug> -->
+  </div>
+  <!-- <hambraug :show.sync="show_hambraug"></hambraug> -->
 </template>
 
 <script>

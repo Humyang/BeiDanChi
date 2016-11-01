@@ -37,8 +37,17 @@ import * as API from './main.js'
 //     console.log("success",res)
 // })
 
-API.moveWord('580f0f99ca27ed033896dc21',function(err,res){
-    console.log("移除单词，结果：")
+// API.moveWord('580f0f99ca27ed033896dc21',function(err,res){
+//     console.log("移除单词，结果：")
+//     if(err){
+//         console.log("some error：",err)
+//         return false
+//     }
+//     console.log("success",res)
+// })
+
+API.wordId('580f0f99ca27ed033896dc21',function(err,res){
+    console.log("查询单个单词，结果：")
     if(err){
         console.log("some error：",err)
         return false

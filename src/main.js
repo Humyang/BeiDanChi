@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import Router from 'vue-router'
 import wordList from './components/wordList.vue'
-import addWord from './components/wordAdd.vue'
+
 import wordAll from './components/wordAll.vue'
 /* eslint-disable no-new */
 // new Vue({
@@ -21,10 +21,10 @@ router.map({
     },
   '/word/list':{
         component: wordList
-    },
-  '/word/add': {
-    component: addWord
-  },
+    }
+  // '/word/add': {
+  //   component: addWord
+  // },
   // '/user/:id': {
   //   component: UserView
   // },

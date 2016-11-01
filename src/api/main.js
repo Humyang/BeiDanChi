@@ -2,6 +2,7 @@
 // 项目太小时不分文件
 import mFetch from './ajax.js'
 import {DAY} from './constant.js'
+import * as M from './method.js'
 // 登录
 export const login = function(username, password, callback) {
     let data={
@@ -45,15 +46,25 @@ export const listGetAll = function(index,number,callback){
     function preSet(err,res){
         if(res){
         for (var i = res.list.length - 1; i >= 0; i--) {
-                if(res.list[i].end_time!=undefined){
-                    let source_time = new Date(res.list[i].end_time) 
-                    res.list[i].end_time = source_time.toLocaleDateString() +" "+ source_time.toLocaleTimeString()
-                }
+                res.list[i].end_time = M.timeFormat(res.list[i].end_time)
             }
         }
         callback(err,res)
     }
     mFetch('/word/all'
+            ,data
+            ,preSet) 
+}
+
+export const wordId = function(id,callback){
+    let data={
+        id
+    }
+    function preSet(err,res){
+        res.end_time = M.timeFormat(res.end_time)
+        callback(err,res)
+    }
+    mFetch('/word/id'
             ,data
             ,preSet) 
 }
