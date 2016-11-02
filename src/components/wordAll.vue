@@ -10,7 +10,10 @@
             class="list">
               <p class="p1">{{item.word}}</p>
               <p class="p2">{{item.describe}}</p>
-              <p v-if="item.end_time!=undefined" class="p3">隐藏至：{{item.end_time}}</p>
+
+              <p v-if="item.end_time === true" class="p3 green">显示中</p>
+              <p v-else class="p3">隐藏至：{{item.end_time}}</p>
+              
               <template v-if="item.show">
                 <p class="line"></p>
                 <footer>
@@ -59,11 +62,10 @@ export default {
               console.log("some error：",err)
               return false
           }
-          self.lists = self.lists.slice(index,index+1)
-          // [
-          //                 ...self.lists.slice(0, index),
-          //                 ...self.lists.slice(index + 1)
-          //               ]
+
+          self.lists = [...self.lists.slice(0, index),
+                          ...self.lists.slice(index + 1)
+                        ]
           console.log("success",res)
       })
     },
@@ -138,6 +140,9 @@ export default {
     color: #ffbda9;
     text-align: right;
     margin-bottom: 0.15rem;
+}
+.list p.p3.green{
+  color:green;
 }
 footer {overflow: hidden;margin: 0.12rem 0;}
 footer a {

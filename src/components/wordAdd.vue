@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div v-show="show" class="wrapper">
       <navbar 
       title="新词" 
       :left="navbar_btn_left" 
@@ -38,6 +38,9 @@ import loadmore from 'mint-loadmore';
 // import hambraug from './hambraug'
 import * as API from '../api/main.js'
 export default {
+  props:{
+    show:false
+  },
   components:{
     navbar
   },
@@ -45,7 +48,8 @@ export default {
   },
   methods:{
     navbar_btn_left:function(){
-      history.back()
+      this.show = false
+      // history.back()
     },
     navbar_btn_right:function(){
       let self = this
@@ -55,8 +59,10 @@ export default {
           console.log("添加失败：",err)
         }else{
           console.log("添加成功")
-          self.$router.go('/word/list')
+          // self.$router.go('/word/list')
+
         }
+        self.show = false
       })
     }
   },
