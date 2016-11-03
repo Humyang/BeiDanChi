@@ -10,15 +10,17 @@ import {
 } from './constant.js'
 
 
+// 业务逻辑错误处理
+
 // 对返回报文进行预处理
-// 返回 true 表示已经对报文进行了处理
-// 返回 false 表示未处理，请求成功
+// 返回 false 表示发生业务逻辑问题
+// 返回 true 表示未发生业务逻辑问题，继续执行
 const preProcessRsp = function(store, callback) {
-    if (false) {
-        // 返回数据有问题，需要在业务代码处理
-        callback(HTTP_FAIL);
+    if (!store.status) {
+        callback(store.msg);
+        return false
     }
-    return false;
+    return true;
 };
 
 const mFetch = function(path,data,callback) {
@@ -39,16 +41,15 @@ const mFetch = function(path,data,callback) {
       body: JSON.stringify(comb_data)
     })
     .then(function(response) {
-        // HTTP 错误处理，不涉及逻辑
+        // HTTP 错误处理
         if (response.status != 200) {
             throw new Error("Bad response from server");
         }
         return response.json();
     })
-    .then(function(stories) {
-        if(!preProcessRsp(stories,callback)){
-            // console.log('stories',stories);
-            callback(null,stories)
+    .then(function(res) {
+        if(preProcessRsp(res,callback)){
+            callback(null,res)
         }
     })
     .catch(function(ex){

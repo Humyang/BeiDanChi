@@ -25,7 +25,8 @@
           </section>
         </loadmore>
       </content>
-    </div>
+  </div>
+
 </template>
 
 <script>
@@ -60,12 +61,15 @@ export default {
           console.log("移除单词，结果：")
           if(err){
               console.log("some error：",err)
+              self.$root.popup_text = err
+              self.$root.show_popup = true
+              // self.ui.popup = true
               return false
           }
-
-          self.lists = [...self.lists.slice(0, index),
+            self.lists = [...self.lists.slice(0, index),
                           ...self.lists.slice(index + 1)
                         ]
+
           console.log("success",res)
       })
     },

@@ -33,9 +33,8 @@
     </section>
     <div
           v-show="is_show"
-          transition="fade"
           @click="hidden"
-          class="animated zhezhao">
+          class="zhezhao">
     </div>
   </div>
 </template>

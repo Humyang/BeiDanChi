@@ -131,7 +131,7 @@
 
 @-webkit-keyframes fadeOut {
   from {
-    opacity: 0.4;
+    opacity: 1;
   }
 
   to {
@@ -141,7 +141,7 @@
 
 @keyframes fadeOut {
   from {
-    opacity: 0.4;
+    opacity: 1;
   }
 
   to {
@@ -159,7 +159,7 @@
   }
 
   to {
-    opacity: 0.4;
+    opacity: 1;
   }
 }
 
@@ -169,7 +169,7 @@
   }
 
   to {
-    opacity: 0.4;
+    opacity: 1;
   }
 }
 

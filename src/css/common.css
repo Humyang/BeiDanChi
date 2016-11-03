@@ -22,10 +22,57 @@ ul{
 li{
 	list-style: none;
 }
-.wrapper { height: 100%; overflow: hidden;position: absolute;top: 0;}
+.wrapper { height: 100%; overflow: hidden;position: absolute;top: 0; width: 100%;}
 .mint-loadmore-top {
     font-size: 0.16rem;
     color: white;
     text-align: center;
     padding: 0.14rem 0;
+}
+.popup{
+/*    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 999;
+    width: 100%;*/
+}
+.popup .content{
+    width: 5.8rem;
+    height: 3rem;
+    background-color: white;
+    z-index: 999;
+    margin: 0 auto;
+    margin: 0 0.3rem;
+    margin-top: 4rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    border-radius: 10px;
+    animation-duration: 0.5s;
+    overflow: hidden;
+}
+.popup .zhezhao{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    z-index: 9999;
+    opacity: 0.3;
+    animation-duration: 0s;
+}
+.popup footer{
+    font-size: 0.28rem;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    color: white;
+    background-color: #00bdac;
+    font-weight: 600;
+    padding: 0;
+    margin: 0;
 }

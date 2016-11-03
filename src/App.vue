@@ -7,6 +7,17 @@
 
       ></router-view>
     <hambraug :is_show.sync="show_hambraug"></hambraug>
+    <div  class="popup">
+      <div v-show="show_popup" transition="fade" class="animated content">
+          <p class="text">
+            {{popup_text}}
+          </p>
+        <footer @click="show_popup=false">
+          <p>确&nbsp;&nbsp;定</p>
+        </footer>
+      </div>
+      <div v-show="show_popup" @click="show_popup=false" class="zhezhao"></div>
+    </div>
   </div>
 </template>
 
@@ -20,6 +31,8 @@ import './css/animal.css'
 export default {
   data:function(){
     return {
+      popup_text:"",
+      show_popup:true,
       show_hambraug:false,
       transition_type:true
     }

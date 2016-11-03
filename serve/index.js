@@ -92,8 +92,18 @@ router.post('/word/id',body(),function *(next){
 
 // 隐藏单词
 router.post('/word/hide',body(),function *(next){
-    let id = this.request.fields.id
+    let id = ""
     let end_time = this.request.fields.end_time
+
+
+    try{
+        id = ObjectId(this.request.fields.id)
+    }catch(e) {
+        return this.body = {
+                  status:false,
+                  res:"id 类型无效"
+                }
+    }
 
     let res = yield this.mongo
             .db('BeiDanChi')
@@ -109,8 +119,17 @@ router.post('/word/hide',body(),function *(next){
 })
 // 移除单词
 router.post('/word/move',body(),function *(next){
-    let id = this.request.fields.id
+    let id = ""
     let end_time = this.request.fields.end_time
+
+    try{
+        id = ObjectId(this.request.fields.id)
+    }catch(e) {
+        return this.body = {
+                  status:false,
+                  msg:"id 类型无效"
+                }
+    }
 
     let res = yield this.mongo
             .db('BeiDanChi')
@@ -124,7 +143,6 @@ router.post('/word/move',body(),function *(next){
       res
     }
 })
-
 app.use(mongo())
 app.use(router.routes())
 
