@@ -32,7 +32,7 @@ export default {
   data:function(){
     return {
       popup_text:"",
-      show_popup:true,
+      show_popup:false,
       show_hambraug:false,
       transition_type:true
     }
@@ -54,6 +54,10 @@ export default {
 }
 #wrapper .view{
   width: 100%
+}
+.popup .text{
+  font-size: 0.28rem;
+  text-align: center;
 }
 /* html {
   height: 100%;

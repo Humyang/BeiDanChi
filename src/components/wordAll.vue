@@ -84,7 +84,6 @@ export default {
       this.$root.show_hambraug = true
     },
     navbar_btn_right:function(){
-      // this.$router.go('/word/add')
     },
     loadTop:function(id){
       let self = this
@@ -99,9 +98,9 @@ export default {
     var self = this
 
     API.listGetAll(0,20,function(err,res){
-        // console.log("获取所有列表数据,结果：")
         if(err){
-            console.log("some error：",err)
+            self.$root.popup_text = err
+            self.$root.show_popup = true
             return false
         }
         for (var i = res.list.length - 1; i >= 0; i--) {

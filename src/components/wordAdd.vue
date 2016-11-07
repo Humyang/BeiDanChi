@@ -1,5 +1,5 @@
 <template>
-  <div v-show="show" class="wrapper">
+  <div v-show="show" transition="slide_right" class="animated wrapper">
       <navbar 
       title="新词" 
       :left="navbar_btn_left" 
