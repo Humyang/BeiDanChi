@@ -26,6 +26,8 @@ const preProcessRsp = function(store, callback) {
 const mFetch = function(path,data,callback) {
     let comb_data = data
     let root = this
+
+    
     if(typeof window !=="undefined" && root===window){
         let token = BASE.getToken()
         comb_data = Object.assign(data,{token})
