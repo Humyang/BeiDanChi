@@ -46,11 +46,30 @@ import * as API from './main.js'
 //     console.log("success",res)
 // })
 
-API.wordId('580f0f99ca27ed033896dc21',function(err,res){
-    console.log("查询单个单词，结果：")
+// API.wordId('580f0f99ca27ed033896dc21',function(err,res){
+//     console.log("查询单个单词，结果：")
+//     if(err){
+//         console.log("some error：",err)
+//         return false
+//     }
+//     console.log("success",res)
+// })
+
+
+API.login('test01','123456',function(err,res){
+    console.log('登录，结果：')
     if(err){
-        console.log("some error：",err)
+        console.log('some error：',err)
         return false
     }
-    console.log("success",res)
+    console.log('success',res)
+})
+
+API.regiest('test01','123456',4555,function(err,res){
+    console.log('注册，结果：')
+    if(err){
+        console.log('some error：',err)
+        return false
+    }
+    console.log('success',res)
 })

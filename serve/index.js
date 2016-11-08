@@ -5,7 +5,9 @@ var cors = require('koa-cors');
 var mongo = require('koa-mongo')
 var ObjectId = require('mongodb').ObjectId
 var objectAssign = require('object-assign');
+// var ccap = require('ccap');
 app.use(cors());
+
 
 // 添加单词
 router.post('/word/add',body(),function * (next){
@@ -143,10 +145,55 @@ router.post('/word/move',body(),function *(next){
       res
     }
 })
+
+router.post('/regiest',body(),function *(next){
+
+    let fields = this.request.fields
+
+    // 验证验证码
+
+    // 验证账号格式
+    
+    // 验证密码格式
+
+    // 验证账号重复性
+
+    // 写入数据库
+
+    // 响应
+
+
+    // let res = yield this.mongo
+    //         .db('BeiDanChi')
+    //         .collection('word_list')
+    //         .update({'_id':ObjectId(id)},
+    //                 {'$set':{end_time,is_move:true}},
+    //                 {'upsert':true});
+
+    this.body = {
+      status:true,
+      res
+    }
+})
+
+router.all('/verify',function *(next){
+
+    // 生成 Token
+    let Token = ""
+    
+    // 生成 验证码
+    let verify_code = "123456"
+    // 验证码转换为 base64 图片
+    // Token，verify_code 存入数据库
+
+    // 返回 验证码
+    this.body = verify_code
+})
+
 app.use(mongo())
-app.use(router.routes())
+app.use(router.routes()).use(router.allowedMethods());
 
 
-app.listen(8081)
+app.listen(8082)
 
 console.log("listen serve on port 8081")

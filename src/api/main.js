@@ -116,6 +116,7 @@ export const hideWord = function(id,type,callback){
 
 }
 
+// 删除单词
 export const moveWord = function(id,callback){
     let data = {
         id
@@ -125,3 +126,27 @@ export const moveWord = function(id,callback){
             ,callback)
 
 }
+export const verify = function(){
+    mFetcg('/verify',callback)
+}
+export const login = function(username,password,callback){
+    let data = {
+        username,
+        password
+    }
+    mFetch('/login',
+        data,
+        callback)
+}
+export const regiest = function(username,password,verificode,callback){
+    let data = {
+        username,
+        password,
+        verificode
+    }
+    mFetch('/regiest',
+        data,
+        callback)
+}
+
+

@@ -12,3 +12,11 @@ export const timeFormat = function(timestamp){
 
     return "unkonw"
 }
+// 账号验证
+export const verifyUserName = function(username){
+    return true
+}
+// 验证密码格式
+export const verfyPassword = function(password){
+    return false
+}
