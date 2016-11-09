@@ -5,6 +5,7 @@ var cors = require('koa-cors');
 var mongo = require('koa-mongo')
 var ObjectId = require('mongodb').ObjectId
 var objectAssign = require('object-assign');
+var uid = reuiqre('uid')
 // var ccap = require('ccap');
 app.use(cors());
 
@@ -179,12 +180,18 @@ router.post('/regiest',body(),function *(next){
 router.all('/verify',function *(next){
 
     // 生成 Token
-    let Token = ""
+    let Token = uid(20)
     
     // 生成 验证码
     let verify_code = "123456"
     // 验证码转换为 base64 图片
     // Token，verify_code 存入数据库
+
+    let insert = {
+        Token,
+        verify_code,
+        
+    }
 
     // 返回 验证码
     this.body = verify_code
