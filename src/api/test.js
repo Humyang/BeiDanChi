@@ -56,16 +56,16 @@ import * as API from './main.js'
 // })
 
 
-API.login('test01','123456',function(err,res){
-    console.log('登录，结果：')
-    if(err){
-        console.log('some error：',err)
-        return false
-    }
-    console.log('success',res)
-})
+// API.login('test01','123456',function(err,res){
+//     console.log('登录，结果：')
+//     if(err){
+//         console.log('some error：',err)
+//         return false
+//     }
+//     console.log('success',res)
+// })
 
-API.regiest('test01','123456',4555,function(err,res){
+API.regiest('test01','123456',123456,'oyjgo3vxemalxu190ddk',function(err,res){
     console.log('注册，结果：')
     if(err){
         console.log('some error：',err)

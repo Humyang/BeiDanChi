@@ -3,16 +3,7 @@
 import mFetch from './ajax.js'
 import {DAY} from './constant.js'
 import * as M from './method.js'
-// 登录
-export const login = function(username, password, callback) {
-    let data={
-        username,
-        password
-    }
-    mFetch('/login/send_login'
-            ,data
-            ,callback)
-}
+
 
 // 添加单词
 export const wordAdd = function(word,describe,callback){
@@ -138,11 +129,12 @@ export const login = function(username,password,callback){
         data,
         callback)
 }
-export const regiest = function(username,password,verificode,callback){
+export const regiest = function(username,password,verificode,token,callback){
     let data = {
         username,
         password,
-        verificode
+        verificode,
+        token
     }
     mFetch('/regiest',
         data,

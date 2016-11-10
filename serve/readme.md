@@ -13,8 +13,9 @@ Token 库
 ｛
 token,
 verify_code,
-create_time,
-expire_time
+create_time, 
+expire_time, //过期时间
+is_verify //登录成功后设为 true
 ｝
 
 登录库

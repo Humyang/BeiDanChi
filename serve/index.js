@@ -1,13 +1,16 @@
 var app = require('koa')()
 var body = require('koa-better-body')
 var router = require('koa-router')()
-var cors = require('koa-cors');
+var cors = require('koa-cors')
 var mongo = require('koa-mongo')
 var ObjectId = require('mongodb').ObjectId
-var objectAssign = require('object-assign');
-var uid = reuiqre('uid')
-// var ccap = require('ccap');
-app.use(cors());
+var objectAssign = require('object-assign')
+var uid = require('uid')
+var DAY = require('./constant.js').DAY
+var verifyUserName = require('./method.js').verifyUserName
+
+
+app.use(cors())
 
 
 // 添加单词
@@ -147,29 +150,74 @@ router.post('/word/move',body(),function *(next){
     }
 })
 
+var validate_username = function (username){
+        let self = this
+        let query_filter = {
+            username
+        }
+        function * plugin (next) {
+            let res = yield self.mongo 
+                            .db('BeiDanChi')
+                            .collection('user')
+                            .findOne(query_filter)
+
+            console.log("验证用户名",res)
+        }
+        
+
+
+
+        // yield * next
+
+
+}
+
+// 验证账号重复性
+router.post('/valid/username',body(),function *(next){
+
+})
+
 router.post('/regiest',body(),function *(next){
 
     let fields = this.request.fields
+    
+    let query_filter = {
+        token:fields.token
+    }
+
+    // 根据 Token 获取验证码
+    let verify_code = yield this.mongo 
+                        .db('BeiDanChi')
+                        .collection('token')
+                        .findOne(query_filter);
+
 
     // 验证验证码
+    if(verify_code != fields.verify_code){
+        this.body = "验证码错误"
+        return
+    }
 
     // 验证账号格式
-    
+    if(!verifyUserName(fields.username)){
+        this.body = "账号格式不符合要求"
+        return 
+    }
+
     // 验证密码格式
 
     // 验证账号重复性
+    let vu = yield validate_username.call(this)
+
+    console.log('vu',vu)
+    // if(!vu(fields.username)){
+    //     this.body = "账号已重复"
+    //     return 
+    // }
 
     // 写入数据库
 
     // 响应
-
-
-    // let res = yield this.mongo
-    //         .db('BeiDanChi')
-    //         .collection('word_list')
-    //         .update({'_id':ObjectId(id)},
-    //                 {'$set':{end_time,is_move:true}},
-    //                 {'upsert':true});
 
     this.body = {
       status:true,
@@ -177,30 +225,46 @@ router.post('/regiest',body(),function *(next){
     }
 })
 
-router.all('/verify',function *(next){
+router.all('/verify_code',function *(next){
 
     // 生成 Token
-    let Token = uid(20)
+    let Token = uid(40)
     
     // 生成 验证码
     let verify_code = "123456"
     // 验证码转换为 base64 图片
     // Token，verify_code 存入数据库
 
-    let insert = {
+    let now = new Date()
+    let create_time = now.getTime()
+    let expire_time = create_time + DAY*1
+    let data = {
         Token,
         verify_code,
-        
+        create_time,
+        expire_time,
+        is_verify:false
     }
 
+    let res = yield this.mongo
+                    .db('BeiDanChi')
+                    .collection('token')
+                    .insert(data)
+
+    this.body = {
+      status:true,
+      result:res.result,
+      Token,
+      verify_code
+    }
     // 返回 验证码
-    this.body = verify_code
+    // this.body = verify_code
 })
 
 app.use(mongo())
 app.use(router.routes()).use(router.allowedMethods());
 
 
-app.listen(8082)
+app.listen(8081)
 
 console.log("listen serve on port 8081")
