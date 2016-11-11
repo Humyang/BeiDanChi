@@ -150,33 +150,36 @@ router.post('/word/move',body(),function *(next){
     }
 })
 
-var validate_username = function (username){
-        let self = this
-        let query_filter = {
-            username
-        }
-        function * plugin (next) {
-            let res = yield self.mongo 
-                            .db('BeiDanChi')
-                            .collection('user')
-                            .findOne(query_filter)
+// var validate_username = function (username){
+//         let self = this
+//         let query_filter = {
+//             username
+//         }
+//         function * plugin (next) {
+//             let res = yield self.mongo 
+//                             .db('BeiDanChi')
+//                             .collection('user')
+//                             .findOne(query_filter)
 
-            console.log("验证用户名",res)
-        }
+//             console.log("验证用户名",res)
+//         }
         
 
 
 
-        // yield * next
+//         // yield * next
 
 
-}
+// }
 
 // 验证账号重复性
 router.post('/valid/username',body(),function *(next){
 
 })
-
+// 密码加密
+function encryptPassword(password){
+    return password
+}
 router.post('/regiest',body(),function *(next){
 
     let fields = this.request.fields
@@ -194,34 +197,63 @@ router.post('/regiest',body(),function *(next){
 
     // 验证验证码
     if(verify_code != fields.verify_code){
-        this.body = "验证码错误"
-        return
+        console.log("验证码错误")
+        this.body = {
+          status:false,
+          res:"验证码错误"
+        }
+        this.end()
+        // yield *next
     }
 
     // 验证账号格式
     if(!verifyUserName(fields.username)){
-        this.body = "账号格式不符合要求"
+        console.log("账号格式不符合要求")
+        this.body = {
+          status:false,
+          res:"账号格式不符合要求"
+        }
         return 
     }
 
     // 验证密码格式
 
     // 验证账号重复性
-    let vu = yield validate_username.call(this)
+    let username_query_filter = {
+        username:fields.username
+    }
+    let res = yield this.mongo 
+                    .db('BeiDanChi')
+                    .collection('user')
+                    .findOne(username_query_filter)
 
-    console.log('vu',vu)
-    // if(!vu(fields.username)){
-    //     this.body = "账号已重复"
-    //     return 
-    // }
+    // console.log('验证账号重复性',res)
 
+    if(res!=null && res.res === 1){
+        this.body = {
+          status:false,
+          res:"账号重复"
+        }
+        console.log("账号重复")
+        return
+    }
+
+    let data = {
+        username:fields.username,
+        password:encryptPassword(fields.password),
+        token:fields.token
+    }
     // 写入数据库
+    let inset_res = yield this.mongo
+                    .db('BeiDanChi')
+                    .collection('user')
+                    .insert(data)
 
     // 响应
 
     this.body = {
       status:true,
-      res
+      res:inset_res
     }
 })
 
@@ -263,7 +295,10 @@ router.all('/verify_code',function *(next){
 
 app.use(mongo())
 app.use(router.routes()).use(router.allowedMethods());
-
+// app.use(function*(next){
+//     console.log(next)
+//     console.log(22222)
+// })
 
 app.listen(8081)
 
