@@ -17,6 +17,7 @@ import {
 // 返回 true 表示未发生业务逻辑问题，继续执行
 const preProcessRsp = function(store, callback) {
     if (!store.status) {
+
         callback(store.msg);
         return false
     }
@@ -45,7 +46,7 @@ const mFetch = function(path,data,callback) {
     .then(function(response) {
         // HTTP 错误处理
         if (response.status != 200) {
-            throw new Error("Bad response from server");
+            throw new Error("Bad response from server: status",response.status);
         }
         return response.json();
     })

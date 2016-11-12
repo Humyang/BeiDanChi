@@ -65,11 +65,30 @@ import * as API from './main.js'
 //     console.log('success',res)
 // })
 
-API.regiest('test01','123456',123456,'oyjgo3vxemalxu190ddk',function(err,res){
-    console.log('注册，结果：')
+// 测试获取验证码与注册
+API.verify_code(function(err,res){
+    console.log('测试获取验证码，结果：')
     if(err){
-        console.log('some error：',err)
+        console.log('失败：',err)
         return false
     }
-    console.log('success',res)
+    console.log('成功：',res)
+
+    API.regiest('username1','password1',123456,res.token,function(err,res){
+        console.log('测试注册，结果：')
+        if(err){
+            console.log('失败：',err)
+            return false
+        }
+        console.log('成功：',res)
+    })
 })
+
+// API.regiest('username','password',123456,'9aar5hti4alntvqr1kq79euu72js6011gh3d5uru',function(err,res){
+//     console.log('测试注册，结果：')
+//     if(err){
+//         console.log('失败：',err)
+//         return false
+//     }
+//     console.log('成功：',res)
+// })

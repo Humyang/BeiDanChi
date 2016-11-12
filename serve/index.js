@@ -189,53 +189,33 @@ router.post('/regiest',body(),function *(next){
     }
 
     // 根据 Token 获取验证码
-    let verify_code = yield this.mongo 
+    let _vc = yield this.mongo 
                         .db('BeiDanChi')
                         .collection('token')
                         .findOne(query_filter);
 
-
+    console.log('verify_code：',_vc)
+    console.log('fields.verify_code：',fields.verify_code)
     // 验证验证码
-    if(verify_code != fields.verify_code){
-        console.log("验证码错误")
-        this.body = {
-          status:false,
-          res:"验证码错误"
-        }
-        this.end()
-        // yield *next
+    if(_vc==null || _vc.verify_code != fields.verify_code){
+        throw new Error('验证码错误');
     }
-
     // 验证账号格式
     if(!verifyUserName(fields.username)){
-        console.log("账号格式不符合要求")
-        this.body = {
-          status:false,
-          res:"账号格式不符合要求"
-        }
-        return 
+        throw new Error('账号格式不符合要求');
     }
-
     // 验证密码格式
-
     // 验证账号重复性
     let username_query_filter = {
         username:fields.username
     }
-    let res = yield this.mongo 
+    let _username = yield this.mongo 
                     .db('BeiDanChi')
                     .collection('user')
                     .findOne(username_query_filter)
-
-    // console.log('验证账号重复性',res)
-
-    if(res!=null && res.res === 1){
-        this.body = {
-          status:false,
-          res:"账号重复"
-        }
-        console.log("账号重复")
-        return
+    console.log('_username：',_username)
+    if(_username!=null){
+        throw new Error('账号重复');
     }
 
     let data = {
@@ -244,23 +224,23 @@ router.post('/regiest',body(),function *(next){
         token:fields.token
     }
     // 写入数据库
-    let inset_res = yield this.mongo
+    let _inset_res = yield this.mongo
                     .db('BeiDanChi')
                     .collection('user')
                     .insert(data)
 
+    console.log('inset_res：',_inset_res)
     // 响应
-
     this.body = {
       status:true,
-      res:inset_res
+      res:_inset_res
     }
 })
 
 router.all('/verify_code',function *(next){
 
     // 生成 Token
-    let Token = uid(40)
+    let token = uid(40)
     
     // 生成 验证码
     let verify_code = "123456"
@@ -271,7 +251,7 @@ router.all('/verify_code',function *(next){
     let create_time = now.getTime()
     let expire_time = create_time + DAY*1
     let data = {
-        Token,
+        token,
         verify_code,
         create_time,
         expire_time,
@@ -286,15 +266,41 @@ router.all('/verify_code',function *(next){
     this.body = {
       status:true,
       result:res.result,
-      Token,
+      token,
       verify_code
     }
-    // 返回 验证码
-    // this.body = verify_code
 })
 
 app.use(mongo())
+app.use(function *(next){
+
+    try{
+        yield next
+    }catch (err) {
+    this.body = {
+        status:false,
+        msg:err.message
+    };
+
+  }
+})
 app.use(router.routes()).use(router.allowedMethods());
+
+
+// https://github.com/koajs/examples/blob/master/errors/app.js
+// 
+// this.app.emit('error', err, this);
+// app.on('error', function(err) {
+//     console.log('error:',err)
+//     this.body={
+//         status:false,
+//         err
+//     }
+//   // if (process.env.NODE_ENV != 'test') {
+//   //   console.log('sent error %s to the cloud', err.message);
+//   //   console.log(err);
+//   // }
+// });
 // app.use(function*(next){
 //     console.log(next)
 //     console.log(22222)

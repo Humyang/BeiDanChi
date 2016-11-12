@@ -117,9 +117,11 @@ export const moveWord = function(id,callback){
             ,callback)
 
 }
-export const verify = function(){
-    mFetcg('/verify',callback)
+// 获取验证码
+export const verify_code = function(callback){
+    mFetch('/verify_code',{},callback)
 }
+//登录
 export const login = function(username,password,callback){
     let data = {
         username,
@@ -129,11 +131,12 @@ export const login = function(username,password,callback){
         data,
         callback)
 }
-export const regiest = function(username,password,verificode,token,callback){
+// 注册
+export const regiest = function(username,password,verify_code,token,callback){
     let data = {
         username,
         password,
-        verificode,
+        verify_code,
         token
     }
     mFetch('/regiest',
