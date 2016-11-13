@@ -180,6 +180,18 @@ router.post('/valid/username',body(),function *(next){
 function encryptPassword(password){
     return password
 }
+function* username_repeat(self,username){
+
+    let username_query_filter = {
+        username
+    }
+    console.log(self.mmm)
+
+    yield self.mongo 
+                    .db('BeiDanChi')
+                    .collection('user')
+                    .findOne(username_query_filter)
+}
 router.post('/regiest',body(),function *(next){
 
     let fields = this.request.fields
@@ -206,13 +218,9 @@ router.post('/regiest',body(),function *(next){
     }
     // 验证密码格式
     // 验证账号重复性
-    let username_query_filter = {
-        username:fields.username
-    }
-    let _username = yield this.mongo 
-                    .db('BeiDanChi')
-                    .collection('user')
-                    .findOne(username_query_filter)
+
+    let _username = yield username_repeat(this,fields.username)
+
     console.log('_username：',_username)
     if(_username!=null){
         throw new Error('账号重复');
