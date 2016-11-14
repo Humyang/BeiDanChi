@@ -190,7 +190,6 @@ router.all('/valid/username/:username',body(),function *(next){
 function encryptPassword(password,salt){
     return md5(md5(password+salt))
 }
-
 //检查重复用户名
 function* username_repeat(self,username){
 
@@ -207,26 +206,15 @@ function* username_repeat(self,username){
 
     return res
 }
+//注册账户
 router.post('/regiest',body(),function *(next){
 
     let fields = this.request.fields
     
-    let query_filter = {
-        token:fields.token
-    }
+    //验证码检查
+    verify_code(this,fields.token,fields.verify_code)
 
-    // 根据 Token 获取验证码
-    let _vc = yield this.mongo 
-                        .db('BeiDanChi')
-                        .collection('token')
-                        .findOne(query_filter);
 
-    console.log('verify_code：',_vc)
-    console.log('fields.verify_code：',fields.verify_code)
-    // 验证验证码
-    if(_vc==null || _vc.verify_code != fields.verify_code){
-        throw new Error('验证码错误');
-    }
     // 验证账号格式
     if(!verifyUserName(fields.username)){
         throw new Error('账号格式不符合要求');
@@ -263,7 +251,72 @@ router.post('/regiest',body(),function *(next){
       res:_inset_res
     }
 })
+function* verify_code(self,token,verify_code){
+    let query_filter = {
+        token,
+        verify_code
+    }
+    let _vc = yield this.mongo 
+                        .db('BeiDanChi')
+                        .collection('token')
+                        .findOne(query_filter);
+    // 验证验证码
+    if(_vc==null || _vc.verify_code != fields.verify_code){
+        throw new Error('验证码错误')
+    }
+    return true
+}
+//登录
+router.post('/login',body(),function *(next){
+    let fields = this.request.fields
+    //验证码
+    verify_code(this,fields.token,fields.verify_code)
 
+    //获取 salt
+    let salt = yield this.mongo
+                        .db('BeiDanChi')
+                        .collection('user')
+                        .findOne({username:fields.username})
+    console.log('salt，',salt)
+    //验证账号密码
+    let _usm_pwd_filter = {
+        username:fields.username,
+        password:encryptPassword(fields.password,salt.token)
+    }
+    let _usm_pwd = yield this.mongo 
+                        .db('BeiDanChi')
+                        .collection('user')
+                        .findOne(_usm_pwd_filter);
+    console.log('_usm_pwd，',_usm_pwd)
+    if(_usm_pwd === null){
+        throw new Error('验证码错误')
+    }
+
+    //token 写入有效状态
+    let _token_stauts = {
+        token:fields.token
+    }
+    let _token_res = yield this.mongo
+            .db('BeiDanChi')
+            .collection('word_list')
+            .update(_token_stauts,
+                    {'$set':{is_verify:true}},
+                    {'upsert':false});
+
+    console.log('_token_res，',_token_res)
+
+    if(_token_res === null){
+        throw new Error('登录失败，token 未找到')
+    }
+
+    //登录成功
+    this.body = {
+      status:true
+    }
+
+
+})
+//获取验证码
 router.all('/verify_code',function *(next){
 
     // 生成 Token
