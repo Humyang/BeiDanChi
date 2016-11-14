@@ -3,7 +3,8 @@
 import mFetch from './ajax.js'
 import {DAY} from './constant.js'
 import * as M from './method.js'
-
+import md5 from 'md5'
+// var md5 = require('md5')
 
 // 添加单词
 export const wordAdd = function(word,describe,callback){
@@ -135,7 +136,7 @@ export const login = function(username,password,callback){
 export const regiest = function(username,password,verify_code,token,callback){
     let data = {
         username,
-        password,
+        password:md5(password),
         verify_code,
         token
     }

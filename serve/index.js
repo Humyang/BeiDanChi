@@ -7,6 +7,9 @@ var ObjectId = require('mongodb').ObjectId
 var objectAssign = require('object-assign')
 var uid = require('uid')
 var DAY = require('./constant.js').DAY
+var md5 = require('md5')
+
+
 var verifyUserName = require('./method.js').verifyUserName
 
 
@@ -184,9 +187,11 @@ router.all('/valid/username/:username',body(),function *(next){
     }
 })
 // 密码加密
-function encryptPassword(password){
-    return password
+function encryptPassword(password,salt){
+    return md5(md5(password+salt))
 }
+
+//检查重复用户名
 function* username_repeat(self,username){
 
     let username_query_filter = {
@@ -198,7 +203,9 @@ function* username_repeat(self,username){
                     .collection('user')
                     .findOne(username_query_filter)
 
-    console.log('res:',res)
+    // console.log('res:',res)
+
+    return res
 }
 router.post('/regiest',body(),function *(next){
 
@@ -234,10 +241,14 @@ router.post('/regiest',body(),function *(next){
         throw new Error('账号重复');
     }
 
+    let salt = md5(Math.random()*1000000)
+    let password = encryptPassword(fields.password,salt)
+
     let data = {
         username:fields.username,
-        password:encryptPassword(fields.password),
-        token:fields.token
+        password,
+        salt
+        // 弹性添加其它字段
     }
     // 写入数据库
     let _inset_res = yield this.mongo

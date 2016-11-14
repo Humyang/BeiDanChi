@@ -74,7 +74,7 @@ API.verify_code(function(err,res){
     }
     console.log('成功：',res)
 
-    API.regiest('username1','password1',123456,res.token,function(err,res){
+    API.regiest('username3','password1',123456,res.token,function(err,res){
         console.log('测试注册，结果：')
         if(err){
             console.log('失败：',err)
