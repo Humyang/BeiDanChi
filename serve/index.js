@@ -173,8 +173,15 @@ router.post('/word/move',body(),function *(next){
 // }
 
 // 验证账号重复性
-router.post('/valid/username',body(),function *(next){
-
+router.all('/valid/username/:username',body(),function *(next){
+    let _username = yield username_repeat(this,this.params.username)
+    console.log('_username：',_username)
+    if(_username!=null){
+        throw new Error('账号重复');
+    }
+    this.body = {
+        status:true
+    }
 })
 // 密码加密
 function encryptPassword(password){
@@ -185,12 +192,13 @@ function* username_repeat(self,username){
     let username_query_filter = {
         username
     }
-    console.log(self.mmm)
 
-    yield self.mongo 
+    let res = yield self.mongo 
                     .db('BeiDanChi')
                     .collection('user')
                     .findOne(username_query_filter)
+
+    console.log('res:',res)
 }
 router.post('/regiest',body(),function *(next){
 
