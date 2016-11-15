@@ -92,13 +92,13 @@ API.verify_code(function(err,res){
         return false
     }
     console.log('成功：',res)
-    API.login('username1','123456',123456,res.token,function(err,res){
+    API.login('username3','password1',123456,res.token,function(err,res){
         console.log('测试登录，结果：')
         if(err){
             console.log('失败：',err)
             return false
         }
-        console.log('成功：',res)
+        console.log('登录成功')
     })
 })
 

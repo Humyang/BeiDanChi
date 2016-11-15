@@ -130,19 +130,19 @@ export const login = function(username,password,verify_code,token,callback){
         verify_code,
         token
     }
-    function preSet(err,res){
-        if(err){
-            console.log('登录失败')
-            callback(err)
-        }else{
-            BASE.saveToken(res.token)
-            callback(err,res)    
-        }
+    // function preSet(err,res){
+    //     if(err){
+    //         console.log('登录失败')
+    //         callback(err)
+    //     }else{
+    //         BASE.saveToken(res.token)
+    //         callback(err,res)    
+    //     }
 
-    }
+    // }
     mFetch('/login',
         data,
-        preSet)
+        callback)
 }
 // 注册
 export const regiest = function(username,password,verify_code,token,callback){

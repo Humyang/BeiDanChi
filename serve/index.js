@@ -278,10 +278,11 @@ router.post('/login',body(),function *(next){
                         .collection('user')
                         .findOne({username:fields.username})
     console.log('salt，',salt)
+    console.log('encryptPassword',encryptPassword(fields.password,salt.salt))
     //验证账号密码
     let _usm_pwd_filter = {
         username:fields.username,
-        password:encryptPassword(fields.password,salt.token)
+        password:encryptPassword(fields.password,salt.salt)
     }
     let _usm_pwd = yield this.mongo 
                         .db('BeiDanChi')
@@ -289,32 +290,31 @@ router.post('/login',body(),function *(next){
                         .findOne(_usm_pwd_filter);
     console.log('_usm_pwd，',_usm_pwd)
     if(_usm_pwd === null){
-        throw new Error('验证码错误')
+        throw new Error('账号密码错误')
     }
 
     //token 写入有效状态
     let _token_stauts = {
+        username:fields.username,
+        status:{$ne:true},
         token:fields.token
     }
     let _token_res = yield this.mongo
             .db('BeiDanChi')
-            .collection('word_list')
+            .collection('token')
             .update(_token_stauts,
-                    {'$set':{is_verify:true}},
-                    {'upsert':false});
+                    {'$set':{is_verify:true}});
 
-    console.log('_token_res，',_token_res)
+    // console.log('_token_res，',_token_res)
 
-    if(_token_res === null){
-        throw new Error('登录失败，token 未找到')
+    if(_token_res.result.nModified === 0){
+        throw new Error('登录失败，token 无效')
     }
 
     //登录成功
     this.body = {
       status:true
     }
-
-
 })
 //获取验证码
 router.all('/verify_code',function *(next){
