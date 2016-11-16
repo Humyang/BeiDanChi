@@ -294,26 +294,31 @@ router.post('/login',body(),function *(next){
     }
 
     //token 写入有效状态
+    let new_token = uid(40)
     let _token_stauts = {
         username:fields.username,
-        status:{$ne:true},
-        token:fields.token
+        status:true,
+        token:new_token,
+        device:fields.device
     }
-    let _token_res = yield this.mongo
-            .db('BeiDanChi')
-            .collection('token')
-            .update(_token_stauts,
-                    {'$set':{is_verify:true}});
+    //使旧 token 失效
+    let _update_res = yield this.mongo.db('BeiDanChi')
+                                .collection('logined_token')
+                                .update({
+                                        username:fields.username,
+                                        device:fields.device
+                                    })
 
-    // console.log('_token_res，',_token_res)
+    let _insert_res = yield this.mongo
+                    .db('BeiDanChi')
+                    .collection('logined_token')
+                    .insert(_token_stauts)
+    console.log('_insert_res',_insert_res)
 
-    if(_token_res.result.nModified === 0){
-        throw new Error('登录失败，token 无效')
-    }
-
-    //登录成功
+    // //登录成功
     this.body = {
-      status:true
+      status:true,
+      token:new_token
     }
 })
 //获取验证码

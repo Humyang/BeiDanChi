@@ -98,7 +98,7 @@ API.verify_code(function(err,res){
             console.log('失败：',err)
             return false
         }
-        console.log('登录成功')
+        console.log('登录成功，Token：',res.token)
     })
 })
 
