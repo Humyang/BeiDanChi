@@ -122,6 +122,7 @@ export const moveWord = function(id,callback){
 export const verify_code = function(callback){
     mFetch('/verify_code',{},callback)
 }
+
 //登录
 export const login = function(username,password,verify_code,token,callback){
     let data = {
@@ -130,16 +131,6 @@ export const login = function(username,password,verify_code,token,callback){
         verify_code,
         token
     }
-    // function preSet(err,res){
-    //     if(err){
-    //         console.log('登录失败')
-    //         callback(err)
-    //     }else{
-    //         BASE.saveToken(res.token)
-    //         callback(err,res)    
-    //     }
-
-    // }
     mFetch('/login',
         data,
         callback)
