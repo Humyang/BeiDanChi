@@ -55,16 +55,6 @@ import * as API from './main.js'
 //     console.log("success",res)
 // })
 
-
-// API.login('test01','123456',function(err,res){
-//     console.log('登录，结果：')
-//     if(err){
-//         console.log('some error：',err)
-//         return false
-//     }
-//     console.log('success',res)
-// })
-
 // 测试获取验证码与注册
 // API.verify_code(function(err,res){
 //     console.log('测试获取验证码，结果：')
@@ -84,7 +74,7 @@ import * as API from './main.js'
 //     })
 // })
 
-//登录
+//测试登录
 API.verify_code(function(err,res){
     console.log('测试获取验证码，结果：')
     if(err){
@@ -99,6 +89,11 @@ API.verify_code(function(err,res){
             return false
         }
         console.log('登录成功，Token：',res.token)
+
+        //再次登录，使旧token失效
+
+        //使用旧 token 获取数据，反馈失败
+
     })
 })
 

@@ -1,3 +1,5 @@
+验证码因为 windows 的 nodejs 不好处理图形，留到 linux 环境处理
+
 数据结构
 
 ```js

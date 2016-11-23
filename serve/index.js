@@ -266,6 +266,7 @@ function* verify_code(self,token,verify_code){
     }
     return true
 }
+
 //登录
 router.post('/login',body(),function *(next){
     let fields = this.request.fields
@@ -302,7 +303,7 @@ router.post('/login',body(),function *(next){
         device:fields.device
     }
     //使旧 token 失效
-    let _update_res = yield this.mongo.db('BeiDanChi')
+    let _remove_token = yield this.mongo.db('BeiDanChi')
                                 .collection('logined_token')
                                 .update({
                                         username:fields.username,
