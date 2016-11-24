@@ -12,9 +12,9 @@ export const wordAdd = function(word,describe,callback){
         word,
         describe
     }
-    mFetch('/word/add'
+    return mFetch('/word/add'
             ,data
-            ,callback)
+            )
 }
 
 
@@ -24,9 +24,9 @@ export const listGet = function(index,number,callback){
         page_index:index,
         page_number:number
     }
-    mFetch('/word/list'
+    return mFetch('/word/list'
             ,data
-            ,callback) 
+            ) 
 }
 
 // 获取所有单词列表
@@ -43,9 +43,16 @@ export const listGetAll = function(index,number,callback){
         }
         callback(err,res)
     }
-    mFetch('/word/all'
+    return mFetch('/word/all'
             ,data
-            ,preSet) 
+            ).then(function(res){
+                if(res){
+                for (var i = res.list.length - 1; i >= 0; i--) {
+                        res.list[i].end_time = M.timeFormat(res.list[i].end_time)
+                    }
+                }
+                return res
+            }) 
 }
 
 export const wordId = function(id,callback){
@@ -56,9 +63,9 @@ export const wordId = function(id,callback){
         res.end_time = M.timeFormat(res.end_time)
         callback(err,res)
     }
-    mFetch('/word/id'
+    return mFetch('/word/id'
             ,data
-            ,preSet) 
+            ) 
 }
 
 // 隐藏单词
@@ -102,9 +109,9 @@ export const hideWord = function(id,type,callback){
     console.log('rand_',rand_)
     console.log('end_time',new Date(end_time).toLocaleDateString() +" "+ new Date(end_time).toLocaleTimeString() )
 
-    mFetch('/word/hide'
+    return mFetch('/word/hide'
             ,data
-            ,callback)
+            )
 
 }
 
@@ -113,9 +120,9 @@ export const moveWord = function(id,callback){
     let data = {
         id
     }
-    mFetch('/word/move'
+    return mFetch('/word/move'
             ,data
-            ,callback)
+            )
 
 }
 // 获取验证码
