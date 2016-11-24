@@ -1,5 +1,5 @@
 import * as API from './main.js'
-
+import co from 'co'
 
 // API.listGet(0,20,function(err,res){
 //     console.log("获取列表数据,结果：")
@@ -75,28 +75,35 @@ import * as API from './main.js'
 // })
 
 //测试登录
-API.verify_code(function(err,res){
-    console.log('测试获取验证码，结果：')
-    if(err){
-        console.log('失败：',err)
-        return false
-    }
-    console.log('成功：',res)
-    API.login('username3','password1',123456,res.token,function(err,res){
-        console.log('测试登录，结果：')
-        if(err){
-            console.log('失败：',err)
-            return false
-        }
-        console.log('登录成功，Token：',res.token)
+// API.verify_code(function(err,res){
+//     console.log('测试获取验证码，结果：')
+//     if(err){
+//         console.log('失败：',err)
+//         return false
+//     }
+//     console.log('成功：',res)
+//     API.login('username3','password1',123456,res.token,function(err,res){
+//         console.log('测试登录，结果：')
+//         if(err){
+//             console.log('失败：',err)
+//             return false
+//         }
+//         console.log('登录成功，Token：',res.token)
 
-        //再次登录，使旧token失效
+//         //再次登录，使旧token失效
 
-        //使用旧 token 获取数据，反馈失败
+//         //使用旧 token 获取数据，反馈失败
 
-    })
+//     })
+// })
+co(function*(){
+    var verifycode = yield API.verify_code()
+    console.log('verifycode',verifycode)
+    var login = yield API.login('username3','password1',123456,verifycode.token)
+    console.log('login status',login)
+}).catch(function(err){
+    console.log('error',err)
 })
-
 // API.regiest('username','password',123456,'9aar5hti4alntvqr1kq79euu72js6011gh3d5uru',function(err,res){
 //     console.log('测试注册，结果：')
 //     if(err){

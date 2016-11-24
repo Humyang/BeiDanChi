@@ -119,33 +119,32 @@ export const moveWord = function(id,callback){
 
 }
 // 获取验证码
-export const verify_code = function(callback){
-    mFetch('/verify_code',{},callback)
+export const verify_code = function(){
+    return mFetch('/verify_code')
 }
 
 //登录
-export const login = function(username,password,verify_code,token,callback){
+export const login = function(username,password,verify_code,token){
     let data = {
         username,
         password:md5(password),
         verify_code,
-        token
+        token,
+        device:'html5'
     }
-    mFetch('/login',
-        data,
-        callback)
+    return mFetch('/login',
+        data)
 }
 // 注册
-export const regiest = function(username,password,verify_code,token,callback){
+export const regiest = function(username,password,verify_code,token){
     let data = {
         username,
         password:md5(password),
         verify_code,
         token
     }
-    mFetch('/regiest',
-        data,
-        callback)
+    return mFetch('/regiest',
+        data)
 }
 
 

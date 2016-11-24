@@ -285,6 +285,7 @@ router.post('/login',body(),function *(next){
         username:fields.username,
         password:encryptPassword(fields.password,salt.salt)
     }
+    console.log('_usm_pwd_filter: ',_usm_pwd_filter)
     let _usm_pwd = yield this.mongo 
                         .db('BeiDanChi')
                         .collection('user')
@@ -303,13 +304,15 @@ router.post('/login',body(),function *(next){
         device:fields.device
     }
     //使旧 token 失效
-    let _remove_token = yield this.mongo.db('BeiDanChi')
+    let _remove_token = yield this.mongo
+                                .db('BeiDanChi')
                                 .collection('logined_token')
                                 .update({
                                         username:fields.username,
-                                        device:fields.device
-                                    })
+                                        device:fields.device},
+                                        {status:false})
 
+    console.log('_remove_token: ',_remove_token)
     let _insert_res = yield this.mongo
                     .db('BeiDanChi')
                     .collection('logined_token')
