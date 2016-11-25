@@ -13,6 +13,7 @@ var md5 = require('md5')
 var verifyUserName = require('./method.js').verifyUserName
 
 
+
 app.use(cors())
 
 
@@ -38,7 +39,7 @@ router.post('/word/add',body(),function * (next){
 const QUERY_BASE = {'is_move':{$ne:true}}
 
 // 获取列表（以到达显示时间）
-router.post('/word/list',body(),function *(next){
+router.post('/word/list',body(),login_check(),function *(next){
     let page_index = this.request.fields.page_index
     let page_number = this.request.fields.page_number
 
@@ -62,7 +63,7 @@ router.post('/word/list',body(),function *(next){
     }
 })
 // 获取所有
-router.post('/word/all',body(),function *(next){
+router.post('/word/all',body(),login_check(),function *(next){
     let page_index = this.request.fields.page_index
     let page_number = this.request.fields.page_number
     let query_filter = objectAssign(QUERY_BASE)
@@ -266,7 +267,18 @@ function* verify_code(self,token,verify_code){
     }
     return true
 }
-
+function login_check(){
+    return function * plugin (next) {
+        let token = this.request.fields.token
+        let _insert_res = yield this.mongo
+                    .db('BeiDanChi')
+                    .collection('logined_token')
+                    .findOne({status:true,koken:token})
+        // throw new Error('未登陆')
+        yield next
+    }
+    
+}
 //登录
 router.post('/login',body(),function *(next){
     let fields = this.request.fields
@@ -310,7 +322,8 @@ router.post('/login',body(),function *(next){
                                 .update({
                                         username:fields.username,
                                         device:fields.device},
-                                        {status:false})
+                                        {'$set':{status:false}},
+                                        {'upsert':false})
 
     console.log('_remove_token: ',_remove_token)
     let _insert_res = yield this.mongo
@@ -319,7 +332,7 @@ router.post('/login',body(),function *(next){
                     .insert(_token_stauts)
     console.log('_insert_res',_insert_res)
 
-    // //登录成功
+    // 登录成功
     this.body = {
       status:true,
       token:new_token

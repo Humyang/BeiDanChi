@@ -101,6 +101,23 @@ co(function*(){
     console.log('verifycode',verifycode)
     var login = yield API.login('username3','password1',123456,verifycode.token)
     console.log('login status',login)
+
+    //再次登录，使旧token失效
+    var verifycode2 = yield API.verify_code()
+    var login2 = yield API.login('username3','password1',123456,verifycode2.token)
+    console.log('再次登录，使旧token失效: ',login2)
+
+    //使用旧 token 获取数据，反馈失败
+    var listall = yield API.listGetAll(0,20)
+    console.log('使用旧 token 获取数据，反馈失败: ',listall)
+    // API.listGetAll(0,20,function(err,res){
+//     console.log("获取所有列表数据,结果：")
+//     if(err){
+//         console.log("some error：",err)
+//         return false
+//     }
+//     console.log("success",res)
+// })
 }).catch(function(err){
     console.log('error',err)
 })
