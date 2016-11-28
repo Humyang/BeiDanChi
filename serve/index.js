@@ -297,6 +297,13 @@ function login_check(){
         // 2016年11月28日17:55:51 todo：
         // _login_check_res.username
         // 获取 user 的资料
+        let userinfo = yield this.mongo
+                                .db('BeiDanChi')
+                                .collection('user')
+                                .findOne({username:_login_check_res.username})
+
+        console.log('userinfo',userinfo)
+        this.user_uid = userinfo.uid
         yield next
     }
     
