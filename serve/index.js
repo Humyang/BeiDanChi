@@ -294,6 +294,9 @@ function login_check(){
         }
 
         console.log('_login_check_res',_login_check_res)
+        // 2016年11月28日17:55:51 todo：
+        // _login_check_res.username
+        // 获取 user 的资料
         yield next
     }
     
