@@ -28,12 +28,12 @@ const mFetch = function(path,data) {
         if(data===undefined){
             data = {}
         }
-        let comb_data = data
-        let root = this
-        if(typeof window !=="undefined" && root===window){
-            let token = BASE.getToken()
-            comb_data = Object.assign(data,{token})
-        }
+        // let comb_data = data
+        // let root = this
+        // if(typeof window !=="undefined" && root===window){
+        //     let token = BASE.getToken()
+        //     comb_data = Object.assign(data,{token})
+        // }
 
         fetch(API_URL+path,
         {
@@ -42,7 +42,7 @@ const mFetch = function(path,data) {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(comb_data)
+          body: JSON.stringify(data)
         })
         .then(function(response) {
             // HTTP 错误处理

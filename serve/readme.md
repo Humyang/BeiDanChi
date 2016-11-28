@@ -8,7 +8,8 @@
     id,
     word,
     describe,
-    end_time
+    end_time,
+    user
 }
 
 Token 库
@@ -24,7 +25,6 @@ is_verify //登录成功后设为 true
 ｛
 username,
 password,
-token,
 uid
 ｝
 

@@ -49,33 +49,36 @@ export default {
       ],
       events:[
       function(id){
-        API.hideWord(id,0,function(err,res){
-            console.log("隐藏单词 1，结果：")
-            if(err){
-                console.log("some error：",err)
-                return false
-            }
+        console.log("隐藏单词 1，结果：")
+        API.hideWord(id,0)
+        .then(function(res){
             console.log("success",res)
+        })
+        .catch(function(err){
+          console.log("some error：",err)
         })
       },
       function(id){
-        API.hideWord(id,1,function(err,res){
-            console.log("隐藏单词 2，结果：")
-            if(err){
-                console.log("some error：",err)
-                return false
-            }
+
+        console.log("隐藏单词 2，结果：")
+
+        API.hideWord(id,1)
+        .then(function(res){
             console.log("success",res)
         })
+        .catch(function(err){
+            console.log("some error：",err)
+        })
+
       },
       function(id){
-        API.hideWord(id,2,function(err,res){
-            console.log("隐藏单词 3，结果：")
-            if(err){
-                console.log("some error：",err)
-                return false
-            }
+        console.log("隐藏单词 3，结果：")
+        API.hideWord(id,2)
+        .then(function(res){
             console.log("success",res)
+        })
+        .catch(function(err){
+            console.log("some error：",err)
         })
       }
       ],
@@ -129,10 +132,7 @@ export default {
   ready:function(){
     var self = this
     // 获取单词列表
-    API.listGet(0,20,function(err,res){
-      if(err){
-
-      }
+    API.listGet(0,20).then(function(res){
       self.lists = res.list
       console.log("返回数据",res)
     })

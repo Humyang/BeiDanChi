@@ -213,16 +213,17 @@ router.post('/regiest',body(),function *(next){
     let fields = this.request.fields
     
     //验证码检查
-    verify_code(this,fields.token,fields.verify_code)
-
+    let verifycode = yield verify_code(this,fields.token,fields.verify_code)
+    console.log('verifycode',verifycode)
 
     // 验证账号格式
     if(!verifyUserName(fields.username)){
         throw new Error('账号格式不符合要求');
     }
     // 验证密码格式
-    // 验证账号重复性
 
+
+    // 验证账号重复性
     let _username = yield username_repeat(this,fields.username)
 
     console.log('_username：',_username)
@@ -232,14 +233,16 @@ router.post('/regiest',body(),function *(next){
 
     let salt = md5(Math.random()*1000000)
     let password = encryptPassword(fields.password,salt)
-
+    let now = new Date()
     let data = {
         username:fields.username,
         password,
-        salt
+        salt,
+        uid:uid(40),
+        regiest_date:now.getTime()
         // 弹性添加其它字段
     }
-    // 写入数据库
+    // 账号写入数据库
     let _inset_res = yield this.mongo
                     .db('BeiDanChi')
                     .collection('user')
@@ -252,29 +255,45 @@ router.post('/regiest',body(),function *(next){
       res:_inset_res
     }
 })
-function* verify_code(self,token,verify_code){
-    let query_filter = {
-        token,
-        verify_code
+function verify_code(self,token,verify_code){
+    return function*(){
+        let query_filter = {
+            token,
+            verify_code:verify_code.toString(),
+            is_verify:false
+        }
+        console.log(query_filter)
+        let _vc = yield this.mongo 
+                            .db('BeiDanChi')
+                            .collection('token')
+                            .findOne(query_filter);
+        // 验证验证码
+        if(_vc==null){
+            throw new Error('验证码错误')
+        }
+        let verifytoken = yield this.mongo
+                                    .db('BeiDanChi')
+                                    .collection('token')
+                                    .update({token},
+                                        {'$set':{is_verify:true}})
+        console.log('verifytoken',verify_code)
+        // 验证成功，使 token 失效
+        return true
     }
-    let _vc = yield this.mongo 
-                        .db('BeiDanChi')
-                        .collection('token')
-                        .findOne(query_filter);
-    // 验证验证码
-    if(_vc==null || _vc.verify_code != fields.verify_code){
-        throw new Error('验证码错误')
-    }
-    return true
 }
 function login_check(){
     return function * plugin (next) {
         let token = this.request.fields.token
-        let _insert_res = yield this.mongo
+        let _login_check_res = yield this.mongo
                     .db('BeiDanChi')
                     .collection('logined_token')
-                    .findOne({status:true,koken:token})
+                    .findOne({status:true,token:token})
         // throw new Error('未登陆')
+        if(_login_check_res === null){
+            throw new Error('未登陆')
+        }
+
+        console.log('_login_check_res',_login_check_res)
         yield next
     }
     

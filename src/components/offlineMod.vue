@@ -40,16 +40,16 @@ export default {
     navbar_btn_right:function(){
       let self = this
       // 添加单词
-      API.wordAdd(this.word,this.describe,function(err,res){
-        if(err){
-          console.log("添加失败：",err)
-        }else{
-          console.log("添加成功")
-          // self.$router.go('/word/list')
-
-        }
-        self.show = false
-      })
+      API.wordAdd(this.word,this.describe)
+          .then(function(res){
+            console.log("添加成功")
+            self.show = false
+          })
+          .catch(function(err){
+            if(err){
+              console.log("添加失败：",err)
+            }
+          })
     }
   },
   events:{

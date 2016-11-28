@@ -7,10 +7,11 @@ import md5 from 'md5'
 // var md5 = require('md5')
 
 // 添加单词
-export const wordAdd = function(word,describe,callback){
+export const wordAdd = function(word,describe,token){
     let data={
         word,
-        describe
+        describe,
+        token
     }
     return mFetch('/word/add'
             ,data
@@ -19,10 +20,11 @@ export const wordAdd = function(word,describe,callback){
 
 
 // 获取单词列表
-export const listGet = function(index,number,callback){
+export const listGet = function(index,number,token){
     let data={
         page_index:index,
-        page_number:number
+        page_number:number,
+        token
     }
     return mFetch('/word/list'
             ,data
@@ -30,19 +32,20 @@ export const listGet = function(index,number,callback){
 }
 
 // 获取所有单词列表
-export const listGetAll = function(index,number,callback){
+export const listGetAll = function(index,number,token){
     let data={
         page_index:index,
-        page_number:number
+        page_number:number,
+        token
     }
-    function preSet(err,res){
-        if(res){
-        for (var i = res.list.length - 1; i >= 0; i--) {
-                res.list[i].end_time = M.timeFormat(res.list[i].end_time)
-            }
-        }
-        callback(err,res)
-    }
+    // function preSet(err,res){
+    //     if(res){
+    //     for (var i = res.list.length - 1; i >= 0; i--) {
+    //             res.list[i].end_time = M.timeFormat(res.list[i].end_time)
+    //         }
+    //     }
+    //     callback(err,res)
+    // }
     return mFetch('/word/all'
             ,data
             ).then(function(res){
@@ -52,12 +55,13 @@ export const listGetAll = function(index,number,callback){
                     }
                 }
                 return res
-            }) 
+            })
 }
 
-export const wordId = function(id,callback){
+export const wordId = function(id,token){
     let data={
-        id
+        id,
+        token
     }
     function preSet(err,res){
         res.end_time = M.timeFormat(res.end_time)
@@ -74,7 +78,7 @@ export const wordId = function(id,callback){
 // 1 10~100 天
 // 2 很久
 
-export const hideWord = function(id,type,callback){
+export const hideWord = function(id,type,token){
 
 
     let rand_ = 0
@@ -103,7 +107,8 @@ export const hideWord = function(id,type,callback){
 
     let data = {
         id,
-        end_time
+        end_time,
+        token
     }
     console.log('current_time',now_time.toLocaleDateString() +" "+ now_time.toLocaleTimeString())
     console.log('rand_',rand_)
@@ -116,9 +121,10 @@ export const hideWord = function(id,type,callback){
 }
 
 // 删除单词
-export const moveWord = function(id,callback){
+export const moveWord = function(id,token){
     let data = {
-        id
+        id,
+        token
     }
     return mFetch('/word/move'
             ,data

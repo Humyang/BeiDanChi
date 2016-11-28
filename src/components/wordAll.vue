@@ -11,7 +11,7 @@
               <p class="p1">{{item.word}}</p>
               <p class="p2">{{item.describe}}</p>
 
-              <p v-if="item.end_time === true" class="p3 green">显示中</p>
+              <p v-if="item.end_time === 'now'" class="p3 green">显示中</p>
               <p v-else class="p3">隐藏至：{{item.end_time}}</p>
               
               <template v-if="item.show">
@@ -57,20 +57,17 @@ export default {
     // 移除 item
     moveItem:function(item,index){
       let self = this
-      API.moveWord(item._id,function(err,res){
-          console.log("移除单词，结果：")
-          if(err){
-              console.log("some error：",err)
-              self.$root.popup_text = err
-              self.$root.show_popup = true
-              // self.ui.popup = true
-              return false
-          }
-            self.lists = [...self.lists.slice(0, index),
-                          ...self.lists.slice(index + 1)
-                        ]
-
+      console.log("移除单词，结果：")
+      API.moveWord(item._id)
+      .then(function(res){
+          self.lists = [...self.lists.slice(0, index),
+                        ...self.lists.slice(index + 1)
+                      ]
           console.log("success",res)
+      }).catch(function(err){
+          console.log("some error：",err)
+          self.$root.popup_text = err
+          self.$root.show_popup = true
       })
     },
     setItem:function(item){
@@ -96,18 +93,16 @@ export default {
   },
   ready:function(){
     var self = this
-
-    API.listGetAll(0,20,function(err,res){
-        if(err){
-            self.$root.popup_text = err
-            self.$root.show_popup = true
-            return false
-        }
+    API.listGetAll(0,20)
+    .then(function(res){
         for (var i = res.list.length - 1; i >= 0; i--) {
           res.list[i].show = false
         }
         self.lists = res.list
-        // console.log("success",res)
+    })
+    .catch(function(err){
+        self.$root.popup_text = err
+        self.$root.show_popup = true
     })
   }
   
