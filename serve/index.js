@@ -18,17 +18,18 @@ app.use(cors())
 
 
 // 添加单词
-router.post('/word/add',body(),function * (next){
+router.post('/word/add',body(),login_check(),function * (next){
     let word = this.request.fields.word
     let describe = this.request.fields.describe
 
     let now_time = new Date()
     let end_time = now_time.getTime()
 
+    let insert_obj = objectAssign({word,describe,end_time},this.login_status)
     let res = yield this.mongo
                         .db('BeiDanChi')
                         .collection('word_list')
-                        .insert({word,describe,end_time})
+                        .insert(insert_obj)
 
     this.body = {
       status:true,
@@ -47,7 +48,7 @@ router.post('/word/list',body(),login_check(),function *(next){
     let now_time = new Date()
     let time = now_time.getTime()
 
-    let query_filter = objectAssign({ "end_time":{ $lt: time }},QUERY_BASE)
+    let query_filter = objectAssign({ "end_time":{ $lt: time }},QUERY_BASE,this.login_status)
 
     let list = yield this.mongo 
                             .db('BeiDanChi')
@@ -66,7 +67,8 @@ router.post('/word/list',body(),login_check(),function *(next){
 router.post('/word/all',body(),login_check(),function *(next){
     let page_index = this.request.fields.page_index
     let page_number = this.request.fields.page_number
-    let query_filter = objectAssign(QUERY_BASE)
+    // this.login_status
+    let query_filter = objectAssign(QUERY_BASE,this.login_status)
 
     let list = yield this.mongo 
                             .db('BeiDanChi')
@@ -81,7 +83,7 @@ router.post('/word/all',body(),login_check(),function *(next){
     }
 })
 // 获取单个
-router.post('/word/id',body(),function *(next){
+router.post('/word/id',body(),login_check(),function *(next){
 
     let id = this.request.fields.id
 
@@ -303,7 +305,10 @@ function login_check(){
                                 .findOne({username:_login_check_res.username})
 
         console.log('userinfo',userinfo)
-        this.user_uid = userinfo.uid
+
+        this.login_status = {
+            uid:userinfo.uid
+        }
         yield next
     }
     
@@ -396,7 +401,6 @@ router.all('/verify_code',function *(next){
 
     this.body = {
       status:true,
-      result:res.result,
       token,
       verify_code
     }

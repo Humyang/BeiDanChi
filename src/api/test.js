@@ -71,6 +71,7 @@ co(function*(){
     console.log('获取登录验证码：')
     let verify_login = yield API.verify_code()
     console.log(verify_login)
+    
     console.log('登录：')
     var login = yield API.login(username,'password1',123456,verify_login.token)
     console.log(login)

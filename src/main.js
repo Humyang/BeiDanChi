@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import wordList from './components/wordList.vue'
 
 import wordAll from './components/wordAll.vue'
+import login from './components/login.vue'
 /* eslint-disable no-new */
 // new Vue({
 //   el: 'body',
@@ -21,6 +22,9 @@ router.map({
     },
   '/word/list':{
         component: wordList
+    },
+  '/login':{
+        component: login
     }
   // '/word/add': {
   //   component: addWord
