@@ -4,7 +4,7 @@ import * as API from '../src/api/main.js'
 import co from 'co'
 import uid from 'uid'
 
-
+// mocha --compilers js:babel-register --recursive login.js
         
 describe('登录模块测试', function() {
     it('获取验证码并注册', function(done) {
