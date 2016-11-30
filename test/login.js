@@ -6,30 +6,33 @@ import uid from 'uid'
 
 
         
-            describe('登录模块测试', function() {
-                it('获取验证码并注册', function(done) {
-                    // expect(null).toExist()
-                    co(function*(){
-                        let verifycode = yield API.verify_code()
-                        console.log(verifycode.status)
-                        expect(verifycode.status).toBe(false,'获取验证码')
+describe('登录模块测试', function() {
+    it('获取验证码并注册', function(done) {
+        // expect(null).toExist()
+        co(function*(){
+            let username = 'test'+uid(10)
 
+            let verifycode = yield API.verify_code()
+            expect(verifycode.status).toBe(true,'获取验证码')
 
-                        let regiest_res = yield API.regiest(username,'password1','123456',verifycode.token)
-                        expect(regiest_res.status).toBe(true,'测试注册')
+            let regiest_res = yield API.regiest(username,'password1','123456',verifycode.token)
+            expect(regiest_res.status).toBe(true,'测试注册')
 
-                        let regiest_res2 = yield API.regiest(username,'password1','123456',verifycode.token)
-                        // done()
-                        done()
-                    })
-                    .catch(function(err){
-                        done('出现错误')
-                        // expect(err.status).toBe(true,'使用旧验证码测试注册')
-                         // reject()
-                        // throw new Error('验证码错误')
-                    })
-                })
-            })
+            let regiest_res2 = yield API.regiest(username,'password1','123456',verifycode.token)
+            // expect(regiest_res.status).toBe(false,'token 未失效，旧 token 仍能注册')
+            done()
+        })
+        .catch(function(err){
+            if(err.msg === "验证码失效"){
+                done()
+            }else{
+                done(err)    
+            }
+            // expect(err.status).toBe(false,'token 未失效，旧 token 仍能注册')
+            
+        })
+    })
+})
                 // let username = 'test'+uid(10)
 
                 // let verifycode = yield API.verify_code()

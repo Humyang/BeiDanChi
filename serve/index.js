@@ -210,13 +210,13 @@ function* username_repeat(self,username){
     return res
 }
 //注册账户
-router.post('/regiest',body(),function *(next){
+router.post('/regiest',body(),verify_code(),function *(next){
 
     let fields = this.request.fields
     
     //验证码检查
-    let verifycode = yield verify_code(this,fields.token,fields.verify_code)
-    console.log('verifycode',verifycode)
+    // let verifycode = yield verify_code(this,fields.token,fields.verify_code)
+    // console.log('verifycode',verifycode)
 
     // 验证账号格式
     if(!verifyUserName(fields.username)){
@@ -257,12 +257,15 @@ router.post('/regiest',body(),function *(next){
       res:_inset_res
     }
 })
-function verify_code(self,token,verify_code){
-    return function*(){
+function verify_code(){
+    return function*(next){
+        // verify_code()this,fields.token,
+        let fields = this.request.fields
+        console.log(fields)
         let query_filter = {
-            token,
-            verify_code:verify_code.toString(),
-            is_verify:false
+            token:fields.token,
+            verify_code:fields.verify_code.toString()
+            
         }
         console.log(query_filter)
         let _vc = yield this.mongo 
@@ -273,14 +276,17 @@ function verify_code(self,token,verify_code){
         if(_vc==null){
             throw new Error('验证码错误')
         }
+        if(_vc.is_verify===true){
+            throw new Error('验证码失效')
+        }
         let verifytoken = yield this.mongo
                                     .db('BeiDanChi')
                                     .collection('token')
-                                    .update({token},
+                                    .update({token:fields.token},
                                         {'$set':{is_verify:true}})
-        console.log('verifytoken',verify_code)
+        console.log('verifytoken',verifytoken)
         // 验证成功，使 token 失效
-        return true
+        yield next
     }
 }
 function login_check(){
@@ -314,10 +320,10 @@ function login_check(){
     
 }
 //登录
-router.post('/login',body(),function *(next){
+router.post('/login',body(),verify_code(),function *(next){
     let fields = this.request.fields
     //验证码
-    verify_code(this,fields.token,fields.verify_code)
+    
 
     //获取 salt
     let salt = yield this.mongo
