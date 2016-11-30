@@ -31,7 +31,7 @@
 
 <script>
 import navbar from './common/navbar'
-import loadmore from 'mint-loadmore';
+import loadmore from 'mint-loadmore'
 
 import * as API from '../api/main.js'
 export default {

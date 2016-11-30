@@ -8,6 +8,7 @@ import md5 from 'md5'
 
 // 添加单词
 export const wordAdd = function(word,describe,token){
+    
     let data={
         word,
         describe,

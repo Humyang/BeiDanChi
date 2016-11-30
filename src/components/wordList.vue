@@ -30,11 +30,10 @@
 <script>
 import navbar from './common/navbar'
 import card from './common/card'
-import loadmore from 'mint-loadmore';
+import loadmore from 'mint-loadmore'
 import drop_down from '../vendor/drop_down.js'
 import addWord from './wordAdd.vue'
 import * as API from '../api/main.js'
-import * as BASE from '../api/base.js'
 // import hambraug from './hambraug'
 export default {
   data () {
@@ -132,9 +131,9 @@ export default {
   },
   ready:function(){
     var self = this
-    let  token = BASE.getToken()
+    
     // 获取单词列表
-    API.listGet(0,20,token).then(function(res){
+    API.listGet(0,20).then(function(res){
       self.lists = res.list
       console.log("返回数据",res)
     })
