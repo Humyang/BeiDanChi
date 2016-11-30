@@ -4,11 +4,14 @@ import * as API from '../src/api/main.js'
 import co from 'co'
 import uid from 'uid'
 
-describe('登录模块测试', function() {
-        it('获取验证码并注册', function() {
+
         co(function*(){
-            throw new Error('验证码错误')
-                expect(null).toExist()
+            describe('登录模块测试', function() {
+                it('获取验证码并注册', function() {
+                    // expect(null).toExist()
+                    let verifycode = yield API.verify_code()
+                })
+            })
                 // let username = 'test'+uid(10)
 
                 // let verifycode = yield API.verify_code()
@@ -22,13 +25,13 @@ describe('登录模块测试', function() {
                 // let regiest_res2 = yield API.regiest(username,'password1','123456',verifycode.token)
                 // // done()
             
-        })
-        .catch(function(err){
-            expect(err.status).toBe(true,'使用旧验证码测试注册')
-             // reject()
-            throw new Error('验证码错误')
-        })
-        })
+        // })
+        // .catch(function(err){
+        //     expect(err.status).toBe(true,'使用旧验证码测试注册')
+        //      // reject()
+        //     throw new Error('验证码错误')
+        // })
+        // })
         // expect(
         //     function(){
 
