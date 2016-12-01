@@ -8,6 +8,10 @@ module.exports = {
         VERIFY_ERROR:{
             STATUSCODE:102,
             MSG:'验证码错误'
+        },
+        LOGIN_TOKEN_INVALID:{
+            STATUSCODE:103,
+            MSG:'登录超时'
         }
     }
 }
