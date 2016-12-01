@@ -1,0 +1,245 @@
+var verifyUserName = require('../method.js').verifyUserName
+var md5 = require('md5')
+var uid = require('uid')
+var throwError = require('../error.js').throwError
+var CONSTANT = require('../constant.js')
+var DAY = CONSTANT.DAY
+var CODE = CONSTANT.CODE
+// 密码加密
+function encryptPassword(password,salt){
+    return md5(md5(password+salt))
+}
+//检查重复用户名
+function* username_check(self,username){
+
+    let username_query_filter = {
+        username
+    }
+
+    let res = yield self.mongo 
+                    .db('BeiDanChi')
+                    .collection('user')
+                    .findOne(username_query_filter)
+
+    // console.log('res:',res)
+
+    return res
+}
+function* regiest(next){
+    let fields = this.request.fields
+    
+    //验证码检查
+    // let verifycode = yield verify_code(this,fields.token,fields.verify_code)
+    // console.log('verifycode',verifycode)
+
+    // 验证账号格式
+    if(!verifyUserName(fields.username)){
+        throw new Error('账号格式不符合要求');
+    }
+    // 验证密码格式
+
+
+    // 验证账号重复性
+    let _username = yield username_check(this,fields.username)
+
+    console.log('_username：',_username)
+    if(_username!=null){
+        throw new Error('账号重复');
+    }
+
+    let salt = md5(Math.random()*1000000)
+    let password = encryptPassword(fields.password,salt)
+    let now = new Date()
+    let data = {
+        username:fields.username,
+        password,
+        salt,
+        uid:uid(40),
+        regiest_date:now.getTime()
+        // 弹性添加其它字段
+    }
+    // 账号写入数据库
+    let _inset_res = yield this.mongo
+                    .db('BeiDanChi')
+                    .collection('user')
+                    .insert(data)
+
+    console.log('inset_res：',_inset_res)
+    // 响应
+    this.body = {
+      status:true,
+      res:_inset_res
+    }
+}
+function* login(next){
+    let fields = this.request.fields
+    //验证码
+    
+
+    //获取 salt
+    let salt = yield this.mongo
+                        .db('BeiDanChi')
+                        .collection('user')
+                        .findOne({username:fields.username})
+    console.log('salt，',salt)
+    console.log('encryptPassword',encryptPassword(fields.password,salt.salt))
+    //验证账号密码
+    let _usm_pwd_filter = {
+        username:fields.username,
+        password:encryptPassword(fields.password,salt.salt)
+    }
+    console.log('_usm_pwd_filter: ',_usm_pwd_filter)
+    let _usm_pwd = yield this.mongo 
+                        .db('BeiDanChi')
+                        .collection('user')
+                        .findOne(_usm_pwd_filter);
+    console.log('_usm_pwd，',_usm_pwd)
+    if(_usm_pwd === null){
+        throw new Error('账号密码错误')
+    }
+
+    //token 写入有效状态
+    let new_token = uid(40)
+    let _token_stauts = {
+        username:fields.username,
+        status:true,
+        token:new_token,
+        device:fields.device
+    }
+    //使旧 token 失效
+    let _remove_token = yield this.mongo
+                                .db('BeiDanChi')
+                                .collection('logined_token')
+                                .update({
+                                        username:fields.username,
+                                        device:fields.device},
+                                        {'$set':{status:false}},
+                                        {'upsert':false})
+
+    console.log('_remove_token: ',_remove_token)
+    let _insert_res = yield this.mongo
+                    .db('BeiDanChi')
+                    .collection('logined_token')
+                    .insert(_token_stauts)
+    console.log('_insert_res',_insert_res)
+
+    // 登录成功
+    this.body = {
+      status:true,
+      token:new_token
+    }
+}
+function* verifycode(next){
+
+    // 生成 Token
+    let token = uid(40)
+    
+    // 生成 验证码
+    let verify_code = "123456"
+    // 验证码转换为 base64 图片
+    // Token，verify_code 存入数据库
+
+    let now = new Date()
+    let create_time = now.getTime()
+    let expire_time = create_time + DAY*1
+    let data = {
+        token,
+        verify_code,
+        create_time,
+        expire_time,
+        is_verify:false
+    }
+
+    let res = yield this.mongo
+                    .db('BeiDanChi')
+                    .collection('token')
+                    .insert(data)
+
+    this.body = {
+      status:true,
+      token,
+      verify_code
+    }
+}
+function* username_repeat(next){
+    let _username = yield username_check(this,this.params.username)
+    console.log('_username：',_username)
+    if(_username!=null){
+        throw new Error('账号重复');
+    }
+    this.body = {
+        status:true
+    }
+}
+//middleware
+function login_check(){
+    return function * plugin (next) {
+        let token = this.request.fields.token
+        let _login_check_res = yield this.mongo
+                    .db('BeiDanChi')
+                    .collection('logined_token')
+                    .findOne({status:true,token:token})
+        // throw new Error('未登陆')
+        if(_login_check_res === null){
+            throw new Error('未登陆')
+        }
+
+        console.log('_login_check_res',_login_check_res)
+        // 2016年11月28日17:55:51 todo：
+        // _login_check_res.username
+        // 获取 user 的资料
+        let userinfo = yield this.mongo
+                                .db('BeiDanChi')
+                                .collection('user')
+                                .findOne({username:_login_check_res.username})
+
+        console.log('userinfo',userinfo)
+
+        this.login_status = {
+            uid:userinfo.uid
+        }
+        yield next
+    }
+    
+}
+function verify_code(){
+    return function*(next){
+        // verify_code()this,fields.token,
+        let fields = this.request.fields
+        console.log(fields)
+        let query_filter = {
+            token:fields.token,
+            verify_code:fields.verify_code.toString()
+            
+        }
+        console.log(query_filter)
+        let _vc = yield this.mongo 
+                            .db('BeiDanChi')
+                            .collection('token')
+                            .findOne(query_filter);
+        // 验证验证码
+        if(_vc==null){
+            throwError(CODE.VERIFY_ERROR)
+        }
+        if(_vc.is_verify===true){
+            throwError(CODE.VERIFY_INVALID)
+        }
+        let verifytoken = yield this.mongo
+                                    .db('BeiDanChi')
+                                    .collection('token')
+                                    .update({token:fields.token},
+                                        {'$set':{is_verify:true}})
+        console.log('verifytoken',verifytoken)
+        // 验证成功，使 token 失效
+        yield next
+    }
+}
+
+module.exports = {
+    regiest,
+    login,
+    verifycode,
+    login_check,
+    verify_code,
+    username_repeat
+}
