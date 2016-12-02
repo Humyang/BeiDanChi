@@ -16,7 +16,8 @@
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
     "mocha": "mocha --compilers js:babel-register --recursive ",
-    "test_login":"mocha --compilers js:babel-register --recursive test/login.js"
+    "test_login":"mocha --compilers js:babel-register --recursive test/login.js",
+    "test_word":"mocha --compilers js:babel-register --recursive test/word.js"
   },
   "dependencies": {
     "animate.css": "^3.5.2",

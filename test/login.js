@@ -56,6 +56,7 @@ describe('登录模块测试----', function() {
             //使用旧 token 获取数据，反馈失败
             var listall2 = yield API.listGetAll(0,20,login.token)
             done('出现错误，token应失效，无法获取数据')
+            
         }).catch(function(err){
             if(err.STATUSCODE === CODE.LOGIN_TOKEN_INVALID.STATUSCODE){
                 done()
