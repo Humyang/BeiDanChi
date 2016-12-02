@@ -3,14 +3,14 @@ var body = require('koa-better-body')
 var router = require('koa-router')()
 var cors = require('koa-cors')
 var mongo = require('koa-mongo')
-var ObjectId = require('mongodb').ObjectId
-var objectAssign = require('object-assign')
+
+
 
 var CONSTANT = require('./constant.js')
-
-var CODE = CONSTANT.CODE
-var md5 = require('md5')
-var throwError = require('./error.js').throwError
+var objectAssign = require('object-assign')
+// var CODE = CONSTANT.CODE
+// var md5 = require('md5')
+// var throwError = require('./error.js').throwError
 var LOGIN = require('./module/login.js')
 var WORD = require('./module/word.js')
 
@@ -18,32 +18,32 @@ var WORD = require('./module/word.js')
 
 app.use(cors())
 
-const QUERY_BASE = {'is_move':{$ne:true}}
-// 添加单词
-router.post('/word/add',body(),LOGIN.login_check(),WORD.add)
 
+// 添加单词
+router.post('/word/add',LOGIN.login_check(),WORD.add)
 // 获取列表（以到达显示时间）
-router.post('/word/list',body(),LOGIN.login_check(),WORD.list)
+router.post('/word/list',LOGIN.login_check(),WORD.list)
 // 获取所有
-router.post('/word/all',body(),LOGIN.login_check(),WORD.all)
+router.post('/word/all',LOGIN.login_check(),WORD.all)
 // 获取单个
-router.post('/word/id',body(),LOGIN.login_check(),WORD.id)
+router.post('/word/id',LOGIN.login_check(),WORD.id)
 // 隐藏单词
-router.post('/word/hide',body(),LOGIN.login_check(),WORD.hide)
+router.post('/word/hide',LOGIN.login_check(),WORD.hide)
 // 移除单词
-router.post('/word/move',body(),LOGIN.login_check(),WORD.move)
+router.post('/word/move',LOGIN.login_check(),WORD.move)
 
 
 // 验证账号重复性
-router.all('/valid/username/:username',body(),LOGIN.username_repeat)
+router.all('/valid/username/:username',LOGIN.username_repeat)
 //注册账户
-router.post('/regiest',body(),LOGIN.verify_code(),LOGIN.regiest)
+router.post('/regiest',LOGIN.verify_code(),LOGIN.regiest)
 //登录
-router.post('/login',body(),LOGIN.verify_code(),LOGIN.login)
+router.post('/login',LOGIN.verify_code(),LOGIN.login)
 //获取验证码
 router.all('/verify_code',LOGIN.verifycode)
 
 app.use(mongo())
+app.use(body())
 app.use(function *(next){
     try{
         yield next
@@ -52,15 +52,11 @@ app.use(function *(next){
             // 业务逻辑错误
             this.body = objectAssign({status:false},JSON.parse(err.message));
         }catch(err2){
-
             this.body = {
                 status:false,
                 msg:err.message
             }
         }
-        // console.log('error.code: ',err.message)
-        // console.log('errmessage',err.message)
-        
     }
 })
 app.use(router.routes()).use(router.allowedMethods());

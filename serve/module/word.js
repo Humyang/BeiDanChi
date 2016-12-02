@@ -1,3 +1,7 @@
+var mongo = require('koa-mongo')
+var ObjectId = require('mongodb').ObjectId
+var objectAssign = require('object-assign')
+const QUERY_BASE = {'is_move':{$ne:true}}
 function* add (next){
     let word = this.request.fields.word
     let describe = this.request.fields.describe

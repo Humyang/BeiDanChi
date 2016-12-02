@@ -12,6 +12,18 @@ module.exports = {
         LOGIN_TOKEN_INVALID:{
             STATUSCODE:103,
             MSG:'登录超时'
+        },
+        LOGIN_NO_LOGIN:{
+            STATUSCODE:104,
+            MSG:'未登录'
+        },
+        USERNAME_REPTER:{
+            STATUSCODE:105,
+            MSG:'用户名重复'
+        },
+        USERNAME_INVALID:{
+            STATUSCODE:106,
+            MSG:'账号格式不符合要求'
         }
     }
 }

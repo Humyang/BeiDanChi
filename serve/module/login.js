@@ -34,7 +34,8 @@ function* regiest(next){
 
     // 验证账号格式
     if(!verifyUserName(fields.username)){
-        throw new Error('账号格式不符合要求');
+        // throw new Error('账号格式不符合要求');
+        throwError(CODE.USERNAME_INVALID)
     }
     // 验证密码格式
 
@@ -44,7 +45,7 @@ function* regiest(next){
 
     console.log('_username：',_username)
     if(_username!=null){
-        throw new Error('账号重复');
+        throwError(CODE.USERNAME_REPTER)
     }
 
     let salt = md5(Math.random()*1000000)
@@ -178,10 +179,13 @@ function login_check(){
         let _login_check_res = yield this.mongo
                     .db('BeiDanChi')
                     .collection('logined_token')
-                    .findOne({status:true,token:token})
-        // throw new Error('未登陆')
+                    .findOne({token:token})
         if(_login_check_res === null){
-            throw new Error('未登陆')
+            // throw new Error('未登陆')
+            throwError(CODE.LOGIN_NO_LOGIN)
+        }
+        if(_login_check_res.status === false){
+            throwError(CODE.LOGIN_TOKEN_INVALID)
         }
 
         console.log('_login_check_res',_login_check_res)
