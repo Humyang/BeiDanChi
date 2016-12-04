@@ -134,7 +134,7 @@ export const moveWord = function(id,token){
 }
 // 获取验证码
 export const verify_code = function(){
-    return mFetch('/verify_code')
+    return mFetch('/verify_code',{},null)
 }
 
 //登录
@@ -143,22 +143,20 @@ export const login = function(username,password,verify_code,token){
         username,
         password:md5(password),
         verify_code,
-        token,
         device:'html5'
     }
     return mFetch('/login',
-        data)
+        data,token)
 }
 // 注册
 export const regiest = function(username,password,verify_code,token){
     let data = {
         username,
         password:md5(password),
-        verify_code,
-        token
+        verify_code
     }
     return mFetch('/regiest',
-        data)
+        data,token)
 }
 
 

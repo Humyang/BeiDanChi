@@ -23,18 +23,25 @@ const preProcessRsp = function(store,reslove,reject) {
     return true;
 };
 
-const mFetch = function(path,data) {
+const mFetch = function(path,data,token) {
     return new Promise(function(reslove,reject){
         if(data===undefined){
             data = {}
         }
-        // let comb_data = data
-        // let root = this
+        let comb_data = data
+        let root = this
         // if(typeof window !=="undefined" && root===window){
         //     let token = BASE.getToken()
         //     comb_data = Object.assign(data,{token})
         // }
 
+        if(token===undefined){
+            comb_data = Object.assign(data,{token:BASE.getToken()})
+            console.log(222,path)
+        }else{
+            console.log(111,path)
+            comb_data = Object.assign(data,{token})
+        }
         fetch(API_URL+path,
         {
           method: 'POST',
@@ -42,7 +49,7 @@ const mFetch = function(path,data) {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(data)
+          body: JSON.stringify(comb_data)
         })
         .then(function(response) {
             // HTTP 错误处理

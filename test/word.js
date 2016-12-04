@@ -3,6 +3,8 @@ import expect from 'expect'
 import * as API from '../src/api/main.js'
 import co from 'co'
 import uid from 'uid'
+import * as BASE from '../src/api/base.js'
+
 var CODE = require('../serve/constant.js').CODE
 
 function assert(value,expect,msg,append_msg){
@@ -29,6 +31,10 @@ describe('单词正删改查模块----', function() {
             expect(login.status).toBe(true,'登录')
 
             let token = login.token
+
+            BASE.saveToken = expect.createSpy().andReturn(1)
+
+            BASE.getToken = expect.createSpy().andReturn(login.token)
 
             let wordAdd = yield API.wordAdd('test word','some word on here',token)
             expect(wordAdd.status).toBe(true,'添加单词')
