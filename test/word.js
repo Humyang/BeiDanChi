@@ -21,7 +21,6 @@ describe('单词正删改查模块----', function() {
             let verifycode = yield API.verify_code()
             assert(verifycode.status,true,verifycode)
             let regiest_res = yield API.regiest(username,'password1',123456,verifycode.token)
-            // expect(regiest_res.status).toBe(true,'注册账号')
             assert(regiest_res.status,true,regiest_res)
 
             let verify_login = yield API.verify_code()
@@ -54,8 +53,6 @@ describe('单词正删改查模块----', function() {
             assert(moveWord.status,true,moveWord,'移除单词')
 
             let wordId2 = yield API.wordId(listGet.list[0]._id,token)
-            // assert(wordId2.status,false,wordId2,'查询单个单词')
-            // console.log('query single word: ',wordId2)
 
             done()
         })
