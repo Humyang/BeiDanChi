@@ -24,6 +24,10 @@ module.exports = {
         USERNAME_INVALID:{
             STATUSCODE:106,
             MSG:'账号格式不符合要求'
+        },
+        WORD_NOT_FIND:{
+            STATUSCODE:107,
+            MSG:'未查询到：'
         }
     }
 }

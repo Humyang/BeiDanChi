@@ -1,6 +1,10 @@
 var mongo = require('koa-mongo')
 var ObjectId = require('mongodb').ObjectId
 var objectAssign = require('object-assign')
+var throwError = require('../error.js').throwError
+var CONSTANT = require('../constant.js')
+var DAY = CONSTANT.DAY
+var CODE = CONSTANT.CODE
 const QUERY_BASE = {'is_move':{$ne:true}}
 function* add (next){
     let word = this.request.fields.word
@@ -73,7 +77,13 @@ function* id(next){
                             .findOne(query_filter);
 
     console.log('/word/id：',word)
-
+    if(word === null){
+        throwError(CODE.WORD_NOT_FIND,id)
+        // return this.body = {
+        //     status:false,
+        //     msg:'未查询到: '+ObjectId(id)
+        // }
+    }
     this.body = objectAssign({
       status:true},
       word)
