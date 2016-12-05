@@ -71,7 +71,7 @@ describe('登录模块测试----', function() {
         }).catch(function(err){
 
             if(err.STATUSCODE === CODE.LOGIN_TOKEN_INVALID.STATUSCODE){
-                console.log('err: ',err)
+                // console.log('err: ',err)
                 done()
             }else{
                 done(err)    

@@ -17,10 +17,11 @@ import {
 // 返回 true 表示未发生业务逻辑问题，继续执行
 const preProcessRsp = function(store,reslove,reject) {
     if (!store.status) {
-        if(CODE.LOGIN_NO_LOGIN.STATUSCODE === store.STATUSCODE ||
-           CODE.LOGIN_TOKEN_INVALID.STATUSCODE === store.STATUSCODE){
-            location.href = '/login'
-        }
+        // if(CODE.LOGIN_NO_LOGIN.STATUSCODE === store.STATUSCODE ||
+        //    CODE.LOGIN_TOKEN_INVALID.STATUSCODE === store.STATUSCODE){
+        //     console.log('jump')
+        //     location.href = '/login'
+        // }
         reject(store)
         return false
     }

@@ -36,12 +36,13 @@ router.map({
   //   component: ItemView
   // }
 })
+router.redirect({
+  '*': '/word/list'
+})
 router.beforeEach(function () {
   window.scrollTo(0, 0)
 })
 
-router.redirect({
-  '*': '/word/list'
-})
+
 
 router.start(App, '#app')
