@@ -7,12 +7,11 @@ import md5 from 'md5'
 // var md5 = require('md5')
 
 // 添加单词
-export const wordAdd = function(word,describe,token){
+export const wordAdd = function(word,describe){
     
     let data={
         word,
-        describe,
-        token
+        describe
     }
     return mFetch('/word/add'
             ,data
@@ -21,11 +20,10 @@ export const wordAdd = function(word,describe,token){
 
 
 // 获取单词列表
-export const listGet = function(index,number,token){
+export const listGet = function(index,number){
     let data={
         page_index:index,
-        page_number:number,
-        token
+        page_number:number
     }
     return mFetch('/word/list'
             ,data
@@ -33,11 +31,10 @@ export const listGet = function(index,number,token){
 }
 
 // 获取所有单词列表
-export const listGetAll = function(index,number,token){
+export const listGetAll = function(index,number){
     let data={
         page_index:index,
-        page_number:number,
-        token
+        page_number:number
     }
     // function preSet(err,res){
     //     if(res){
@@ -59,10 +56,9 @@ export const listGetAll = function(index,number,token){
             })
 }
 
-export const wordId = function(id,token){
+export const wordId = function(id){
     let data={
-        id,
-        token
+        id
     }
     function preSet(err,res){
         res.end_time = M.timeFormat(res.end_time)
@@ -79,7 +75,7 @@ export const wordId = function(id,token){
 // 1 10~100 天
 // 2 很久
 
-export const hideWord = function(id,type,token){
+export const hideWord = function(id,type){
 
 
     let rand_ = 0
@@ -108,8 +104,7 @@ export const hideWord = function(id,type,token){
 
     let data = {
         id,
-        end_time,
-        token
+        end_time
     }
     console.log('current_time',now_time.toLocaleDateString() +" "+ now_time.toLocaleTimeString())
     console.log('rand_',rand_)
@@ -122,10 +117,9 @@ export const hideWord = function(id,type,token){
 }
 
 // 删除单词
-export const moveWord = function(id,token){
+export const moveWord = function(id){
     let data = {
-        id,
-        token
+        id
     }
     return mFetch('/word/move'
             ,data
@@ -134,7 +128,7 @@ export const moveWord = function(id,token){
 }
 // 获取验证码
 export const verify_code = function(){
-    return mFetch('/verify_code',{},null)
+    return mFetch('/verify_code')
 }
 
 //登录
@@ -143,20 +137,22 @@ export const login = function(username,password,verify_code,token){
         username,
         password:md5(password),
         verify_code,
-        device:'html5'
+        device:'html5',
+        token
     }
     return mFetch('/login',
-        data,token)
+        data)
 }
 // 注册
 export const regiest = function(username,password,verify_code,token){
     let data = {
         username,
         password:md5(password),
-        verify_code
+        verify_code,
+        token
     }
     return mFetch('/regiest',
-        data,token)
+        data)
 }
 
 

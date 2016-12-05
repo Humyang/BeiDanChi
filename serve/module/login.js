@@ -43,7 +43,7 @@ function* regiest(next){
     // 验证账号重复性
     let _username = yield username_check(this,fields.username)
 
-    console.log('_username：',_username)
+    // console.log('_username：',_username)
     if(_username!=null){
         throwError(CODE.USERNAME_REPTER)
     }
@@ -65,7 +65,7 @@ function* regiest(next){
                     .collection('user')
                     .insert(data)
 
-    console.log('inset_res：',_inset_res)
+    // console.log('inset_res：',_inset_res)
     // 响应
     this.body = {
       status:true,
@@ -82,19 +82,19 @@ function* login(next){
                         .db('BeiDanChi')
                         .collection('user')
                         .findOne({username:fields.username})
-    console.log('salt，',salt)
-    console.log('encryptPassword',encryptPassword(fields.password,salt.salt))
+    // console.log('salt，',salt)
+    // console.log('encryptPassword',encryptPassword(fields.password,salt.salt))
     //验证账号密码
     let _usm_pwd_filter = {
         username:fields.username,
         password:encryptPassword(fields.password,salt.salt)
     }
-    console.log('_usm_pwd_filter: ',_usm_pwd_filter)
+    // console.log('_usm_pwd_filter: ',_usm_pwd_filter)
     let _usm_pwd = yield this.mongo 
                         .db('BeiDanChi')
                         .collection('user')
                         .findOne(_usm_pwd_filter);
-    console.log('_usm_pwd，',_usm_pwd)
+    // console.log('_usm_pwd，',_usm_pwd)
     if(_usm_pwd === null){
         throw new Error('账号密码错误')
     }
@@ -117,12 +117,12 @@ function* login(next){
                                         {'$set':{status:false}},
                                         {'upsert':false})
 
-    console.log('_remove_token: ',_remove_token)
+    // console.log('_remove_token: ',_remove_token)
     let _insert_res = yield this.mongo
                     .db('BeiDanChi')
                     .collection('logined_token')
                     .insert(_token_stauts)
-    console.log('_insert_res',_insert_res)
+    // console.log('_insert_res',_insert_res)
 
     // 登录成功
     this.body = {
@@ -164,7 +164,7 @@ function* verifycode(next){
 }
 function* username_repeat(next){
     let _username = yield username_check(this,this.params.username)
-    console.log('_username：',_username)
+    // console.log('_username：',_username)
     if(_username!=null){
         throw new Error('账号重复');
     }
@@ -188,7 +188,7 @@ function login_check(){
             throwError(CODE.LOGIN_TOKEN_INVALID)
         }
 
-        console.log('_login_check_res',_login_check_res)
+        // console.log('_login_check_res',_login_check_res)
         // 2016年11月28日17:55:51 todo：
         // _login_check_res.username
         // 获取 user 的资料
@@ -197,7 +197,7 @@ function login_check(){
                                 .collection('user')
                                 .findOne({username:_login_check_res.username})
 
-        console.log('userinfo',userinfo)
+        // console.log('userinfo',userinfo)
 
         this.login_status = {
             uid:userinfo.uid
@@ -210,13 +210,13 @@ function verify_code(){
     return function*(next){
         // verify_code()this,fields.token,
         let fields = this.request.fields
-        console.log(fields)
+        // console.log(fields)
         let query_filter = {
             token:fields.token,
             verify_code:fields.verify_code.toString()
             
         }
-        console.log(query_filter)
+        // console.log(query_filter)
         let _vc = yield this.mongo 
                             .db('BeiDanChi')
                             .collection('token')
@@ -233,7 +233,7 @@ function verify_code(){
                                     .collection('token')
                                     .update({token:fields.token},
                                         {'$set':{is_verify:true}})
-        console.log('verifytoken',verifytoken)
+        // console.log('verifytoken',verifytoken)
         // 验证成功，使 token 失效
         yield next
     }

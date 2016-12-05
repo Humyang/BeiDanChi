@@ -36,6 +36,8 @@ describe('单词正删改查模块----', function() {
 
             BASE.getToken = expect.createSpy().andReturn(login.token)
 
+            // var localhost = {}
+
             let wordAdd = yield API.wordAdd('test word','some word on here',token)
             expect(wordAdd.status).toBe(true,'添加单词')
 
@@ -67,7 +69,7 @@ describe('单词正删改查模块----', function() {
                 done()
             }else{
                 console.log(err)
-                done(err)        
+                done(err)
             }
         })
     })

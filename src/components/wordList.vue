@@ -133,12 +133,12 @@ export default {
     var self = this
     
     // 获取单词列表
-    API.listGet(0,20).then(function(res){
+    API.listGet(0,20)
+    .then(function(res){
       self.lists = res.list
       console.log("返回数据",res)
     })
   }
-  
 }
 </script>
 
