@@ -137,7 +137,14 @@ export default {
     .then(function(res){
       self.lists = res.list
       console.log("返回数据",res)
-    })
+    }).catch(err){
+      if(CODE.LOGIN_NO_LOGIN.STATUSCODE === err.STATUSCODE ||
+         CODE.LOGIN_TOKEN_INVALID.STATUSCODE === err.STATUSCODE){
+          // console.log('jump')
+          // location.href = '/login'
+          self.$router.go('/word/list')
+      }
+    }
   }
 }
 </script>
