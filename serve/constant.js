@@ -25,6 +25,14 @@ module.exports = {
             STATUSCODE:106,
             MSG:'账号格式不符合要求'
         },
+        USERNAME_ERROR:{
+            STATUSCODE:106,
+            MSG:'账号或密码错误'
+        },
+        USERNAME_NO_FIND:{
+            STATUSCODE:106,
+            MSG:'没有找到此用户'
+        },
         WORD_NOT_FIND:{
             STATUSCODE:107,
             MSG:'未查询到：'

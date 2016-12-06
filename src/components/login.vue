@@ -5,6 +5,7 @@
     <div>请输入验证码：{{verify_img}} <a @click.prevent="refresh_verifycode" href="#">更换</a></div>
     <div><input v-model="verifycode" type="password" placeholder="验证码"></div>
     <a @click.prevent="login" href="#" >登录</a>
+    <a @click.prevent="regiest" href="#" >注册</a>
   </div>
   
 </template>
@@ -49,6 +50,24 @@ export default {
       .then(function(verifycode){
         self.verifytoken = verifycode.token
         self.verify_img = verifycode.verify_code
+      })
+    },
+    regiest:function(){
+      var self = this
+      co(function*(){
+        let regiest = yield API.regiest( self.username,
+                                          self.password,
+                                          self.verify_img,
+                                          self.verifytoken)
+      })
+      API.regiest(self.username,self.password,self.verify_img,self.verifytoken)
+      .then(function(res){
+        // BASE.saveToken(res.token)
+        // self.$router.go('/word/list')
+        console.log('注册成功')
+        console.log('登录中')
+
+        //然后登录
       })
     }
   },

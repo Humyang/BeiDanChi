@@ -86,7 +86,7 @@ export default {
       let self = this
       setTimeout(function() {
         self.$broadcast('onTopLoaded', id);
-      }, 2000);
+      }, 2000)
     }
   },
   events:{

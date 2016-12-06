@@ -34,6 +34,8 @@ import loadmore from 'mint-loadmore'
 import drop_down from '../vendor/drop_down.js'
 import addWord from './wordAdd.vue'
 import * as API from '../api/main.js'
+var CODE = require('../../serve/constant.js').CODE
+import {pageHandle} from '../api/method.js'
 // import hambraug from './hambraug'
 export default {
   data () {
@@ -137,14 +139,10 @@ export default {
     .then(function(res){
       self.lists = res.list
       console.log("返回数据",res)
-    }).catch(err){
-      if(CODE.LOGIN_NO_LOGIN.STATUSCODE === err.STATUSCODE ||
-         CODE.LOGIN_TOKEN_INVALID.STATUSCODE === err.STATUSCODE){
-          // console.log('jump')
-          // location.href = '/login'
-          self.$router.go('/word/list')
-      }
-    }
+    })
+    .catch(function(err){
+      pageHandle.call(self,err)
+    })
   }
 }
 </script>

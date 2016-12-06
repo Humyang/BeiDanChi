@@ -13,4 +13,13 @@ export const timeFormat = function(timestamp){
 
     return "unkonw"
 }
+var CODE = require('../../serve/constant.js').CODE
+export const pageHandle = function(err){
+    if( CODE.LOGIN_NO_LOGIN.STATUSCODE === err.STATUSCODE ||
+        CODE.LOGIN_TOKEN_INVALID.STATUSCODE === err.STATUSCODE){
+          // console.log('jump')
+          // location.href = '/login'
+          this.$router.go('/login')
+    }
+}
 

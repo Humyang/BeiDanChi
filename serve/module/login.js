@@ -51,11 +51,12 @@ function* regiest(next){
     let salt = md5(Math.random()*1000000)
     let password = encryptPassword(fields.password,salt)
     let now = new Date()
+    let uid = uid(40)
     let data = {
         username:fields.username,
         password,
         salt,
-        uid:uid(40),
+        uid,
         regiest_date:now.getTime()
         // 弹性添加其它字段
     }
@@ -70,6 +71,7 @@ function* regiest(next){
     this.body = {
       status:true,
       res:_inset_res
+      // token:
     }
 }
 function* login(next){
@@ -82,6 +84,9 @@ function* login(next){
                         .db('BeiDanChi')
                         .collection('user')
                         .findOne({username:fields.username})
+    if(salt === null){
+        throwError(CODE.USERNAME_NO_FIND)
+    }
     // console.log('salt，',salt)
     // console.log('encryptPassword',encryptPassword(fields.password,salt.salt))
     //验证账号密码
@@ -96,7 +101,8 @@ function* login(next){
                         .findOne(_usm_pwd_filter);
     // console.log('_usm_pwd，',_usm_pwd)
     if(_usm_pwd === null){
-        throw new Error('账号密码错误')
+        // throw new Error('账号密码错误')
+        throwError(CODE.USERNAME_ERROR)
     }
 
     //token 写入有效状态
