@@ -67,10 +67,16 @@ function* regiest(next){
                     .insert(data)
 
     // console.log('inset_res：',_inset_res)
+
+    // 获取用于登录的token
+    let temptoken = yield get_verifytoken()
+
     // 响应
     this.body = {
       status:true,
-      res:_inset_res
+      res:_inset_res,
+      temp_token:temptoken.token,
+      temp_verifycode:temptoken.verify_code
       // token:
     }
 }
@@ -138,6 +144,15 @@ function* login(next){
 }
 function* verifycode(next){
 
+    let insert_res = yield get_verifytoken()
+
+    this.body = {
+      status:true,
+      token:insert_res.token,
+      verify_code:insert_res.verify_code
+    }
+}
+function* get_verifytoken(){
     // 生成 Token
     let token = uid(40)
     
@@ -162,11 +177,7 @@ function* verifycode(next){
                     .collection('token')
                     .insert(data)
 
-    this.body = {
-      status:true,
-      token,
-      verify_code
-    }
+    return {token,verify_code}
 }
 function* username_repeat(next){
     let _username = yield username_check(this,this.params.username)

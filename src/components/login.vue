@@ -59,6 +59,10 @@ export default {
                                           self.password,
                                           self.verify_img,
                                           self.verifytoken)
+        console.log('注册成功')
+        console.log('登录中')
+        // temp_token 用于注册后立即登录的验证码
+        API.login(self.username,self.password,regiest.temp_verifycode,regiest.temp_token)
       })
       API.regiest(self.username,self.password,self.verify_img,self.verifytoken)
       .then(function(res){
