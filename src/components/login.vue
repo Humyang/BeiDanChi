@@ -18,6 +18,8 @@
 // import addWord from './wordAdd.vue'
 import * as API from '../api/main.js'
 import * as BASE from '../api/base.js'
+import co from 'co'
+
 // import hambraug from './hambraug'
 export default {
   data () {
@@ -62,16 +64,12 @@ export default {
         console.log('注册成功')
         console.log('登录中')
         // temp_token 用于注册后立即登录的验证码
-        API.login(self.username,self.password,regiest.temp_verifycode,regiest.temp_token)
-      })
-      API.regiest(self.username,self.password,self.verify_img,self.verifytoken)
-      .then(function(res){
-        // BASE.saveToken(res.token)
-        // self.$router.go('/word/list')
-        console.log('注册成功')
-        console.log('登录中')
+        let login =yield API.login(self.username,self.password,regiest.temp_verifycode,regiest.temp_token)
+        BASE.saveToken(login.token)
+        self.$router.go('/word/list')
 
-        //然后登录
+      }).catch(function(err){
+        console.log(err)
       })
     }
   },

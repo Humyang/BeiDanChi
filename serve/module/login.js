@@ -5,6 +5,7 @@ var throwError = require('../error.js').throwError
 var CONSTANT = require('../constant.js')
 var DAY = CONSTANT.DAY
 var CODE = CONSTANT.CODE
+
 // 密码加密
 function encryptPassword(password,salt){
     return md5(md5(password+salt))
@@ -51,12 +52,14 @@ function* regiest(next){
     let salt = md5(Math.random()*1000000)
     let password = encryptPassword(fields.password,salt)
     let now = new Date()
-    let uid = uid(40)
+
+    let uid2 = uid(40)
+
     let data = {
         username:fields.username,
         password,
         salt,
-        uid,
+        uid:uid2,
         regiest_date:now.getTime()
         // 弹性添加其它字段
     }
@@ -69,7 +72,7 @@ function* regiest(next){
     // console.log('inset_res：',_inset_res)
 
     // 获取用于登录的token
-    let temptoken = yield get_verifytoken()
+    let temptoken = yield get_verifytoken(this)
 
     // 响应
     this.body = {
@@ -144,7 +147,7 @@ function* login(next){
 }
 function* verifycode(next){
 
-    let insert_res = yield get_verifytoken()
+    let insert_res = yield get_verifytoken(this)
 
     this.body = {
       status:true,
@@ -152,7 +155,7 @@ function* verifycode(next){
       verify_code:insert_res.verify_code
     }
 }
-function* get_verifytoken(){
+function* get_verifytoken(self){
     // 生成 Token
     let token = uid(40)
     
@@ -172,7 +175,7 @@ function* get_verifytoken(){
         is_verify:false
     }
 
-    let res = yield this.mongo
+    let res = yield self.mongo
                     .db('BeiDanChi')
                     .collection('token')
                     .insert(data)

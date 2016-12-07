@@ -2,12 +2,12 @@
   <div id="wrapper">
     <router-view
       class="view animated"
-      keep-alive
+      
       :transition="transition_type?'slide_go':'slide_back'"
 
       ></router-view>
     <hambraug :is_show.sync="show_hambraug"></hambraug>
-    <div  class="popup">
+    <div class="popup">
       <div v-show="show_popup" transition="fade" class="animated content">
           <p class="text">
             {{popup_text}}
@@ -20,7 +20,7 @@
     </div>
   </div>
 </template>
-
+<!-- keep-alive -->
 <script>
 // import Hello from './components/Hello'
 import navbar from './components/common/navbar'
@@ -59,32 +59,5 @@ export default {
   font-size: 0.28rem;
   text-align: center;
 }
-/* html {
-  height: 100%;
-}
 
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-#app {
-  color: #2c3e50;
-  margin-top: -100px;
-  max-width: 600px;
-  font-family: Source Sans Pro, Helvetica, sans-serif;
-  text-align: center;
-}
-
-#app a {
-  color: #42b983;
-  text-decoration: none;
-}
-
-.logo {
-  width: 100px;
-  height: 100px
-} */
 </style>

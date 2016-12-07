@@ -52,11 +52,14 @@ app.use(function *(next){
             // 业务逻辑错误
             this.body = objectAssign({status:false},JSON.parse(err.message));
         }catch(err2){
+            // console.log(this)
             this.body = {
                 status:false,
-                msg:err.message
+                msg:err.message,
+                path:this.request.url
             }
         }
+        console.log(err)
     }
 })
 app.use(router.routes()).use(router.allowedMethods());

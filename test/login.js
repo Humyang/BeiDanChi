@@ -24,6 +24,7 @@ describe('注册流程测试', function() {
             }
         })
     })
+    
     it('输入错误验证码',function(done){
         co(function*(){
             var verifycode = yield API.verify_code()
@@ -38,6 +39,7 @@ describe('注册流程测试', function() {
             }
         })
     })
+
     it('不传 token 值',function(done){
         co(function*(){
             var verifycode = yield API.verify_code()
@@ -52,6 +54,7 @@ describe('注册流程测试', function() {
             }
         })
     })
+
     it('获取验证码并注册', function(done) {
         // expect(null).toExist()
         co(function*(){
@@ -74,23 +77,27 @@ describe('注册流程测试', function() {
             }
         })
     })
-    // it('不合法账号密码',function(done){
-    //     co(function*(){
-    //         var verifycode = yield API.verify_code()
-    //         expect(verifycode.status).toBe(true,'获取注册验证码')
-    //         let regiest_res = yield API.regiest('','','fasddf','')
-    //         done('应该提示验证码错误')
-    //     }).catch(function(err){
-    //         if(err.STATUSCODE === CODE.VERIFY_ERROR.STATUSCODE){
-    //             done()
-    //         }else{
-    //             done(err)    
-    //         }
-    //     })
-    // })
+
 })
+
 describe('登录流程测试', function() {
 
+    it('注册后立即登录',function(done){
+        co(function*(){
+            let username = 'test'+uid(10)
+
+            var verifycode = yield API.verify_code()
+            expect(verifycode.status).toBe(true,'获取注册验证码')
+
+            let regiest_res = yield API.regiest(username,'password1','123456',verifycode.token)
+            expect(regiest_res.status).toBe(true,'注册账号')
+
+            var login = yield API.login(username,'password1',regiest_res.temp_verifycode,regiest_res.temp_token)
+            done()
+        }).catch(function(err){
+            done(err)
+        })
+    })
 
     it('测试注册-登录-再次登录-使用旧token测试获取数据', function(done) {
         co(function*(){
@@ -158,6 +165,7 @@ describe('登录流程测试', function() {
             }
         })
     })
+
     it('不输入验证码',function(done){
         co(function*(){
             var verifycode = yield API.verify_code()
@@ -173,6 +181,7 @@ describe('登录流程测试', function() {
             }
         })
     })
+
     it('输入错误验证码',function(done){
         co(function*(){
             var verifycode = yield API.verify_code()
@@ -188,6 +197,7 @@ describe('登录流程测试', function() {
             }
         })
     })
+
     it('不输入账号密码',function(done){
         co(function*(){
             var verifycode = yield API.verify_code()
@@ -202,6 +212,7 @@ describe('登录流程测试', function() {
             }
         })
     })
+
     it('输入错误账号密码',function(done){
         co(function*(){
             let username = 'test'+uid(10)
@@ -212,7 +223,9 @@ describe('登录流程测试', function() {
             let regiest_res = yield API.regiest(username,'password1','123456',verifycode.token)
             expect(regiest_res.status).toBe(true,'注册账号')
 
-            let regiest_res = yield API.login('','','123456',verifycode.token)
+            var verifycode2 = yield API.verify_code()
+            expect(verifycode2.status).toBe(true,'获取注册验证码')
+            let regiest_res2 = yield API.login('','','123456',verifycode2.token)
             done('出现错误，应该提示没有找到此用户')
         }).catch(function(err){
             if(err.STATUSCODE === CODE.USERNAME_NO_FIND.STATUSCODE){
