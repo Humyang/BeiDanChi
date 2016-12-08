@@ -18,12 +18,12 @@
             :id="item._id"
             :describe="item.describe" 
             :size="1"
-            :events="events"
+            :events="hideWord()"
             ></card>
           </section>
         </loadmore>
       </content>
-      <add-word :show.sync="ui.addword"></add-word>
+      <add-word :show.sync="ui.addword" :callback="addWord()"></add-word>
   </div>
 </template>
 
@@ -49,7 +49,41 @@ export default {
             //   describe: 'some word on here'
             // }
       ],
+      ui:{
+        addword:false
+      }
+      ,
       events:[
+      
+      ]
+    }
+  },
+  components:{
+    navbar,
+    card,
+    loadmore,
+    addWord
+    // hambraug
+  },
+  computed:{
+    // 过滤单词
+    liste_filter:function(){
+      // if(!this.lists){
+      //   return []
+      // }
+      // var new_list = []
+      // for (var i = this.lists.length - 1; i >= 0; i--) {
+      //   if(this.lists[i].describe.indexOf(this.search_text)!=-1){
+      //     new_list.push(this.lists[i])
+      //   }
+      // }
+      return this.lists
+    }
+  },
+  methods:{
+    hideWord:function(){
+
+      return [
       function(id){
         console.log("隐藏单词 1，结果：")
         API.hideWord(id,0)
@@ -82,36 +116,16 @@ export default {
         .catch(function(err){
             console.log("some error：",err)
         })
+      }]
+    },
+    addWord:function(){
+      var self = this
+      return function(err,res){
+        console.log('22222')
+        self.lists.push(res)
+        self.ui.addword = false
       }
-      ],
-      ui:{
-        addword:false
-      }
-    }
-  },
-  components:{
-    navbar,
-    card,
-    loadmore,
-    addWord
-    // hambraug
-  },
-  computed:{
-    // 过滤单词
-    liste_filter:function(){
-      // if(!this.lists){
-      //   return []
-      // }
-      // var new_list = []
-      // for (var i = this.lists.length - 1; i >= 0; i--) {
-      //   if(this.lists[i].describe.indexOf(this.search_text)!=-1){
-      //     new_list.push(this.lists[i])
-      //   }
-      // }
-      return this.lists
-    }
-  },
-  methods:{
+    },
     topmethod:function(event){
       console.log(111)
     },

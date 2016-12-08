@@ -21,7 +21,8 @@ function* add (next){
 
     this.body = {
       status:true,
-      result:res.result
+      result:res.result,
+      _id:res.insertedIds[1]
     }
 }
 function* list (next){

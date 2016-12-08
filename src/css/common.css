@@ -22,7 +22,7 @@ ul{
 li{
 	list-style: none;
 }
-.wrapper { height: 100%; overflow: hidden;position: absolute;top: 0; width: 100%;}
+.wrapper { height: 100%; overflow: hidden;position: absolute;top: 0; width: 100%;z-index: 9;}
 .mint-loadmore-top {
     font-size: 0.16rem;
     color: white;

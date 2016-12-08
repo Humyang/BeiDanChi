@@ -39,7 +39,8 @@ import loadmore from 'mint-loadmore'
 import * as API from '../api/main.js'
 export default {
   props:{
-    show:false
+    show:false,
+    callback:Function
   },
   components:{
     navbar
@@ -56,11 +57,14 @@ export default {
       // 添加单词
       API.wordAdd(this.word,this.describe)
           .then(function(res){
-            console.log("添加成功")
-            self.show = false
+            // console.log("添加成功")
+            // console.log(res)
+            self.callback(null,{_id:res._id,word:self.word,describe:self.describe})
+            // self.show = false
           }).catch(function(err){
+            self.callback("添加失败")
             console.log("添加失败：",err)
-            self.show = false
+            // self.show = false
           })
     }
   },

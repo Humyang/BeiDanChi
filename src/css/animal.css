@@ -70,11 +70,11 @@
   }
 }
 .slide_right-enter {
-  -webkit-animation-name: slideOutLeft;
-  animation-name: slideOutLeft;
+  -webkit-animation-name: slideInRight;
+  animation-name: slideInRight;
 }
 
-@keyframes slideInRight {
+/*@keyframes slideInRight {
   0% {
     -webkit-transform: translate3d(100%, 0, 0);
     transform: translate3d(100%, 0, 0);
@@ -84,7 +84,7 @@
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }
-}
+}*/
 .slide_right-leave {
   -webkit-animation-name: slideOutLeft;
   animation-name: slideOutLeft;

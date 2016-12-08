@@ -50,7 +50,7 @@ export default {
 </style>
 <style>
 #wrapper{
-  height: 100%
+  height: 100%;
 }
 #wrapper .view{
   width: 100%
