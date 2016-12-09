@@ -4,6 +4,7 @@
         <p @click.prevent="back">
           <img v-if="left_type==='hambraug'" :src="img_url2" alt="">
           <img v-if="left_type==='back'" :src="img_url3" alt="">
+          <span v-if="left_type==='close'" >关闭</span>
         </p>
       </div>
       <div class="text">

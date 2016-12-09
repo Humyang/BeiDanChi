@@ -1,6 +1,11 @@
 <template>
   <div class="wrapper">
-      <navbar title="首页" :left="navbar_btn_left" :right="navbar_btn_right"></navbar>
+      <navbar 
+        title="首页" 
+        :left="navbar_btn_left" 
+        :right="navbar_btn_right"
+        
+      ></navbar>
       <content class="container">
         <loadmore :top-method="loadTop" >
           <!-- <section v-show="show_search" class="search_wrap">

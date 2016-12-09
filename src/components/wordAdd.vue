@@ -1,9 +1,9 @@
 <template>
-  <div v-show="show" transition="slide_right" class="animated wrapper">
+  <div v-show="show"  class=" wrapper">
       <navbar 
       title="新词" 
       :left="navbar_btn_left" 
-      left_type="back"
+      left_type="close"
       :right="navbar_btn_right"
       right_type="done"
       >
