@@ -5,7 +5,8 @@ var fetch = require('isomorphic-fetch');
 import * as BASE from './base.js'
 var CODE = require('../../serve/constant.js').CODE
 import {
-    API_URL,
+    // API_URL,
+    IP,
     HTTP_FAIL
 } from './constant.js'
 
@@ -54,7 +55,7 @@ const mFetch = function(path,data,token) {
         // }
 
         
-        fetch(API_URL+path,
+        fetch(IP+path,
         {
           method: 'POST',
           headers: {

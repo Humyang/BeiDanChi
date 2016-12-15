@@ -4,7 +4,6 @@
   "description": "A Vue.js project",
   "author": "Yangxg <jessebutchman@gmail.com>",
   "private": true,
-
   "scripts": {
     "dev": "node build/dev-server.js",
     "serve": "babel-node serve/index",
@@ -16,8 +15,8 @@
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
     "mocha": "mocha --compilers js:babel-register --recursive ",
-    "test_login":"mocha --compilers js:babel-register --recursive test/login.js",
-    "test_word":"mocha --compilers js:babel-register --recursive test/word.js"
+    "test_login": "mocha --compilers js:babel-register --recursive test/login.js",
+    "test_word": "mocha --compilers js:babel-register --recursive test/word.js"
   },
   "dependencies": {
     "animate.css": "^3.5.2",
@@ -30,6 +29,7 @@
     "koa-cors": "0.0.16",
     "koa-mongo": "^0.6.0",
     "koa-router": "^5.4.0",
+    "koa-static": "^2.0.0",
     "md5": "^2.2.1",
     "mocha": "^2.5.3",
     "object-assign": "^4.1.0",
