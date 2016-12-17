@@ -1,11 +1,11 @@
 <template>
   <div id="login">
-    <div  ><input v-model="username" type="text" placeholder="账号"></div>
+    <div class="input"><input v-model="username" type="text" placeholder="账号"></div>
     <div><input v-model="password" type="password" placeholder="密码"></div>
-    <div>请输入验证码：{{verify_img}} <a @click.prevent="refresh_verifycode" href="#">更换</a></div>
-    <div><input v-model="verifycode" type="password" placeholder="验证码"></div>
-    <a @click.prevent="login" href="#" >登录</a>
-    <a @click.prevent="regiest" href="#" >注册</a>
+    <!-- <div>请输入验证码：{{verify_img}} <a @click.prevent="refresh_verifycode" href="#">更换</a></div>
+    <div><input v-model="verifycode" type="password" placeholder="验证码"></div> -->
+    <a class="btn_" @click.prevent="login" href="#" >登录</a>
+    <a class="btn_" @click.prevent="regiest" href="#" >注册</a>
   </div>
   
 </template>
@@ -19,7 +19,8 @@
 import * as API from '../api/main.js'
 import * as BASE from '../api/base.js'
 import co from 'co'
-
+import '../css/login.css'
+import {pageHandle} from '../api/method.js'
 // import hambraug from './hambraug'
 export default {
   data () {
@@ -44,6 +45,9 @@ export default {
         BASE.saveToken(res.token)
         self.$router.go('/word/list')
         console.log('登录成功')
+      }).catch(function(err){
+        self.$root.popup_text = err.MSG
+        self.$root.show_popup = true
       })
     },
     refresh_verifycode:function(){
@@ -69,13 +73,17 @@ export default {
         self.$router.go('/word/list')
 
       }).catch(function(err){
-        console.log(err)
+        self.$root.popup_text = err.MSG
+        self.$root.show_popup = true
+        // console.log(err)
+        // pageHandle.call(self,err)
       })
     }
   },
   events:{
   },
   ready:function(){
+    localStorage.clear()
     this.refresh_verifycode()
   }
   
@@ -83,21 +91,22 @@ export default {
 </script>
 
 <style scoped>
-#wrapper{
+/* #wrapper{
     text-align: center;
     font-size: 28px;
+}
+#login{
+  background-color: #36474F;
+}
+div#wrapper {
+    
 }
 input{
 
     font-size: 28px;
-    /* border: 0; */
     margin-bottom: 20px;
     padding: 11px;
     margin-left: 12px;
     margin-top: 10px;
-}
-</style>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-
+} */
 </style>

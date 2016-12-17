@@ -36,9 +36,9 @@ router.post('/word/move',LOGIN.login_check(),WORD.move)
 // 验证账号重复性
 router.all('/valid/username/:username',LOGIN.username_repeat)
 //注册账户
-router.post('/regiest',LOGIN.verify_code(),LOGIN.regiest)
+router.post('/regiest',/*LOGIN.verify_code(),*/LOGIN.regiest)
 //登录
-router.post('/login',LOGIN.verify_code(),LOGIN.login)
+router.post('/login',/*LOGIN.verify_code(),*/LOGIN.login)
 //获取验证码
 router.all('/verify_code',LOGIN.verifycode)
 

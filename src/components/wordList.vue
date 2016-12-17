@@ -160,7 +160,9 @@ export default {
       console.log("返回数据",res)
     })
     .catch(function(err){
-      pageHandle.call(self,err)
+      // pageHandle.call(self,err)
+      self.$root.popup_text = err
+      self.$root.show_popup = true
     })
   }
 }

@@ -1,0 +1,32 @@
+/*login.css*/
+#wrapper{
+        width: 100%;
+    
+}
+#login{
+    background-color: #36474F;
+    height: 100%;
+    color: white;
+    font-size: 28px;
+    padding-top: 70px;
+    text-align: center;
+}
+div#wrapper {
+    
+}
+input{
+    font-size: 28px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 0;
+    margin-bottom: 10px;
+}
+#wrapper .view a {
+    color: white;
+}
+
+a.btn_ {
+    display: block;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}

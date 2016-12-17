@@ -1,3 +1,8 @@
+#更新日志
+###  待开发
+错误弹窗（登录错误）
+去除验证码
+
 # beidanchi
 
 > A Vue.js project
