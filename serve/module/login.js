@@ -119,18 +119,20 @@ function* login(next){
     let _token_stauts = {
         username:fields.username,
         status:true,
-        token:new_token,
-        device:fields.device
+        token:new_token
+        // ,
+        // device:fields.device
     }
     //使旧 token 失效
-    let _remove_token = yield this.mongo
-                                .db('BeiDanChi')
-                                .collection('logined_token')
-                                .update({
-                                        username:fields.username,
-                                        device:fields.device},
-                                        {'$set':{status:false}},
-                                        {'upsert':false})
+    // let _remove_token = yield this.mongo
+    //                             .db('BeiDanChi')
+    //                             .collection('logined_token')
+    //                             .update({
+    //                                     username:fields.username,
+    //                                     device:fields.device
+    //                                 },
+    //                                     {'$set':{status:false}},
+    //                                     {'upsert':false})
 
     // console.log('_remove_token: ',_remove_token)
     let _insert_res = yield this.mongo
