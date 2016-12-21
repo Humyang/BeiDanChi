@@ -10,7 +10,7 @@
             </section>
             <!-- 登录帐号 -->
             <footer>
-              <p>{{username}}</p>
+              <p>{{username1}}</p>
               <a href="#" class="more"><img src="../assets/images/展开按钮.png" alt=""></a>
             </footer>
           </header>
@@ -50,7 +50,7 @@ export default {
   data () {
     return {
       index:0,
-      username:'',
+      username1:'123'
     }
   },
   methods: {
@@ -78,6 +78,7 @@ export default {
     // },
   },
   ready:function(){
+    console.log(getUsername())
     this.username = getUsername()
   }
 

@@ -28,5 +28,7 @@ export const saveUsername = function(username){
     localStorage.setItem(USERNAME, username);
 }
 export const getUsername = function(){
+    console.log(USERNAME)
     localStorage.getItem(USERNAME);
+    console.log(localStorage.getItem(USERNAME))
 }

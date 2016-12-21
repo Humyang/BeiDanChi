@@ -146,6 +146,7 @@ export const login = function(username,password,verify_code,token){
         data).then(
         function(res){
             saveUsername(username)
+            return res
         })
 }
 // 注册
