@@ -4,7 +4,6 @@
         title="首页" 
         :left="navbar_btn_left" 
         :right="navbar_btn_right"
-        
       ></navbar>
       <content class="container">
         <loadmore :top-method="loadTop" >

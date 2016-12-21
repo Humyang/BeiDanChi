@@ -64,7 +64,7 @@ export default {
     margin: 5px 0; }
 
 .card.middle { width: 150px; height: 150px; margin: 5px; }
-.card.middle p { padding: 10px; height: 100px; font-size: 16px; }
+.card.middle p { padding: 10px; height: 100px; font-size: 16px;overflow: hidden; }
 .card.middle footer { height: 30px; }
 .card.middle footer a { width: 50px;  }
 .card.middle footer a img { width: 18px; height: 18px; }

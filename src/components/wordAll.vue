@@ -148,7 +148,7 @@ footer a {
     display: block;
     float: left;
     text-align: center;
-    font-size: 0.28rem;
+    /*font-size: 0.28rem;*/
     color:#009688;
     text-decoration: none;
 }

@@ -60,12 +60,15 @@ export default {
             // console.log("添加成功")
             // console.log(res)
             self.callback(null,{_id:res._id,word:self.word,describe:self.describe})
+            self.word = ""
+            self.describe = ""
             // self.show = false
           }).catch(function(err){
             self.callback("添加失败")
             console.log("添加失败：",err)
             // self.show = false
           })
+
     }
   },
   events:{

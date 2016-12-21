@@ -58,7 +58,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-header.nav_bar { background-color: #E0E0E0; position: relative; position: fixed; top: 0; opacity: 1; z-index: 9; width: 100% }
+header.nav_bar { background-color: #E0E0E0;  position: absolute; top: 0; opacity: 1; z-index: 9; width: 100% }
 ._btn { width: 1.2rem; right: 0; }
 header.nav_bar div { float: left; }
 header.nav_bar div.text { width: 4rem; left: 1.5rem; }
