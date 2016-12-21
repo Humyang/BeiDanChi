@@ -4,6 +4,8 @@ import mFetch from './ajax.js'
 import {DAY} from './constant.js'
 import * as M from './method.js'
 import md5 from 'md5'
+import {saveUsername} from './base.js'
+
 // var md5 = require('md5')
 
 // 添加单词
@@ -141,7 +143,10 @@ export const login = function(username,password,verify_code,token){
         token
     }
     return mFetch('/login',
-        data)
+        data).then(
+        function(res){
+            saveUsername(username)
+        })
 }
 // 注册
 export const regiest = function(username,password,verify_code,token){

@@ -3,7 +3,8 @@ import {mAjax} from './ajax.js'
 import {
     SESSION_TOKEN,
     SESSION_EXPIRED,
-    ACCOUNT_STATE
+    ACCOUNT_STATE,
+    USERNAME
 } from './constant.js'
 
 export const removeToken = function(page_this) {
@@ -22,4 +23,10 @@ export const getToken = function(){
     }else{
         return localStorage.getItem(SESSION_TOKEN)
     }
+}
+export const saveUsername = function(username){
+    localStorage.setItem(USERNAME, username);
+}
+export const getUsername = function(){
+    localStorage.getItem(USERNAME);
 }

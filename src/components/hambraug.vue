@@ -10,7 +10,7 @@
             </section>
             <!-- 登录帐号 -->
             <footer>
-              <p>jessebutchman@gmail.com</p>
+              <p>{{username}}</p>
               <a href="#" class="more"><img src="../assets/images/展开按钮.png" alt=""></a>
             </footer>
           </header>
@@ -41,13 +41,16 @@
 
 <script>
 import '../css/animal.css'
+import {getUsername} from '../api/base.js'
+
 export default {
   props:{
     is_show:false
   },
   data () {
     return {
-      index:0
+      index:0,
+      username:'',
     }
   },
   methods: {
@@ -73,6 +76,9 @@ export default {
     //       break;          
     //     }
     // },
+  },
+  ready:function(){
+    this.username = getUsername()
   }
 
 }
