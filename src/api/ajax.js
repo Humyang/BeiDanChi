@@ -5,7 +5,6 @@ var fetch = require('isomorphic-fetch');
 import * as BASE from './base.js'
 var CODE = require('../../serve/constant.js').CODE
 import {
-    // API_URL,
     IP,
     HTTP_FAIL
 } from './constant.js'
@@ -18,11 +17,6 @@ import {
 // 返回 true 表示未发生业务逻辑问题，继续执行
 const preProcessRsp = function(store,reslove,reject) {
     if (!store.status) {
-        // if(CODE.LOGIN_NO_LOGIN.STATUSCODE === store.STATUSCODE ||
-        //    CODE.LOGIN_TOKEN_INVALID.STATUSCODE === store.STATUSCODE){
-        //     console.log('jump')
-        //     location.href = '/login'
-        // }
         reject(store)
         return false
     }
@@ -39,22 +33,8 @@ const mFetch = function(path,data,token) {
             if(data.token === undefined){
                 comb_data = Object.assign(data,{token:BASE.getToken()})
             }
-            // if(token===undefined){
-            //     comb_data = Object.assign(data,{token:BASE.getToken()})
-            //     // console.log(222,path)
-            // }else{
-            //     // console.log(111,path)
-            //     comb_data = Object.assign(data,{token})
-            // }
         }
-        
         let root = this
-        // if(typeof window !=="undefined" && root===window){
-        //     let token = BASE.getToken()
-        //     comb_data = Object.assign(data,{token})
-        // }
-
-        
         fetch(IP+path,
         {
           method: 'POST',
@@ -80,9 +60,9 @@ const mFetch = function(path,data,token) {
             }
         })
         .catch(function(ex){
-            // console.log('parsing failed', ex)
-            reject(ex)
-            // callback(HTTP_FAIL);
+            reject({
+                MSG:ex.message
+            })
         });
     })
     
