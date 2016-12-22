@@ -50,25 +50,21 @@ export default {
   methods:{
     navbar_btn_left:function(){
       this.show = false
-      // history.back()
     },
     navbar_btn_right:function(){
       let self = this
       // 添加单词
-      API.wordAdd(this.word,this.describe)
-          .then(function(res){
-            // console.log("添加成功")
-            // console.log(res)
-            self.callback(null,{_id:res._id,word:self.word,describe:self.describe})
-            self.word = ""
-            self.describe = ""
-            // self.show = false
-          }).catch(function(err){
-            self.callback("添加失败")
-            console.log("添加失败：",err)
-            // self.show = false
-          })
-
+      API
+      .wordAdd(this.word,this.describe)
+      .then(function(res){
+        self.callback(null,{_id:res._id,word:self.word,describe:self.describe})
+        self.word = ""
+        self.describe = ""
+      })
+      .catch(function(err){
+        self.$root.popup_text = err.MSG
+        self.$root.show_popup = true
+      })
     }
   },
   events:{

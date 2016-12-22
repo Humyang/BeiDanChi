@@ -75,8 +75,6 @@ export default {
       }).catch(function(err){
         self.$root.popup_text = err.MSG
         self.$root.show_popup = true
-        // console.log(err)
-        // pageHandle.call(self,err)
       })
     }
   },
