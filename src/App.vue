@@ -26,6 +26,8 @@
 import navbar from './components/common/navbar'
 import hambraug from './components/hambraug'
 // import Index from './components/wordList'
+import * as API from './api/main.js'
+
 import './css/common.css'
 import './css/animal.css'
 export default {
@@ -34,7 +36,8 @@ export default {
       popup_text:"",
       show_popup:false,
       show_hambraug:false,
-      transition_type:true
+      transition_type:true,
+      API
     }
   },
   components: {
