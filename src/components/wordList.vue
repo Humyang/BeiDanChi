@@ -125,7 +125,6 @@ export default {
     addWord:function(){
       var self = this
       return function(err,res){
-        console.log('22222')
         self.lists.push(res)
         self.ui.addword = false
       }
@@ -159,8 +158,7 @@ export default {
       console.log("返回数据",res)
     })
     .catch(function(err){
-      // pageHandle.call(self,err)
-      self.$root.popup_text = err
+      self.$root.popup_text = err.MSG
       self.$root.show_popup = true
     })
   }
