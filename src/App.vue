@@ -6,7 +6,7 @@
       :transition="transition_type?'slide_go':'slide_back'"
 
       ></router-view>
-    <hambraug :is_show.sync="show_hambraug"></hambraug>
+    <hambraug :is_show.sync="show_hambraug" :username="username"></hambraug>
     <div class="popup">
       <div v-show="show_popup" transition="fade" class="animated content">
           <p class="text">
@@ -37,9 +37,7 @@ export default {
       show_popup:false,
       show_hambraug:false,
       transition_type:true,
-      App_info:{
-        username:''
-      },
+      username:"",
       pageHandle
       // ,
       // API
@@ -50,7 +48,8 @@ export default {
     hambraug
   },
   ready:function(){
-    this.App_info.username = BASE.getUsername()
+    this.username = BASE.getUsername()
+    console.log('App:',this.username)
   }
 }
 </script>

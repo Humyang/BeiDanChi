@@ -45,7 +45,7 @@ export default {
       .then(function(res){
         BASE.saveToken(res.token)
         console.log(BASE.getUsername())
-        self.$root.App_info.username = BASE.getUsername()
+        self.$root.username = BASE.getUsername()
 
         self.$router.go('/word/list')
         console.log('登录成功')
@@ -75,6 +75,7 @@ export default {
         // temp_token 用于注册后立即登录的验证码
         let login =yield API.login(self.username,self.password,regiest.temp_verifycode,regiest.temp_token)
         BASE.saveToken(login.token)
+        self.$root.username = BASE.getUsername()
         self.$router.go('/word/list')
 
       }).catch(function(err){

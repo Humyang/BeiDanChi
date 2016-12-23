@@ -45,12 +45,12 @@ import '../css/animal.css'
 
 export default {
   props:{
-    is_show:false
+    is_show:false,
+    username:''
   },
   data () {
     return {
-      index:0,
-      username:'123'
+      index:0
     }
   },
   methods: {
@@ -79,10 +79,10 @@ export default {
   },
   ready:function(){
     // console.log(getUsername())
-    console.log(localStorage)
-    console.log("123:",this.$root.App_info.username)
+    // console.log(localStorage)
+    // console.log("123:",this.$root.username)
     // this.username = this.$root.App_info.username
-    this.username='456'
+    // this.username=this.$root.username
   }
 
 }
