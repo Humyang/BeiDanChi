@@ -79,8 +79,10 @@ export default {
   },
   ready:function(){
     // console.log(getUsername())
-    console.log(this.$root.App_info.username)
-    this.username = this.$root.App_info.username
+    console.log(localStorage)
+    console.log("123:",this.$root.App_info.username)
+    // this.username = this.$root.App_info.username
+    this.username='456'
   }
 
 }
