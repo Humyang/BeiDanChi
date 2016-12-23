@@ -158,8 +158,9 @@ export default {
       console.log("返回数据",res)
     })
     .catch(function(err){
-      self.$root.popup_text = err.MSG
-      self.$root.show_popup = true
+      self.$root.pageHandle(err)
+      // self.$root.popup_text = err.MSG
+      // self.$root.show_popup = true
     })
   }
 }

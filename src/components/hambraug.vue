@@ -10,7 +10,7 @@
             </section>
             <!-- 登录帐号 -->
             <footer>
-              <p>{{username1}}</p>
+              <p>{{username}}</p>
               <a href="#" class="more"><img src="../assets/images/展开按钮.png" alt=""></a>
             </footer>
           </header>
@@ -41,7 +41,7 @@
 
 <script>
 import '../css/animal.css'
-import {getUsername} from '../api/base.js'
+
 
 export default {
   props:{
@@ -50,7 +50,7 @@ export default {
   data () {
     return {
       index:0,
-      username1:'123'
+      username:'123'
     }
   },
   methods: {
@@ -78,8 +78,9 @@ export default {
     // },
   },
   ready:function(){
-    console.log(getUsername())
-    this.username = getUsername()
+    // console.log(getUsername())
+    console.log(this.$root.App_info.username)
+    this.username = this.$root.App_info.username
   }
 
 }

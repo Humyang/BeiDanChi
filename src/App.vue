@@ -26,8 +26,8 @@
 import navbar from './components/common/navbar'
 import hambraug from './components/hambraug'
 // import Index from './components/wordList'
-import * as API from './api/main.js'
-
+import {pageHandle} from './api/method.js'
+import * as BASE from './api/base.js'
 import './css/common.css'
 import './css/animal.css'
 export default {
@@ -37,12 +37,20 @@ export default {
       show_popup:false,
       show_hambraug:false,
       transition_type:true,
-      API
+      App_info:{
+        username:''
+      },
+      pageHandle
+      // ,
+      // API
     }
   },
   components: {
     navbar,
     hambraug
+  },
+  ready:function(){
+    this.App_info.username = BASE.getUsername()
   }
 }
 </script>

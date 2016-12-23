@@ -21,6 +21,7 @@ import * as BASE from '../api/base.js'
 import co from 'co'
 import '../css/login.css'
 import {pageHandle} from '../api/method.js'
+// import {getUsername} from '../api/base.js'
 // import hambraug from './hambraug'
 export default {
   data () {
@@ -43,9 +44,13 @@ export default {
       API.login(self.username,self.password,self.verify_img,self.verifytoken)
       .then(function(res){
         BASE.saveToken(res.token)
+        console.log(BASE.getUsername())
+        self.$root.App_info.username = BASE.getUsername()
+
         self.$router.go('/word/list')
         console.log('登录成功')
       }).catch(function(err){
+        console.log(err)
         self.$root.popup_text = err.MSG
         self.$root.show_popup = true
       })
