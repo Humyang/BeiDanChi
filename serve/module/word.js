@@ -39,6 +39,7 @@ function* list (next){
                             .db('BeiDanChi')
                             .collection('word_list')
                             .find(query_filter)
+                            .sort({_id:-1})
                             .toArray();
 
     console.log('/word/list：',list)

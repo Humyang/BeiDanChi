@@ -8,9 +8,9 @@
     {{describe}}
     </p>
     <footer>
-      <a @click.prevent="events[0](id)" href=""><img :src="img1" alt=""></a>
-      <a @click.prevent="events[1](id)" href=""><img :src="img2" alt=""></a>
-      <a @click.prevent="events[2](id)" href=""><img :src="img3" alt=""></a>
+      <a @click.prevent="events[0](id,index)" href=""><img :src="img1" alt=""></a>
+      <a @click.prevent="events[1](id,index)" href=""><img :src="img2" alt=""></a>
+      <a @click.prevent="events[2](id,index)" href=""><img :src="img3" alt=""></a>
     </footer>
   </div>
 </template>
@@ -22,6 +22,7 @@ import img3 from './images/分享.png'
 export default {
   props:{
     id:"",
+    index:"",
     describe:"",
     word:"",
     size:{

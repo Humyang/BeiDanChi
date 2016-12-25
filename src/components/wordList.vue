@@ -19,6 +19,7 @@
             <card 
             v-for="item in liste_filter" 
             :word="item.word"
+            :index="$index"
             :id="item._id"
             :describe="item.describe" 
             :size="1"
@@ -86,46 +87,49 @@ export default {
   },
   methods:{
     hideWord:function(){
-
+      let self = this
       return [
-      function(id){
-        console.log("隐藏单词 1，结果：")
+      function(id,index){
+        
         API.hideWord(id,0)
         .then(function(res){
-            console.log("success",res)
+            self.lists.splice(index,1)
         })
         .catch(function(err){
-          console.log("some error：",err)
+            self.$root.popup_text = err.MSG
+            self.$root.show_popup = true
         })
       },
-      function(id){
+      function(id,index){
 
-        console.log("隐藏单词 2，结果：")
+        
 
         API.hideWord(id,1)
         .then(function(res){
-            console.log("success",res)
+            self.lists.splice(index,1)
         })
         .catch(function(err){
-            console.log("some error：",err)
+            self.$root.popup_text = err.MSG
+            self.$root.show_popup = true
         })
 
       },
-      function(id){
-        console.log("隐藏单词 3，结果：")
+      function(id,index){
+        
         API.hideWord(id,2)
         .then(function(res){
-            console.log("success",res)
+            self.lists.splice(index,1)
         })
         .catch(function(err){
-            console.log("some error：",err)
+            self.$root.popup_text = err.MSG
+            self.$root.show_popup = true
         })
       }]
     },
     addWord:function(){
       var self = this
       return function(err,res){
-        self.lists.push(res)
+        self.lists.unshift(res)
         self.ui.addword = false
       }
     },
