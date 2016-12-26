@@ -1,7 +1,9 @@
 /*login.css*/
 #wrapper{
-        width: 100%;
-    
+    height: 100%;
+      position: absolute;
+  width: 640px;
+  overflow: hidden;
 }
 #login{
     background-color: #36474F;

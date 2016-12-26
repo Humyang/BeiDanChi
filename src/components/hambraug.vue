@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height:100%;">
     <section v-show="is_show" transition="slide" class="animated humbrag">
         <content >
         <!-- 头部账户信息 -->
@@ -92,7 +92,7 @@ export default {
 <style scoped>
 section.humbrag {
     height: 100%;
-    position: fixed;
+    position: relative;
     z-index: 10;
     top: 0;
     left: 0;
@@ -103,10 +103,11 @@ section.humbrag {
     background-color: black;
     opacity: 0.4;
     height: 100%;
-    position: fixed;
+    position: absolute;
     width: 100%;
     top: 0;
     z-index: 9;
+    -webkit-animation-duration: 0.5s;
     animation-duration: 0.5s;
 }
 .humbrag content {
