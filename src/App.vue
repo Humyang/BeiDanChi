@@ -59,7 +59,10 @@ export default {
   }
 </style>
 <style>
-
+#wrapper{
+  height: 100%;
+  position: relative;
+}
 #wrapper .view{
   width: 100%
 }
