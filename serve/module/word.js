@@ -58,7 +58,9 @@ function* all(next){
     let list = yield this.mongo 
                             .db('BeiDanChi')
                             .collection('word_list')
-                            .find(query_filter).toArray();
+                            .find(query_filter)
+                            .sort({end_time:1})
+                            .toArray();
 
     console.log('/word/all：',list)
 
