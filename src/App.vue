@@ -28,8 +28,13 @@ import hambraug from './components/hambraug'
 // import Index from './components/wordList'
 import {pageHandle} from './api/method.js'
 import * as BASE from './api/base.js'
+// if (process.env.NODE_ENV === 'production') {
+
 import './css/common.css'
 import './css/animal.css'
+import './css/login.css'
+// }
+
 export default {
   data:function(){
     return {

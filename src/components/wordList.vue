@@ -41,6 +41,7 @@ import addWord from './wordAdd.vue'
 import * as API from '../api/main.js'
 var CODE = require('../../serve/constant.js').CODE
 import {pageHandle} from '../api/method.js'
+import '../css/worllist.css'
 // import hambraug from './hambraug'
 export default {
   data () {
@@ -169,27 +170,3 @@ export default {
   }
 }
 </script>
-
-<style>
-  
-</style>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-.container { background-color: #36474F; overflow: auto; display: block; height: 100%; padding-bottom: 50px;    margin-top: 0.21rem; }
-/* 下拉刷新 */
-section.refresh { color: #ffffff; text-align: center; margin-top: 45px; padding-top: 5px; }
-section.refresh p { margin: 10px; }
-section.search_wrap {    margin-top: 0.1rem;}
-section.search_wrap p { background-color: white; margin: 0 auto; width: 6.2rem; height: 20px; border-radius: 2px;padding-left: 0.4rem; }
-section.search_wrap img { padding: 2px; float: left; }
-section.search_wrap input[type="text"] { font-size: 14px; line-height: 20px; padding: 0; margin: 0; color: #000000; width: 5.2rem; border: 0;
-    margin-left: 0.4rem;}
-section.word_card { overflow: hidden;
-    min-height: 9rem;
-    left: 0px;
-    float: left;
-    width: 100%;
-    margin-bottom: 0.5rem;
-    margin-top: 0.2rem;
-}
-</style>

@@ -44,6 +44,10 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue'
       },
+      // {
+      //   test: /\.css$/,
+      //   loader: 'file'
+      // },
       {
         test: /\.js$/,
         loader: 'babel',
