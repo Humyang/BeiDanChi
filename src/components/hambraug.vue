@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100%;">
+  <div style="height:100%;" class="hambraug">
     <section v-show="is_show" transition="slide" class="animated humbrag">
         <content >
         <!-- 头部账户信息 -->
@@ -41,7 +41,7 @@
 
 <script>
 import '../css/animal.css'
-
+import '../css/hambraug.css'
 
 export default {
   props:{
@@ -88,88 +88,3 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-section.humbrag {
-    height: 100%;
-    position: relative;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    width: 268px;
-    animation-duration: 0.5s;
-}
-.zhezhao{
-    background-color: black;
-    opacity: 0.4;
-    height: 100%;
-    position: absolute;
-    width: 100%;
-    top: 0;
-    z-index: 9;
-    -webkit-animation-duration: 0.5s;
-    animation-duration: 0.5s;
-}
-.humbrag content {
-    height: 100%;
-    width: 268px;
-    background-color: white;
-    display: block;
-}
-/* 头像部分 */
-.humbrag header {
-    height: 150px;
-    background-color: #616161;
-    overflow: hidden;
-    /* border: 1px solid #333; */
-    display: block;
-}
-
-section.header {
-    display: inline-block;
-    width: 56px;
-    height: 56px;
-    border-radius: 40px;
-    /* background-color: white; */
-    text-align: center;
-    overflow: hidden;
-    border: 0;
-    margin: 35px;
-}
-footer p {
-    margin: 0;
-    padding: 0;
-    color: white;
-    /* margin: 5px; */
-    /* display: block; */
-}
-
-footer {
-    /* margin: 5px; */
-    display: block;
-    /* margin-bottom: 150px; */
-    margin-top: -5px;
-    margin-left: 20px;
-}
-a.more {
-    float: right;
-    margin-top: -16px;
-    margin-right: 10px;
-    display: block;
-}
-.humbrag ul {
-    font-size: 14px;
-    margin-top: 20px;
-}
-.humbrag li {
-    padding: 10px 0;
-}
-.humbrag li.active {
-    color: #4285F4;
-}
-.humbrag li img {
-    /* margin-top: 4px; */
-    vertical-align: -4px;
-    margin: 0 30px;
-}
-</style>

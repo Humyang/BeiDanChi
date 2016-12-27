@@ -1,5 +1,5 @@
 <template>
-  <div v-show="show"  class=" wrapper">
+  <div v-show="show"  class=" wrapper wordadd">
       <navbar 
       title="新词" 
       :left="navbar_btn_left" 
@@ -37,6 +37,7 @@ import card from './common/card'
 import loadmore from 'mint-loadmore'
 // import hambraug from './hambraug'
 import * as API from '../api/main.js'
+import '../css/wordadd.css'
 export default {
   props:{
     show:false,
@@ -83,26 +84,3 @@ export default {
   
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-
-.container { background-color: #36474F; overflow: auto; display: block;height: 100%; padding-bottom: 50px;}
-
-/* 搜索框 */
-.search_wrap { margin-top: 1rem; }
-.search_wrap p { background-color: white; margin: 0 auto; width: 6.2rem; height: 45px;border-radius: 2px; }
-.search_wrap img { padding: 14px; float: left; }
-.search_wrap input[type="text"] { font-size: 14px; line-height: 45px; padding: 0; margin: 0; color: #000000;width: 5.2rem; border: 0;}
-
-
-.detail_tabs ul { overflow: hidden; background-color: #00BBD3; border-radius: 1px; }
-section.detail_tabs { margin-top: 10px; }
-.detail_tabs ul li { font-size: 18px; float: left; width: 2.13rem; text-align: center; color: white; padding: 15px 0; }
-.detail_tabs li.active { border-bottom: 2px solid #FFFF8C; }
-
-.describe textarea { width: 6.3rem; border: 0; margin: 0; padding: 0; background-color: #36474f; border-bottom: 2px solid #80CBC4; margin-left: 5px; color: white; font-size: 16px; }
-section.detail_container.describe { margin-top: 40px; }
-
-</style>
