@@ -19,7 +19,7 @@
 import * as API from '../api/main.js'
 import * as BASE from '../api/base.js'
 import co from 'co'
-import '../css/login.css'
+// import '../css/login.css'
 import {pageHandle} from '../api/method.js'
 // import {getUsername} from '../api/base.js'
 // import hambraug from './hambraug'
