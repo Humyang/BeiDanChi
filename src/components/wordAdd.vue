@@ -32,12 +32,13 @@
 </template>
 
 <script>
+import '../css/wordadd.css'
 import navbar from './common/navbar'
 import card from './common/card'
 import loadmore from 'mint-loadmore'
 // import hambraug from './hambraug'
 import * as API from '../api/main.js'
-import '../css/wordadd.css'
+
 export default {
   props:{
     show:false,

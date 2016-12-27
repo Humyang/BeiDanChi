@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper wordlist">
       <navbar 
         title="首页" 
         :left="navbar_btn_left" 
@@ -7,14 +7,6 @@
       ></navbar>
       <content class="container">
         <loadmore :top-method="loadTop" >
-          <!-- <section v-show="show_search" class="search_wrap">
-            <p>
-              <img src="./images/搜索图标.png" alt="">
-              <input type="text" placeholder="过滤单词" v-model="search_text">
-            </p>
-          </section> -->
-          <!-- <loadmore> -->
-          <!-- 单词列表 -->
           <section id="word_card" class="word_card">
             <card 
             v-for="item in liste_filter" 
@@ -33,6 +25,7 @@
 </template>
 
 <script>
+import '../css/wordlist.css'
 import navbar from './common/navbar'
 import card from './common/card'
 import loadmore from 'mint-loadmore'
@@ -41,7 +34,7 @@ import addWord from './wordAdd.vue'
 import * as API from '../api/main.js'
 var CODE = require('../../serve/constant.js').CODE
 import {pageHandle} from '../api/method.js'
-import '../css/worllist.css'
+
 // import hambraug from './hambraug'
 export default {
   data () {
