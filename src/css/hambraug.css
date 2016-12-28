@@ -1,13 +1,16 @@
-.hambraug section.humbrag { height: 100%; position: relative; z-index: 10; top: 0; left: 0; width: 268px; animation-duration: 0.5s; }
+.hambraug {height:100%;}
 .hambraug .zhezhao { background-color: black; opacity: 0.4; height: 100%; position: absolute; width: 100%; top: 0; z-index: 9; -webkit-animation-duration: 0.5s; animation-duration: 0.5s; }
-.hambraug .humbrag content { height: 100%; width: 268px; background-color: white; display: block; }
 
-.hambraug .humbrag header { height: 150px; background-color: #616161; overflow: hidden; display: block; }
-.hambraug section.header { display: inline-block; width: 56px; height: 56px; border-radius: 40px; text-align: center; overflow: hidden; border: 0; margin: 35px; }
-.hambraug footer p { margin: 0; padding: 0; color: white; }
-.hambraug footer { display: block; margin-top: -5px; margin-left: 20px; }
-.hambraug a.more { float: right; margin-top: -16px; margin-right: 10px; display: block; }
-.hambraug .humbrag ul { font-size: 14px; margin-top: 20px; }
-.hambraug .humbrag li { padding: 10px 0; }
-.hambraug .humbrag li.active { color: #4285F4; }
-.hambraug .humbrag li img { vertical-align: -4px; margin: 0 30px; }
+.hambraug .board { height: 100%; position: relative; z-index: 10; top: 0; left: 0; width: 268px; animation-duration: 0.5s; }
+.hambraug .board content { height: 100%; width: 268px; background-color: white; display: block; }
+.hambraug .board content header { height: 150px; background-color: #616161; overflow: hidden; display: block; }
+.hambraug .board content header .headimg { display: inline-block; width: 56px; height: 56px; border-radius: 40px; text-align: center; overflow: hidden; border: 0; margin: 35px; }
+
+.hambraug .board .username { display: block; margin-top: -5px; margin-left: 20px; }
+.hambraug .board .username p { margin: 0; padding: 0; color: white; }
+.hambraug .board .username a.more { float: right; margin-top: -16px; margin-right: 10px; display: block; }
+
+.hambraug .board .list { font-size: 14px; margin-top: 20px; }
+.hambraug .board .list li { padding: 10px 0; }
+.hambraug .board .list li.active { color: #4285F4; }
+.hambraug .board .list li img { vertical-align: -4px; margin: 0 30px; }

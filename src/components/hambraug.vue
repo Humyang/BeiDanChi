@@ -1,32 +1,32 @@
 <template>
-  <div style="height:100%;" class="hambraug">
-    <section v-show="is_show" transition="slide" class="animated humbrag">
+  <div class="hambraug">
+    <section v-show="is_show" transition="slide" class="animated board">
         <content >
         <!-- 头部账户信息 -->
           <header>
             <!-- 头像 -->
-            <section class="header">
+            <section class="headimg">
               <img src="../assets/images/头像.png" alt="">
             </section>
             <!-- 登录帐号 -->
-            <footer>
+            <div class="username">
               <p>{{username}}</p>
-              <a href="#" class="more"><img src="../assets/images/展开按钮.png" alt=""></a>
-            </footer>
+              <a @click="" href="#" class="more"><img src="../assets/images/展开按钮.png" alt=""></a>
+            </div>
           </header>
           <!-- 菜单 -->
-          <ul>
+          <ul class="list">
             <li 
-              @click="hidden"
+
               v-link="{ path: '/word/list', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" alt="">首页</li>
             <li 
-              @click="hidden"
+
               v-link="{ path: '/word/all', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" height="12" width="17" alt="">所有单词</li>
             <li 
-              @click="hidden"
+
               v-link="{ path: '/word/add', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" height="12" width="17" alt="">离线模式（未实现）</li>
             <li 
-              @click="hidden"
+
               v-link="{ path: '/login', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" alt="">退出登录</li>
           </ul>
         </content>
