@@ -32,7 +32,7 @@ import * as BASE from './api/base.js'
 
 import './css/common.css'
 import './css/animal.css'
-import './css/login.css'
+
 // }
 
 export default {

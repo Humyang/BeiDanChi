@@ -12,25 +12,40 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
 })
 
 module.exports = merge(baseWebpackConfig, {
-  module: {
-    loaders: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
+  // module: {
+    // loaders: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
     // loaders: utils.styleLoaders({ sourceMap: config.build.productionSourceMap, extract: true })
-  },
-  // eval-source-map is faster for development
-  devtool: '#eval-source-map',
-  // vue: {
-  //   loaders: utils.cssLoaders({
-  //     sourceMap: config.build.productionSourceMap,
-  //     extract: true
-  //   })
   // },
+  // output: {
+  //   path: config.build.assetsRoot,
+  //   filename: utils.assetsPath('js/[name].[chunkhash].js'),
+  //   chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+  // },
+  // eval-source-map is faster for development
+  // devtool: '#eval-source-map',
+  
+  module: {
+    loaders: [
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader?sourceMap',
+        extract: true
+      }
+    ]
+  },
+  vue: {
+    loaders: utils.cssLoaders({
+      sourceMap: config.build.productionSourceMap,
+      extract: true
+    })
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': config.dev.env
     }),
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
     new webpack.optimize.OccurenceOrderPlugin(),
-    // new ExtractTextPlugin(utils.assetsPath('css/[name].css')),
+    new ExtractTextPlugin('css/app.css'),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
@@ -39,9 +54,9 @@ module.exports = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true
     })
-    ,
-    new CopyWebpackPlugin([
-        { from: 'src/css/', to: 'static/css' }
-    ])
+    // ,
+    // new CopyWebpackPlugin([
+    //     { from: 'src/css/', to: 'static/css' }
+    // ])
   ]
 })

@@ -16,6 +16,7 @@
 // import loadmore from 'mint-loadmore';
 // import drop_down from '../vendor/drop_down.js'
 // import addWord from './wordAdd.vue'
+import '../css/login.css'
 import * as API from '../api/main.js'
 import * as BASE from '../api/base.js'
 import co from 'co'
