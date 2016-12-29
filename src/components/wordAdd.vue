@@ -4,7 +4,7 @@
       title="新词" 
       :left="navbar_btn_left" 
       left_type="close"
-      :right="navbar_btn_right"
+      :right="mode==='add'?addword:editword"
       right_type="done"
       >
       </navbar>
@@ -12,7 +12,7 @@
         <!-- 搜索框 -->
         <section class="search_wrap">
           <p>
-            <input v-model="word" type="text" placeholder="新增或搜索单词" v-model="search_text">
+            <input v-model="word" value="prop_word" type="text" placeholder="新增或搜索单词" >
           </p>
         </section>
         <section class="detail_tabs">
@@ -23,7 +23,7 @@
           </ul>
         </section>
         <section class="detail_wrap">
-          <textarea v-model="describe" name="" id="" cols="30" rows="10"></textarea>
+          <textarea v-model="describe" value="detail" name="" id="" cols="30" rows="10"></textarea>
         </section>
       </content>
   </div>
@@ -38,7 +38,12 @@ import * as API from '../api/main.js'
 export default {
   props:{
     show:false,
-    callback:Function
+    callback:Function,
+    prop_word:"",
+    detail:"",
+    _id:"",
+    mode:"add",
+    nvabarBtnRight:Function
   },
   components:{
     navbar
@@ -49,7 +54,22 @@ export default {
     navbar_btn_left:function(){
       this.show = false
     },
-    navbar_btn_right:function(){
+    addword:function(){
+      let self = this
+      // 添加单词
+      API
+      .wordAdd(this.word,this.describe)
+      .then(function(res){
+        self.callback(null,{_id:res._id,word:self.word,describe:self.describe})
+        self.word = ""
+        self.describe = ""
+      })
+      .catch(function(err){
+        self.$root.popup_text = err.MSG
+        self.$root.show_popup = true
+      })
+    },
+    editword:function(){
       let self = this
       // 添加单词
       API

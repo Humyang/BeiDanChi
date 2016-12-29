@@ -2,7 +2,7 @@
   <div 
     :class="size"
     class="card">
-    <p>
+    <p @click.prevent="wordclick()">
     {{word}}
     <br/>
     {{describe}}
@@ -26,6 +26,7 @@ export default {
     index:"",
     describe:"",
     word:"",
+    wordclick:Function,
     size:{
       coerce:function(val){
         return {

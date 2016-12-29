@@ -9,10 +9,12 @@
         <loadmore :top-method="loadTop" >
           <section id="word_card" class="word_card">
             <card 
+
             v-for="item in liste_filter" 
             :word="item.word"
             :index="$index"
             :id="item._id"
+            :wordclick="editWord()"
             :describe="item.describe" 
             :size="1"
             :events="hideWord()"
@@ -21,6 +23,7 @@
         </loadmore>
       </content>
       <add-word :show.sync="ui.addword" :callback="addWord()"></add-word>
+      <add-word :show.sync="ui.editword" mode="edit" :callback="editWord()"></add-word>
   </div>
 </template>
 
@@ -47,7 +50,8 @@ export default {
             // }
       ],
       ui:{
-        addword:false
+        addword:false,
+        editword:false
       }
       ,
       events:[
@@ -60,7 +64,6 @@ export default {
     card,
     loadmore,
     addWord
-    // hambraug
   },
   computed:{
     // 过滤单词
@@ -69,6 +72,19 @@ export default {
     }
   },
   methods:{
+    wordClick:function(){
+      let self = this
+      return function(id,index,word,describe){
+        self.ui.editword = true
+      }
+    },
+    editWord:function(){
+      var self = this
+      return function(err,res){
+
+        self.ui.editword = false
+      }
+    },
     hideWord:function(){
       let self = this
       return [
