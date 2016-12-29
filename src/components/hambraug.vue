@@ -11,27 +11,26 @@
             <!-- 登录帐号 -->
             <div class="username">
               <p>{{username}}</p>
-              <a @click="" href="#" class="more"><img src="../assets/images/展开按钮.png" alt=""></a>
+              <a @click.prevent=""  class="more"><img src="../assets/images/展开按钮.png" alt=""></a>
             </div>
           </header>
           <!-- 菜单 -->
           <ul class="list">
             <li 
-
+              @click="hidden"
               v-link="{ path: '/word/list', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" alt="">首页</li>
             <li 
-
+              @click="hidden"
               v-link="{ path: '/word/all', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" height="12" width="17" alt="">所有单词</li>
             <li 
-
-              
+              @click="hidden"
               v-link="{ path: '/login', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" alt="">退出登录</li>
             <li 
-              
-              v-link="{ path: '/word/list', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" height="12" width="17" alt="">离线模式（未实现）</li>
+              @click="hidden"
+              v-link="{ path: '/word/list2', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" height="12" width="17" alt="">离线模式（未实现）</li>
             <li 
-              
-              v-link="{ path: '/word/list', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" height="12" width="17" alt="">单词统计（未实现）</li>
+              @click="hidden"
+              v-link="{ path: '/word/list3', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" height="12" width="17" alt="">单词统计（未实现）</li>
           </ul>
         </content>
     </section>

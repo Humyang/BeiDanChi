@@ -34,8 +34,6 @@ import addWord from './wordAdd.vue'
 import * as API from '../api/main.js'
 var CODE = require('../../serve/constant.js').CODE
 import {pageHandle} from '../api/method.js'
-
-// import hambraug from './hambraug'
 export default {
   data () {
     return {
@@ -67,15 +65,6 @@ export default {
   computed:{
     // 过滤单词
     liste_filter:function(){
-      // if(!this.lists){
-      //   return []
-      // }
-      // var new_list = []
-      // for (var i = this.lists.length - 1; i >= 0; i--) {
-      //   if(this.lists[i].describe.indexOf(this.search_text)!=-1){
-      //     new_list.push(this.lists[i])
-      //   }
-      // }
       return this.lists
     }
   },
@@ -95,9 +84,6 @@ export default {
         })
       },
       function(id,index){
-
-        
-
         API.hideWord(id,1)
         .then(function(res){
             self.lists.splice(index,1)
@@ -106,7 +92,6 @@ export default {
             self.$root.popup_text = err.MSG
             self.$root.show_popup = true
         })
-
       },
       function(id,index){
         
@@ -141,7 +126,6 @@ export default {
     },
     navbar_btn_right:function(){
       this.ui.addword = true
-      // this.$router.go('/word/add')
     }
   },
   events:{
@@ -157,8 +141,6 @@ export default {
     })
     .catch(function(err){
       self.$root.pageHandle(err)
-      // self.$root.popup_text = err.MSG
-      // self.$root.show_popup = true
     })
   }
 }

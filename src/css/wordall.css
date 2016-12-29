@@ -1,10 +1,10 @@
 .wordall .list { overflow: hidden; background-color: white; margin-bottom: 0.1rem; }
 .wordall .list { border-radius: 5px; padding: 0 0.3rem; }
 .wordall .list p { padding: 0; margin: 0; overflow: hidden; }
-.wordall .list p.p1 { font-size: 0.48rem; margin: 0.05rem 0; }
-.wordall .list p.p2 { font-size: 0.28rem; margin: 0.05rem 0; margin-bottom: 0.2rem; color: #949494; }
-.wordall .list p.p3 { color: #ffbda9; text-align: right; margin-bottom: 0.15rem; }
-.wordall .list p.p3.green { color: green; }
-.wordall footer { overflow: hidden; margin: 0.12rem 0; }
-.wordall footer a { width: 50%; display: block; float: left; text-align: center; color: #009688; text-decoration: none; }
-.wordall p.line { height: 0.02rem; width: 150%; background-color: #bfbaba; overflow: hidden; margin-left: -0.3rem; }
+.wordall .list .p1 { font-size: 0.48rem; margin: 0.05rem 0; }
+.wordall .list .p2 { font-size: 0.28rem; margin: 0.05rem 0; margin-bottom: 0.2rem; color: #949494; }
+.wordall .list .p3 { color: #ffbda9; text-align: right; margin-bottom: 0.15rem; }
+.wordall .list .p3.green { color: green; }
+.wordall .list footer { overflow: hidden; margin: 0.12rem 0; }
+.wordall .list footer a { width: 50%; display: block; float: left; text-align: center; color: #009688; text-decoration: none; }
+.wordall .list .line { height: 0.02rem; width: 150%; background-color: #bfbaba; overflow: hidden; margin-left: -0.3rem; }

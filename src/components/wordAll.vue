@@ -32,7 +32,6 @@
 <script>
 import navbar from './common/navbar'
 import loadmore from 'mint-loadmore'
-
 import * as API from '../api/main.js'
 import '../css/wordall.css'
 export default {

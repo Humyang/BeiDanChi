@@ -12,7 +12,6 @@
         <!-- 搜索框 -->
         <section class="search_wrap">
           <p>
-            <!-- <img src="./images/搜索图标.png" alt=""> -->
             <input v-model="word" type="text" placeholder="新增或搜索单词" v-model="search_text">
           </p>
         </section>
@@ -23,12 +22,11 @@
             <li>史</li>
           </ul>
         </section>
-        <section class="detail_container describe">
+        <section class="detail_wrap">
           <textarea v-model="describe" name="" id="" cols="30" rows="10"></textarea>
         </section>
       </content>
   </div>
-  <!-- <hambraug :show.sync="show_hambraug"></hambraug> -->
 </template>
 
 <script>
@@ -36,9 +34,7 @@ import '../css/wordadd.css'
 import navbar from './common/navbar'
 import card from './common/card'
 import loadmore from 'mint-loadmore'
-// import hambraug from './hambraug'
 import * as API from '../api/main.js'
-
 export default {
   props:{
     show:false,
@@ -78,9 +74,6 @@ export default {
     }
   },
   ready:function(){
-    // var container = document.getElementsByClassName("container")[0];
-    // container.scrollTop=50;
-    // console.log(container.scrollTop)
   }
   
 }

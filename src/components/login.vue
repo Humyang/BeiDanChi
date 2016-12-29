@@ -11,19 +11,11 @@
 </template>
 
 <script>
-// import navbar from './common/navbar'
-// import card from './common/card'
-// import loadmore from 'mint-loadmore';
-// import drop_down from '../vendor/drop_down.js'
-// import addWord from './wordAdd.vue'
 import '../css/login.css'
 import * as API from '../api/main.js'
 import * as BASE from '../api/base.js'
 import co from 'co'
-// import '../css/login.css'
 import {pageHandle} from '../api/method.js'
-// import {getUsername} from '../api/base.js'
-// import hambraug from './hambraug'
 export default {
   data () {
     return {
@@ -33,11 +25,6 @@ export default {
       verify_img:'',
       verifytoken:''
     }
-  },
-  components:{
-  },
-  computed:{
-
   },
   methods:{
     login:function(){
@@ -94,24 +81,3 @@ export default {
   
 }
 </script>
-
-<style scoped>
-/* #wrapper{
-    text-align: center;
-    font-size: 28px;
-}
-#login{
-  background-color: #36474F;
-}
-div#wrapper {
-    
-}
-input{
-
-    font-size: 28px;
-    margin-bottom: 20px;
-    padding: 11px;
-    margin-left: 12px;
-    margin-top: 10px;
-} */
-</style>
