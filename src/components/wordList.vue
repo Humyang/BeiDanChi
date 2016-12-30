@@ -14,7 +14,7 @@
             :word="item.word"
             :index="$index"
             :id="item._id"
-            :wordclick="editWord()"
+            :wordclick="wordclick()"
             :describe="item.describe" 
             :size="1"
             :events="hideWord()"
@@ -23,7 +23,11 @@
         </loadmore>
       </content>
       <add-word :show.sync="ui.addword" :callback="addWord()"></add-word>
-      <add-word :show.sync="ui.editword" mode="edit" :callback="editWord()"></add-word>
+      <add-word :show.sync="ui.editword" 
+                :callback="editWord()"
+                :word="edit.word"
+                :describe="edit.describe"
+                mode="edit"></add-word>
   </div>
 </template>
 
@@ -56,7 +60,11 @@ export default {
       ,
       events:[
       
-      ]
+      ],
+      edit:{
+        word:"",
+        describe:""
+      }
     }
   },
   components:{
@@ -72,16 +80,19 @@ export default {
     }
   },
   methods:{
-    wordClick:function(){
+    wordclick:function(){
+      console.log(2222)
       let self = this
       return function(id,index,word,describe){
+        self.edit.word = word
+        self.edit.describe = describe
+        // console.log(describe)
         self.ui.editword = true
       }
     },
     editWord:function(){
       var self = this
       return function(err,res){
-
         self.ui.editword = false
       }
     },

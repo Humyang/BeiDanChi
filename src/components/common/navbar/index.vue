@@ -14,6 +14,8 @@
         <p @click.prevent="go">
           <img v-if="right_type==='add'" :src="img_url" alt="">
           <span v-if="right_type==='done'">完成</span>
+          <!-- <span v-if="right_type==='add'">添加</span> -->
+          <span v-if="right_type==='save'">保存</span>
         </p>
       </div>
   </header>

@@ -2,7 +2,7 @@
   <div 
     :class="size"
     class="card">
-    <p @click.prevent="wordclick()">
+    <p @click.prevent="wordclick(id,index,word,describe)">
     {{word}}
     <br/>
     {{describe}}
