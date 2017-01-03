@@ -9,7 +9,6 @@
         <loadmore :top-method="loadTop" >
           <section id="word_card" class="word_card">
             <card 
-
             v-for="item in liste_filter" 
             :word="item.word"
             :index="$index"
@@ -25,6 +24,7 @@
       <add-word :show.sync="ui.addword" :callback="addWord()"></add-word>
       <add-word :show.sync="ui.editword" 
                 :callback="editWord()"
+                :_id="edit.id"
                 :word="edit.word"
                 :describe="edit.describe"
                 mode="edit"></add-word>
@@ -62,6 +62,7 @@ export default {
       
       ],
       edit:{
+        id:"",
         word:"",
         describe:""
       }
@@ -84,6 +85,7 @@ export default {
       console.log(2222)
       let self = this
       return function(id,index,word,describe){
+        self.edit.id = id
         self.edit.word = word
         self.edit.describe = describe
         // console.log(describe)
@@ -92,7 +94,7 @@ export default {
     },
     editWord:function(){
       var self = this
-      return function(err,res){
+      return function(id,index,word,describe,){
         self.ui.editword = false
       }
     },

@@ -144,11 +144,40 @@ function* move(next){
       res
     }
 }
+// 修改单词
+function* alter(next){
+    let id = ""
+    // let end_time = this.request.fields.end_time
+
+    let word = this.request.fields.word
+    let describe = this.request.fields.describe
+
+    try{
+        id = ObjectId(this.request.fields.id)
+    }catch(e) {
+        return this.body = {
+                  status:false,
+                  msg:"id 类型无效"
+                }
+    }
+
+    let res = yield this.mongo
+            .db('BeiDanChi')
+            .collection('word_list')
+            .update({'_id':ObjectId(id)},
+                    {'$set':{word,describe}});
+
+    this.body = {
+      status:true,
+      res
+    }
+}
 module.exports = {
     add,
     list,
     all,
     id,
     hide,
-    move
+    move,
+    alter
 }

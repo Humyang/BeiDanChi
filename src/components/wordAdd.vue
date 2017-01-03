@@ -82,7 +82,7 @@ export default {
       let self = this
       // 添加单词
       API
-      .wordAdd(this.word,this.describe)
+      .alterWord(this._id,this.word,this.describe)
       .then(function(res){
         self.callback(null,{_id:res._id,word:self.word,describe:self.describe})
         self.word = ""

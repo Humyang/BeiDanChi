@@ -31,7 +31,8 @@ router.post('/word/id',LOGIN.login_check(),WORD.id)
 router.post('/word/hide',LOGIN.login_check(),WORD.hide)
 // 移除单词
 router.post('/word/move',LOGIN.login_check(),WORD.move)
-
+// 编辑单词
+router.post('/word/alter',LOGIN.login_check(),WORD.alter)
 
 // 验证账号重复性
 router.all('/valid/username/:username',LOGIN.username_repeat)

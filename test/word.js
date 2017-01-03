@@ -13,7 +13,8 @@ function assert(value,expect,msg,append_msg){
         throw new Error(msg)
     }
 }
-
+global.localStorage = {}
+global.localStorage.setItem=function(){}
 describe('单词正删改查模块----', function() {
     it('增删改查', function(done) {
         co(function*(){
@@ -55,6 +56,12 @@ describe('单词正删改查模块----', function() {
             let wordId = yield API.wordId(listGet.list[0]._id,token)
             assert(wordId.status,true,wordId,'查询单个单词')
             console.log('query single word: ',wordId)
+
+            let alterWord = yield API.alterWord(listGet.list[0]._id,'test alter1','test alter2')
+            assert(alterWord.status,true,alterWord,'修改单词')
+            let alterAfterWord = yield API.wordId(listGet.list[0]._id,token)
+            assert(alterAfterWord.status,true,alterAfterWord,'查询单个单词')
+            console.log('修改后的单词: ',alterAfterWord)
 
 
             let moveWord = yield API.moveWord(listGet.list[0]._id,token)

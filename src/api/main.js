@@ -128,6 +128,16 @@ export const moveWord = function(id){
             )
 
 }
+// 修改单词
+export const alterWord = function(id,word,describe){
+    let data = {
+        id,
+        word,
+        describe
+    }
+    return mFetch('/word/alter',
+        data)
+}
 // 获取验证码
 export const verify_code = function(){
     return mFetch('/verify_code')
