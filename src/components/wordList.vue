@@ -25,6 +25,7 @@
       <add-word :show.sync="ui.editword" 
                 :callback="editWord()"
                 :_id="edit.id"
+                :index="edit.index"
                 :word="edit.word"
                 :describe="edit.describe"
                 mode="edit"></add-word>
@@ -63,6 +64,7 @@ export default {
       ],
       edit:{
         id:"",
+        index:0,
         word:"",
         describe:""
       }
@@ -88,13 +90,17 @@ export default {
         self.edit.id = id
         self.edit.word = word
         self.edit.describe = describe
+        self.edit.index = index
         // console.log(describe)
         self.ui.editword = true
       }
     },
     editWord:function(){
       var self = this
-      return function(id,index,word,describe,){
+      return function(err,res){
+        // id,index,word,describe,
+        self.lists[res.index].word=res.word
+        self.lists[res.index].describe=res.describe
         self.ui.editword = false
       }
     },

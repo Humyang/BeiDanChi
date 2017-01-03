@@ -43,6 +43,7 @@ export default {
     describe:undefined,
     _id:"",
     mode:{default:"add"},
+    index:0,
     nvabarBtnRight:Function
   },
   components:{
@@ -84,7 +85,7 @@ export default {
       API
       .alterWord(this._id,this.word,this.describe)
       .then(function(res){
-        self.callback(null,{_id:res._id,word:self.word,describe:self.describe})
+        self.callback(null,{_id:res._id,index:self.index,word:self.word,describe:self.describe})
         self.word = ""
         self.describe = ""
       })
