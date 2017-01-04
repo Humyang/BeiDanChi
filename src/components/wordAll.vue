@@ -17,14 +17,21 @@
               <template v-if="item.show">
                 <p class="line"></p>
                 <footer>
-                  <a @click.prevent="" class="a1" href="">编辑</a>
-                  <a @click.prevent="moveItem(item,$index)" class="a2" href="">删除</a>
+                  <a @click.prevent="btn_click($index)" class="a1" >编辑</a>
+                  <a @click.prevent="moveItem(item,$index)" class="a2" >删除</a>
                 </footer>
               </template>
             </div>
           </section>
         </loadmore>
       </content>
+      <add-word :show.sync="edit.show" 
+                :callback="editWord()"
+                :_id="edit.id"
+                :index="edit.index"
+                :word="edit.word"
+                :describe="edit.describe"
+                mode="edit"></add-word>
   </div>
 
 </template>
@@ -32,6 +39,7 @@
 <script>
 import navbar from './common/navbar'
 import loadmore from 'mint-loadmore'
+import addWord from './wordAdd.vue'
 import * as API from '../api/main.js'
 import '../css/wordall.css'
 export default {
@@ -43,17 +51,45 @@ export default {
             //   word: 'test word',
             //   describe: 'some word on here'
             // }
-      ]
+      ],
+      edit:{
+        index:0,
+        show:false,
+        id:"",
+        index:0,
+        word:"",
+        describe:""
+      }
     }
   },
   components:{
     navbar,
     loadmore,
+    addWord
   },
   computed:{
     
   },
   methods:{
+    btn_click:function(index){
+      // let self = this
+      // return function(id,index,word,describe){
+        this.edit.id = this.lists[index]._id
+        this.edit.word = this.lists[index].word
+        this.edit.describe = this.lists[index].describe
+        this.edit.index = index
+        this.edit.show = true
+      // }
+    },
+    editWord:function(){
+      var self = this
+      return function(err,res){
+        // id,index,word,describe,
+        self.lists[res.index].word=res.word
+        self.lists[res.index].describe=res.describe
+        self.edit.show = false
+      }
+    },
     // 移除 item
     moveItem:function(item,index){
       let self = this
