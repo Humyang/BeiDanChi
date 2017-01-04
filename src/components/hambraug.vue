@@ -27,6 +27,9 @@
               v-link="{ path: '/login', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" alt="">退出登录</li>
             <li 
               @click="hidden"
+              v-link="{ path: '/word/list2', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" height="12" width="17" alt="">账号设置（未实现）</li>
+            <li 
+              @click="hidden"
               v-link="{ path: '/word/list2', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" height="12" width="17" alt="">离线模式（未实现）</li>
             <li 
               @click="hidden"
