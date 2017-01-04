@@ -22,13 +22,13 @@ ul{
 li{
 	list-style: none;
 }
-.container { background-color: #36474F; overflow: auto; display: block; height: 100%; padding-bottom: 50px; padding-top: 0.4rem; }
+.container { background-color: #36474F; overflow: auto; display: block; height: 100%; padding-bottom: 50px;  }
 .wrapper { height: 100%; overflow: hidden;position: absolute;top: 0; width: 100%;z-index: 9;}
 .mint-loadmore-top {
     font-size: 0.16rem;
     color: white;
     text-align: center;
-    padding: 0.14rem 0;
+    height: 0.9rem;
 }
 .popup{
 /*    position: fixed;
