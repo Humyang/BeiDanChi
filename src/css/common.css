@@ -22,7 +22,7 @@ ul{
 li{
 	list-style: none;
 }
-.container { background-color: #36474F; overflow: auto; display: block; height: 100%; padding-bottom: 50px; margin-top: 0.21rem; }
+.container { background-color: #36474F; overflow: auto; display: block; height: 100%; padding-bottom: 50px; padding-top: 0.4rem; }
 .wrapper { height: 100%; overflow: hidden;position: absolute;top: 0; width: 100%;z-index: 9;}
 .mint-loadmore-top {
     font-size: 0.16rem;
