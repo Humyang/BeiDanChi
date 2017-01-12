@@ -6,7 +6,7 @@ var serve = require('koa-static');
 // })
 // app.use(serve('../dist'));
 app.use(function*(next){
-    yield serve('../dist',{maxage:3153600000})
+    yield serve(__dirname+'./../dist',{maxage:3153600000})
     // this.set('Cache-Control', 'no-cache');
     console.log(this.body)
 })
