@@ -1,5 +1,6 @@
 import commands
 import re
+import subprocess
 
 def get_pid_close(port):
     status,output = commands.getstatusoutput('lsof -i:'+str(port))
@@ -23,42 +24,29 @@ def run_command(command):
         print command,'info faile,bcs ',info
         return 0
 
+def subprocess_command(command):
+    subprocess.Popen(command,shell=True)
+    return 1
 
 # update lastet code from github server.
-# sync_github,s_g_output = commands.getstatusoutput('git pull origin master')
-run_command('cd serve')
-print 'begin sync github'
-# sync_github = run_command('git pull origin master')
-sync_github = 1
+print 'pull origin master -- begin'
+sync_github = run_command('git pull origin master')
 if sync_github == 1:
-        print 'github sync success'
+        print 'pull origin master -- success'
         # build new code
-        print 'begin build new code'
-        # build_code = run_command('npm run build')
-        build_code = 1
+        print 'build production -- begin'
+        build_code = run_command('npm run build')
         if build_code == 1:
-            print 'build new code success,'
+            print 'build production -- success'
             # close static serve and api serve
-            print 'begin close serve'
-            # close_static = get_pid_close(80)
-            close_static = 1
+            print 'close serve -- begin'
+            close_static = get_pid_close(80)
             close_api = get_pid_close(8081)
             if close_static == 1 and close_api == 1:
-                print 'close serve success'
+                print 'close serve -- success'
             else:
-                print 'close serve faile'
-            print 'begin restart serve'
-            # restart server
-            serve = run_command('node ./serve/index.js')
-            static = 1
-            # static = run_command('node static.js')
-            if serve == 1 and static == 1:
-                print 'restart serve success'
-                exit(1)
-            else:
-                print 'restart serve faile'
-
-
-# print status
-
-
+                print 'close serve -- faile'
+            print 'start serve'
+            # start server
+            subprocess_command('nohup node ./serve/index.js &')
+            subprocess_command('nohup node ./serve/static.js &')
