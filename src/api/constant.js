@@ -2,7 +2,8 @@ let setip=''
 if (process.env.NODE_ENV === 'production') {
  setip = 'http://118.89.19.201:8081'
 }else{
- setip = 'http://localhost:8081'
+ // setip = 'http://localhost:8081'
+    setip = 'http://192.168.1.198:8081'
 }
 export const IP = setip
 export const FLAG="APP_"

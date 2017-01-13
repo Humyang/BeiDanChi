@@ -2,15 +2,15 @@
   <div 
     :class="size"
     class="card">
-    <p @click.prevent="wordclick(id,index,word,describe)">
+    <p v-tap.prevent="wordclick(id,index,word,describe)">
     {{word}}
     <br/>
     {{describe}}
     </p>
     <footer>
-      <a @click.prevent="events[0](id,index)" href=""><img :src="img1" alt=""></a>
-      <a @click.prevent="events[1](id,index)" href=""><img :src="img2" alt=""></a>
-      <a @click.prevent="events[2](id,index)" href=""><img :src="img3" alt=""></a>
+      <a v-tap.prevent="events[0](id,index)" href=""><img :src="img1" alt=""></a>
+      <a v-tap.prevent="events[1](id,index)" href=""><img :src="img2" alt=""></a>
+      <a v-tap.prevent="events[2](id,index)" href=""><img :src="img3" alt=""></a>
     </footer>
   </div>
 </template>

@@ -12,7 +12,7 @@
           <p class="text">
             {{popup_text}}
           </p>
-        <footer @click="show_popup=false">
+        <footer v-tap.prevent="show_popup=false">
           <p>确&nbsp;&nbsp;定</p>
         </footer>
       </div>

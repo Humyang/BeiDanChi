@@ -103,7 +103,7 @@ function* login(next){
         username:fields.username,
         password:encryptPassword(fields.password,salt.salt)
     }
-    // console.log('_usm_pwd_filter: ',_usm_pwd_filter)
+    console.log('_usm_pwd_filter: ',_usm_pwd_filter)
     let _usm_pwd = yield this.mongo 
                         .db('BeiDanChi')
                         .collection('user')
