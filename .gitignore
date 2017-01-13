@@ -1,4 +1,6 @@
 .DS_Store
+serve/*.out
+*.out*
 node_modules/
 dist/
 npm-debug.log
@@ -6,5 +8,5 @@ selenium-debug.log
 test/unit/coverage
 test/e2e/reports
 *.log*
-**.out*
-serve/a.out
+
+
