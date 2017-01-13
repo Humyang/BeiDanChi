@@ -11,12 +11,13 @@
             <!-- 登录帐号 -->
             <div class="username">
               <p>{{username}}</p>
-              <a @click.prevent=""  class="more"><img src="../assets/images/展开按钮.png" alt=""></a>
+              <a v-tap.prevent=""  class="more"><img src="../assets/images/展开按钮.png" alt=""></a>
             </div>
           </header>
           <!-- 菜单 -->
           <ul class="list">
             <li 
+
               @click="hidden"
               v-link="{ path: '/word/list', activeClass: 'active' }" ><img src="../assets/images/汉堡菜单.png" alt="">首页</li>
             <li 
@@ -39,7 +40,7 @@
     </section>
     <div
           v-show="is_show"
-          @click="hidden"
+          v-tap.prevent="hidden"
           class="zhezhao">
     </div>
   </div>
