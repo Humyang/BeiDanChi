@@ -5,7 +5,7 @@ var throwError = require('../error.js').throwError
 var CONSTANT = require('../constant.js')
 var DAY = CONSTANT.DAY
 var CODE = CONSTANT.CODE
-
+var VERIFY = require('../verify.js')
 // 密码加密
 function encryptPassword(password,salt){
     return md5(md5(password+salt))
@@ -86,13 +86,19 @@ function* regiest(next){
 function* login(next){
     let fields = this.request.fields
     //验证码
-    
+    let username = fields.username
+    let password = fields.password
+
+    //密码参数基本判断 不允许密码为空
+    if(!VERIFY.loginVerify(username,password)){
+        throwError(CODE.LOGIN_EMPTY)
+    }
 
     //获取 salt
     let salt = yield this.mongo
                         .db('BeiDanChi')
                         .collection('user')
-                        .findOne({username:fields.username})
+                        .findOne({username:username})
     if(salt === null){
         throwError(CODE.USERNAME_NO_FIND)
     }
@@ -100,8 +106,8 @@ function* login(next){
     // console.log('encryptPassword',encryptPassword(fields.password,salt.salt))
     //验证账号密码
     let _usm_pwd_filter = {
-        username:fields.username,
-        password:encryptPassword(fields.password,salt.salt)
+        username:username,
+        password:encryptPassword(password,salt.salt)
     }
     console.log('_usm_pwd_filter: ',_usm_pwd_filter)
     let _usm_pwd = yield this.mongo 
@@ -117,7 +123,7 @@ function* login(next){
     //token 写入有效状态
     let new_token = uid(40)
     let _token_stauts = {
-        username:fields.username,
+        username:username,
         status:true,
         token:new_token
         // ,

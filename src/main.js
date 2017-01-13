@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import Router from 'vue-router'
 import wordList from './components/wordList.vue'
-import vueTap from 'v-tap'
+import vueTap from './vendor/v-tap'
 import wordAll from './components/wordAll.vue'
 import login from './components/login.vue'
 /* eslint-disable no-new */
