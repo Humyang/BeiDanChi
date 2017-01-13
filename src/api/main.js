@@ -145,6 +145,7 @@ export const verify_code = function(){
 
 //登录
 export const login = function(username,password,verify_code,token){
+    
     let data = {
         username,
         password:md5(password),

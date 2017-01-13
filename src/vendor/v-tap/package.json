@@ -1,0 +1,90 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "v-tap",
+        "scope": null,
+        "escapedName": "v-tap",
+        "name": "v-tap",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\qinh\\Documents\\GitHub\\BeiDanChi"
+    ]
+  ],
+  "_cnpm_publish_time": 1475420266630,
+  "_from": "v-tap@latest",
+  "_id": "v-tap@2.0.2",
+  "_inCache": true,
+  "_location": "/v-tap",
+  "_nodeVersion": "5.4.0",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/v-tap-2.0.2.tgz_1475420266364_0.5766615639440715"
+  },
+  "_npmUser": {
+    "name": "kodo",
+    "email": "kodo@forchange.cn"
+  },
+  "_npmVersion": "3.3.12",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "v-tap",
+    "scope": null,
+    "escapedName": "v-tap",
+    "name": "v-tap",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npm.taobao.org/v-tap/download/v-tap-2.0.2.tgz",
+  "_shasum": "37dd97f91c1e5bc0d89aa94b4f66f491a9e7c0f1",
+  "_shrinkwrap": null,
+  "_spec": "v-tap",
+  "_where": "C:\\Users\\qinh\\Documents\\GitHub\\BeiDanChi",
+  "author": {
+    "name": "kodo"
+  },
+  "bugs": {
+    "url": "https://github.com/MeCKodo/vue-tap/issues"
+  },
+  "dependencies": {},
+  "description": "a directive of vue.js",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "37dd97f91c1e5bc0d89aa94b4f66f491a9e7c0f1",
+    "size": 120435,
+    "noattachment": false,
+    "tarball": "http://registry.npm.taobao.org/v-tap/download/v-tap-2.0.2.tgz"
+  },
+  "gitHead": "2712edfb9ecb0b525ee26638d8aa7703ac5bde06",
+  "homepage": "https://github.com/MeCKodo/vue-tap#readme",
+  "keywords": [
+    "vue",
+    "v-tap"
+  ],
+  "license": "MIT",
+  "main": "vue-tap.js",
+  "maintainers": [
+    {
+      "name": "kodo",
+      "email": "kodo@forchange.cn"
+    }
+  ],
+  "name": "v-tap",
+  "optionalDependencies": {},
+  "publish_time": 1475420266630,
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MeCKodo/vue-tap.git"
+  },
+  "scripts": {},
+  "version": "2.0.2"
+}
