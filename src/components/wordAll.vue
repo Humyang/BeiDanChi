@@ -6,7 +6,7 @@
           <section id="word_card" class="word_card">
             <div 
             v-for="item in lists"
-            v-tap.prevent="setItem(item)" 
+            v-tap="setItem(item)" 
             class="list">
               <p class="p1">{{item.word}}</p>
               <p class="p2">{{item.describe}}</p>
@@ -17,8 +17,8 @@
               <template v-if="item.show">
                 <p class="line"></p>
                 <footer>
-                  <a v-tap.prevent="btn_click($index)" class="a1" >编辑</a>
-                  <a v-tap.prevent="moveItem(item,$index)" class="a2" >删除</a>
+                  <a v-tap="btn_click($index)" class="a1" >编辑</a>
+                  <a v-tap="moveItem(item,$index)" class="a2" >删除</a>
                 </footer>
               </template>
             </div>
