@@ -8,9 +8,9 @@
     {{describe}}
     </p>
     <footer>
-      <a v-tap="events[0](id,index)" href=""><img :src="img1" alt=""></a>
-      <a v-tap="events[1](id,index)" href=""><img :src="img2" alt=""></a>
-      <a v-tap="events[2](id,index)" href=""><img :src="img3" alt=""></a>
+      <a v-tap="events[0](id,index)" ><img :src="img1" alt=""></a>
+      <a v-tap="events[1](id,index)" ><img :src="img2" alt=""></a>
+      <a v-tap="events[2](id,index)" ><img :src="img3" alt=""></a>
     </footer>
   </div>
 </template>
