@@ -17,9 +17,9 @@
         </section>
         <section class="detail_tabs">
           <ul>
-            <li class="active">释</li>
-            <li>例</li>
-            <li>史</li>
+            <li v-tap="tap_tabs(0)" class="active">释</li>
+            <li v-tap="tap_tabs(1)" >例</li>
+            <li v-tap="tap_tabs(2)" >史</li>
           </ul>
         </section>
         <section class="detail_wrap">
@@ -93,6 +93,9 @@ export default {
         self.$root.popup_text = err.MSG
         self.$root.show_popup = true
       })
+    },
+    tap_tabs:function(index){
+      
     }
   },
   events:{
