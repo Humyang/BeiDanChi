@@ -1,7 +1,7 @@
 <template>
   <header class="nav_bar">
       <div class="_btn left">
-        <p v-tap.prevent="back">
+        <p v-tap="back">
           <img v-if="left_type==='hambraug'" :src="img_url2" alt="">
           <img v-if="left_type==='back'" :src="img_url3" alt="">
           <span v-if="left_type==='close'" >关闭</span>
@@ -11,7 +11,7 @@
         <p>{{title}}</p>
       </div>
       <div class="_btn right">
-        <p v-tap.prevent="go">
+        <p v-tap="go">
           <img v-if="right_type==='add'" :src="img_url" alt="">
           <span v-if="right_type==='done'">完成</span>
           <!-- <span v-if="right_type==='add'">添加</span> -->

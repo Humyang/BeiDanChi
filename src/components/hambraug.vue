@@ -11,7 +11,7 @@
             <!-- 登录帐号 -->
             <div class="username">
               <p>{{username}}</p>
-              <a v-tap.prevent=""  class="more"><img src="../assets/images/展开按钮.png" alt=""></a>
+              <a v-tap=""  class="more"><img src="../assets/images/展开按钮.png" alt=""></a>
             </div>
           </header>
           <!-- 菜单 -->
@@ -40,7 +40,7 @@
     </section>
     <div
           v-show="is_show"
-          v-tap.prevent="hidden"
+          v-tap="hidden"
           class="zhezhao">
     </div>
   </div>

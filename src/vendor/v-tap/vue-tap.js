@@ -98,7 +98,7 @@
 					if (self.modifiers.prevent)
 						e.preventDefault();
 					touchstart(e, self);
-				}, false);
+				});
 				self.el.addEventListener('touchend', function (e) {
 					Object.defineProperties(e, { // 重写currentTarget对象 与jq相同
 						"currentTarget": {
@@ -111,7 +111,7 @@
 					e.preventDefault();
 					
 					return touchend(e, self);
-				}, false);
+				});
 			}
 		}
 	};
