@@ -17,9 +17,9 @@
         </section>
         <section class="detail_tabs">
           <ul>
-            <li v-tap="tap_tabs(0)" class="active">释</li>
-            <li v-tap="tap_tabs(1)" >例</li>
-            <li v-tap="tap_tabs(2)" >史</li>
+            <li v-tap="tap_tabs(0)" :class="{'active':tabs_index===0}">释</li>
+            <li v-tap="tap_tabs(1)" :class="{'active':tabs_index===1}">例</li>
+            <li v-tap="tap_tabs(2)" :class="{'active':tabs_index===2}">史</li>
           </ul>
         </section>
         <section class="detail_wrap">
@@ -45,6 +45,7 @@ export default {
     mode:{default:"add"},
     index:0,
     nvabarBtnRight:Function
+    
   },
   components:{
     navbar
@@ -95,13 +96,14 @@ export default {
       })
     },
     tap_tabs:function(index){
-      
+      this.tabs_index = index
     }
   },
   events:{
   },
   data () {
     return {
+      tabs_index:0
       // word:this.prop_word||"1234",
       // describe:this.prop_describe||"1234"
     }
