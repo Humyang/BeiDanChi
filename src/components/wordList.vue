@@ -14,6 +14,7 @@
             :index="$index"
             :id="item._id"
             :wordclick="wordclick()"
+            :sentence="item.sentence" 
             :describe="item.describe" 
             :size="1"
             :events="hideWord()"
@@ -28,6 +29,7 @@
                 :index="edit.index"
                 :word="edit.word"
                 :describe="edit.describe"
+                :sentence="edit.sentence"
                 mode="edit"></add-word>
   </div>
 </template>
@@ -66,7 +68,8 @@ export default {
         id:"",
         index:0,
         word:"",
-        describe:""
+        describe:"",
+        sentence:""
       }
     }
   },
@@ -86,9 +89,10 @@ export default {
     wordclick:function(){
       console.log(2222)
       let self = this
-      return function(id,index,word,describe){
+      return function(id,index,word,sentence,describe){
         self.edit.id = id
         self.edit.word = word
+        self.edit.sentence = sentence
         self.edit.describe = describe
         self.edit.index = index
         // console.log(describe)
@@ -101,6 +105,7 @@ export default {
         // id,index,word,describe,
         self.lists[res.index].word=res.word
         self.lists[res.index].describe=res.describe
+        self.lists[res.index].sentence=res.sentence
         self.ui.editword = false
       }
     },

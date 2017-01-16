@@ -9,11 +9,12 @@ const QUERY_BASE = {'is_move':{$ne:true}}
 function* add (next){
     let word = this.request.fields.word
     let describe = this.request.fields.describe
+    let sentence = this.request.fields.sentence
 
     let now_time = new Date()
     let end_time = now_time.getTime()
 
-    let insert_obj = objectAssign({word,describe,end_time},this.login_status)
+    let insert_obj = objectAssign({word,describe,sentence,end_time},this.login_status)
     let res = yield this.mongo
                         .db('BeiDanChi')
                         .collection('word_list')
@@ -151,6 +152,7 @@ function* alter(next){
 
     let word = this.request.fields.word
     let describe = this.request.fields.describe
+    let sentence = this.request.fields.sentence
 
     try{
         id = ObjectId(this.request.fields.id)
@@ -165,7 +167,7 @@ function* alter(next){
             .db('BeiDanChi')
             .collection('word_list')
             .update({'_id':ObjectId(id)},
-                    {'$set':{word,describe}});
+                    {'$set':{word,describe,sentence}});
 
     this.body = {
       status:true,

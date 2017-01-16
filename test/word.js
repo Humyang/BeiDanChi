@@ -57,7 +57,7 @@ describe('单词正删改查模块----', function() {
             assert(wordId.status,true,wordId,'查询单个单词')
             console.log('query single word: ',wordId)
 
-            let alterWord = yield API.alterWord(listGet.list[0]._id,'test alter1','test alter2')
+            let alterWord = yield API.alterWord(listGet.list[0]._id,'test alter1 word','test alter2 sentence','test alter 3 describe')
             assert(alterWord.status,true,alterWord,'修改单词')
             let alterAfterWord = yield API.wordId(listGet.list[0]._id,token)
             assert(alterAfterWord.status,true,alterAfterWord,'查询单个单词')
