@@ -17,13 +17,17 @@
         </section>
         <section class="detail_tabs">
           <ul>
-            <li class="active">释</li>
-            <li>例</li>
-            <li>史</li>
+            <li v-tap="tap_tabs(0)" :class="{'active':tabs_index===0}">例</li>
+            <li v-tap="tap_tabs(1)" :class="{'active':tabs_index===1}">释</li>
+            <li v-tap="tap_tabs(2)" :class="{'active':tabs_index===2}">史</li>
           </ul>
         </section>
         <section class="detail_wrap">
-          <textarea v-model="describe" name="" id="" cols="30" rows="10"></textarea>
+          <textarea v-show="tabs_index===0" v-model="sentence" name="" id="" cols="30" rows="10"></textarea>
+          <textarea v-show="tabs_index===1" v-model="describe" name="" id="" cols="30" rows="10"></textarea >
+          <div v-show="tabs_index===2">
+            单词历史纪录
+          </div>
         </section>
       </content>
   </div>
@@ -44,7 +48,9 @@ export default {
     _id:"",
     mode:{default:"add"},
     index:0,
-    nvabarBtnRight:Function
+    nvabarBtnRight:Function,
+    sentence:undefined,
+    history:undefined
   },
   components:{
     navbar
@@ -68,9 +74,9 @@ export default {
       let self = this
       // 添加单词
       API
-      .wordAdd(this.word,this.describe)
+      .wordAdd(this.word,this.sentence,self.describe)
       .then(function(res){
-        self.callback(null,{_id:res._id,word:self.word,describe:self.describe})
+        self.callback(null,{_id:res._id,word:self.word,sentence:self.sentence,describe:self.describe})
         self.word = ""
         self.describe = ""
       })
@@ -83,22 +89,28 @@ export default {
       let self = this
       // 添加单词
       API
-      .alterWord(this._id,this.word,this.describe)
+      .alterWord(this._id,this.word,this.sentence,this.describe)
       .then(function(res){
-        self.callback(null,{_id:res._id,index:self.index,word:self.word,describe:self.describe})
+        self.callback(null,{_id:res._id,index:self.index,word:self.word,sentence:self.sentence,describe:self.describe})
         self.word = ""
         self.describe = ""
+        self.sentence = ""
+        // self.history = ""
       })
       .catch(function(err){
         self.$root.popup_text = err.MSG
         self.$root.show_popup = true
       })
+    },
+    tap_tabs:function(index){
+      this.tabs_index = index
     }
   },
   events:{
   },
   data () {
     return {
+      tabs_index:0
       // word:this.prop_word||"1234",
       // describe:this.prop_describe||"1234"
     }

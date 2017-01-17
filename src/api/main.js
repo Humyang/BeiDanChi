@@ -9,10 +9,11 @@ import {saveUsername} from './base.js'
 // var md5 = require('md5')
 
 // 添加单词
-export const wordAdd = function(word,describe){
+export const wordAdd = function(word,sentence,describe){
     
     let data={
         word,
+        sentence,
         describe
     }
     return mFetch('/word/add'
@@ -129,10 +130,11 @@ export const moveWord = function(id){
 
 }
 // 修改单词
-export const alterWord = function(id,word,describe){
+export const alterWord = function(id,word,sentence,describe){
     let data = {
         id,
         word,
+        sentence,
         describe
     }
     return mFetch('/word/alter',
