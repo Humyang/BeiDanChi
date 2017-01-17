@@ -44,7 +44,7 @@ export default {
     show:false,
     callback:Function,
     word:undefined,
-    describe:undefined,
+    describe:"",
     _id:"",
     mode:{default:"add"},
     index:0,
@@ -87,14 +87,18 @@ export default {
     },
     editword:function(){
       let self = this
+      let id = this._id || ""
+      let word = this.word || ""
+      let sentence = this.sentence || ""
+      let describe = this.describe || ""
       // 添加单词
       API
-      .alterWord(this._id,this.word,this.sentence,this.describe)
+      .alterWord(id,word,sentence,describe)
       .then(function(res){
         self.callback(null,{_id:res._id,index:self.index,word:self.word,sentence:self.sentence,describe:self.describe})
-        self.word = ""
-        self.describe = ""
-        self.sentence = ""
+        // self.word = ""
+        // self.describe = ""
+        // self.sentence = ""
         // self.history = ""
       })
       .catch(function(err){

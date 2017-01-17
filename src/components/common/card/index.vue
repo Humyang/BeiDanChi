@@ -5,7 +5,7 @@
     <p v-tap="wordclick(id,index,word,sentence,describe)">
     {{word}}
     <br/>
-    {{describe}}
+    {{sentence}}
     </p>
     <footer>
       <a v-tap="events[0](id,index)" ><img :src="img1" alt=""></a>
