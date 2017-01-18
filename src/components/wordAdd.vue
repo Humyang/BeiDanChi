@@ -23,8 +23,14 @@
           </ul>
         </section>
         <section class="detail_wrap">
-          <textarea v-show="tabs_index===0" v-model="sentence" name="" id="" cols="30" rows="10"></textarea>
-          <textarea v-show="tabs_index===1" v-model="describe" name="" id="" cols="30" rows="10"></textarea >
+          <div v-show="tabs_index===0" >
+            <textarea v-model="sentence" name="" id="" cols="30" rows="10"></textarea>
+            <a class="btn_prime green" v-tap="sentence_clear">清空</a>
+          </div>
+          <div v-show="tabs_index===1" >
+            <textarea v-model="describe" name="" id="" cols="30" rows="10"></textarea >
+          </div>
+          
           <div v-show="tabs_index===2">
             单词历史纪录
           </div>
@@ -59,6 +65,9 @@ export default {
     
   },
   methods:{
+    sentence_clear:function(){
+
+    },
     calc_title:function(){
       console.log(2332323)
       // return "123"

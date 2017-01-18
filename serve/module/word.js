@@ -174,6 +174,32 @@ function* alter(next){
       res
     }
 }
+function* sentence_clear(next){
+    let id = ""
+
+    let sentence = this.request.fields.sentence
+
+    try{
+        id = ObjectId(this.request.fields.id)
+    }catch(e) {
+        return this.body = {
+                  status:false,
+                  msg:"id 类型无效"
+                }
+    }
+
+    let res = yield this.mongo
+            .db('BeiDanChi')
+            .collection('word_list')
+            .update({'_id':ObjectId(id)},
+                    {'$set':{word,describe,sentence}});
+
+    this.body = {
+      status:true,
+      res
+    }
+}
+
 module.exports = {
     add,
     list,

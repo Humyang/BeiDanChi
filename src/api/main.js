@@ -71,7 +71,17 @@ export const wordId = function(id){
             ,data
             ) 
 }
-
+export const word_sentence_clear = function(id,sentence){
+    let now = new Date()
+    let data = {
+        id,
+        sentence,
+        date:now.getTime()
+    }
+    return mFetch('/word/sentence_clear'
+            ,data
+            ) 
+}
 // 隐藏单词
 // type
 // 0 1~10 天
