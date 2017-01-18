@@ -178,6 +178,8 @@ function* sentence_clear(next){
     let id = ""
 
     let sentence = this.request.fields.sentence
+    let now = new Date()
+    let time = now.getTime()
 
     try{
         id = ObjectId(this.request.fields.id)
@@ -187,12 +189,21 @@ function* sentence_clear(next){
                   msg:"id 类型无效"
                 }
     }
-
+// http://stackoverflow.com/questions/3974985/update-mongodb-field-using-value-of-another-field
     let res = yield this.mongo
             .db('BeiDanChi')
             .collection('word_list')
-            .update({'_id':ObjectId(id)},
-                    {'$set':{word,describe,sentence}});
+            .aggregate([
+                { "$addFields": { 
+                    "history": "$history" + "$sentence" 
+                }},
+                { "$out": "word_list" }
+            ])
+            // .update({'_id':ObjectId(id)},
+            //         {'$set':{
+            //             history:history + sentence
+
+            //         }});
 
     this.body = {
       status:true,

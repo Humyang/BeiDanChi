@@ -72,11 +72,10 @@ export const wordId = function(id){
             ) 
 }
 export const word_sentence_clear = function(id,sentence){
-    let now = new Date()
+    
     let data = {
         id,
-        sentence,
-        date:now.getTime()
+        sentence
     }
     return mFetch('/word/sentence_clear'
             ,data
