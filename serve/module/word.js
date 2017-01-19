@@ -14,7 +14,7 @@ function* add (next){
     let now_time = new Date()
     let end_time = now_time.getTime()
 
-    let insert_obj = objectAssign({word,describe,sentence,end_time},this.login_status)
+    let insert_obj = objectAssign({word,describe,sentence,end_time,is_move:false},this.login_status)
     let res = yield this.mongo
                         .db('BeiDanChi')
                         .collection('word_list')
@@ -73,9 +73,10 @@ function* all(next){
 function* id(next){
 
     let id = this.request.fields.id
-
+    console.log('this.request.fields.id：',id)
     let query_filter = objectAssign({'_id':ObjectId(id)},QUERY_BASE)
-
+    console.log('QUERY_BASE：',QUERY_BASE)
+    console.log('query_filter：',query_filter)
     let word = yield this.mongo 
                             .db('BeiDanChi')
                             .collection('word_list')
@@ -189,21 +190,26 @@ function* sentence_clear(next){
                   msg:"id 类型无效"
                 }
     }
-// http://stackoverflow.com/questions/3974985/update-mongodb-field-using-value-of-another-field
-    let res = yield this.mongo
-            .db('BeiDanChi')
-            .collection('word_list')
-            .aggregate([
-                { "$addFields": { 
-                    "history": "$history" + "$sentence" 
-                }},
-                { "$out": "word_list" }
-            ])
-            // .update({'_id':ObjectId(id)},
-            //         {'$set':{
-            //             history:history + sentence
 
-            //         }});
+    let res = yield this.mongo
+    .db('BeiDanChi')
+    .collection('word_list')
+    .find({'_id':ObjectId(id)})
+    .snapshot()
+    .forEach(function (elem) {
+        db.word_list.update(
+                {
+                    _id: elem._id
+                },
+                {
+                    $set: {
+                        history: elem.history + elem.sentence,
+                        sentence:""
+                    }
+                }
+            )
+        }
+    )
 
     this.body = {
       status:true,
@@ -218,5 +224,6 @@ module.exports = {
     id,
     hide,
     move,
-    alter
+    alter,
+    sentence_clear
 }
