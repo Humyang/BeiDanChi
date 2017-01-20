@@ -188,15 +188,20 @@ function* sentence_clear(next){
     .db('BeiDanChi')
     .collection('word_list')
     .findOne({'_id':id})
-    console.log('word_result----------------',word_result)
 
+    let history = ""
+    if(word_result.history != undefined){
+        history = word_result.history + sentence
+    }else{
+        history = sentence
+    }
     let update_result = yield this.mongo
     .db('BeiDanChi')
     .collection('word_list')
     .update({_id: word_result._id},
-            {$set: {history: word_result.history + sentence,
+            {$set: {history: history,
                     sentence:""}})
-    console.log('update_result---------------',update_result)
+
     this.body = {
                 status:true,
                 update_result
