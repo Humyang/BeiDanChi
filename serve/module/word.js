@@ -5,7 +5,13 @@ var throwError = require('../error.js').throwError
 var CONSTANT = require('../constant.js')
 var DAY = CONSTANT.DAY
 var CODE = CONSTANT.CODE
-const QUERY_BASE = {'is_move':{$ne:true}}
+let BASE_QUERY = {}
+Object.defineProperty( BASE_QUERY, "WORD", {
+  value: Object.freeze({'is_move':{$ne:true}}),
+  writable: false,
+  enumerable: true,
+  configurable: true
+});
 function* add (next){
     let word = this.request.fields.word
     let describe = this.request.fields.describe
@@ -33,9 +39,7 @@ function* list (next){
     // 获取所有 end_time 小于当天的单词
     let now_time = new Date()
     let time = now_time.getTime()
-
-    let query_filter = objectAssign({ "end_time":{ $lt: time }},QUERY_BASE,this.login_status)
-
+    let query_filter = objectAssign({ "end_time":{ $lt: time }},BASE_QUERY.WORD,this.login_status)
     let list = yield this.mongo 
                             .db('BeiDanChi')
                             .collection('word_list')
@@ -53,9 +57,7 @@ function* list (next){
 function* all(next){
     let page_index = this.request.fields.page_index
     let page_number = this.request.fields.page_number
-    // this.login_status
-    let query_filter = objectAssign(QUERY_BASE,this.login_status)
-
+    let query_filter = objectAssign({},BASE_QUERY.WORD,this.login_status)
     let list = yield this.mongo 
                             .db('BeiDanChi')
                             .collection('word_list')
@@ -73,10 +75,7 @@ function* all(next){
 function* id(next){
 
     let id = this.request.fields.id
-    console.log('this.request.fields.id：',id)
-    let query_filter = objectAssign({'_id':ObjectId(id)},QUERY_BASE)
-    console.log('QUERY_BASE：',QUERY_BASE)
-    console.log('query_filter：',query_filter)
+    let query_filter = objectAssign({'_id':ObjectId(id)},BASE_QUERY.WORD)
     let word = yield this.mongo 
                             .db('BeiDanChi')
                             .collection('word_list')
@@ -85,10 +84,6 @@ function* id(next){
     console.log('/word/id：',word)
     if(word === null){
         throwError(CODE.WORD_NOT_FIND,id)
-        // return this.body = {
-        //     status:false,
-        //     msg:'未查询到: '+ObjectId(id)
-        // }
     }
     this.body = objectAssign({
       status:true},
@@ -149,8 +144,6 @@ function* move(next){
 // 修改单词
 function* alter(next){
     let id = ""
-    // let end_time = this.request.fields.end_time
-
     let word = this.request.fields.word
     let describe = this.request.fields.describe
     let sentence = this.request.fields.sentence
@@ -191,30 +184,23 @@ function* sentence_clear(next){
                 }
     }
 
-    let res = yield this.mongo
+    let word_result = yield this.mongo
     .db('BeiDanChi')
     .collection('word_list')
-    .find({'_id':ObjectId(id)})
-    .snapshot()
-    .forEach(function (elem) {
-        db.word_list.update(
-                {
-                    _id: elem._id
-                },
-                {
-                    $set: {
-                        history: elem.history + elem.sentence,
-                        sentence:""
-                    }
-                }
-            )
-        }
-    )
+    .findOne({'_id':id})
+    console.log('word_result----------------',word_result)
 
+    let update_result = yield this.mongo
+    .db('BeiDanChi')
+    .collection('word_list')
+    .update({_id: word_result._id},
+            {$set: {history: word_result.history + sentence,
+                    sentence:""}})
+    console.log('update_result---------------',update_result)
     this.body = {
-      status:true,
-      res
-    }
+                status:true,
+                update_result
+            }
 }
 
 module.exports = {

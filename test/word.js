@@ -116,11 +116,11 @@ describe('单词编辑模块',function() {
             assert(wordId.status,true,wordId,'查询单个单词')
             console.log('查询单个单词22: ',wordId)
 
-            // let alterWord = yield API.word_sentence_clear(listGet.list[0]._id,'clear sentence')
-            // assert(alterWord.status,true,alterWord,'清空例句')
-            // let alterAfterWord = yield API.wordId(listGet.list[0]._id,token)
-            // assert(alterAfterWord.status,true,alterAfterWord,'查询单个单词')
-            // console.log('修改后的单词: ',alterAfterWord)
+            let alterWord = yield API.word_sentence_clear(listGet.list[0]._id,'clear sentence')
+            assert(alterWord.status,true,alterWord,'清空例句')
+            let alterAfterWord = yield API.wordId(listGet.list[0]._id,token)
+            assert(alterAfterWord.status,true,alterAfterWord,'查询单个单词')
+            console.log('修改后的单词: ',alterAfterWord)
 
             done()
         })
