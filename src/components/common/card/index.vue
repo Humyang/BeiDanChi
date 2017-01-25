@@ -2,7 +2,7 @@
   <div 
     :class="size"
     class="card">
-    <p v-tap="wordclick(id,index,word,sentence,describe)">
+    <p v-tap="wordclick(id,index)">
     {{word}}
     <br/>
     {{sentence}}
@@ -26,6 +26,7 @@ export default {
     index:"",
     describe:"",
     sentence:"",
+    history:"",
     word:"",
     wordclick:Function,
     size:{

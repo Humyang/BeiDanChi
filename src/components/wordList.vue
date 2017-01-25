@@ -14,8 +14,7 @@
             :index="$index"
             :id="item._id"
             :wordclick="wordclick()"
-            :sentence="item.sentence" 
-            :describe="item.describe" 
+            :sentence="item.sentence"
             :size="1"
             :events="hideWord()"
             ></card>
@@ -23,7 +22,8 @@
         </loadmore>
       </content>
       <add-word :show.sync="ui.addword" :callback="addWord()"></add-word>
-      <add-word :show.sync="ui.editword" 
+      <add-word :show.sync="ui.editword"
+                :data="edit"
                 :callback="editWord()"
                 :_id="edit.id"
                 :index="edit.index"
@@ -89,11 +89,13 @@ export default {
     wordclick:function(){
       console.log(2222)
       let self = this
-      return function(id,index,word,sentence,describe){
+      return function(id,index){
+        let item = self.lists[index]
         self.edit.id = id
-        self.edit.word = word
-        self.edit.sentence = sentence
-        self.edit.describe = describe
+        self.edit.word = item.word
+        self.edit.sentence = item.sentence
+        self.edit.describe = item.describe
+        self.edit.history = item.history
         self.edit.index = index
         // console.log(describe)
         self.ui.editword = true

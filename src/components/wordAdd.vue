@@ -30,9 +30,8 @@
           <div v-show="tabs_index===1" >
             <textarea v-model="describe" name="" id="" cols="30" rows="10"></textarea >
           </div>
-          
-          <div v-show="tabs_index===2">
-            单词历史纪录
+          <div v-if="tabs_index===2">
+            {{{render_history}}}
           </div>
         </section>
       </content>
@@ -50,6 +49,7 @@ export default {
     show:false,
     callback:Function,
     word:undefined,
+    data:{default:function(){return {history:""}}},
     describe:"",
     _id:"",
     mode:{default:"add"},
@@ -62,11 +62,22 @@ export default {
     navbar
   },
   computed:{
-    
+    render_history:function(){
+      return '<p>123123123</p>'
+    }
   },
   methods:{
     sentence_clear:function(){
-
+      let self = this
+      API
+      .word_sentence_clear(this._id,this.sentence)
+      .then(function(res){
+        self.sentence = ""
+      })
+      .catch(function(res){
+        self.$root.popup_text = err.MSG
+        self.$root.show_popup = true
+      })
     },
     calc_title:function(){
       console.log(2332323)
