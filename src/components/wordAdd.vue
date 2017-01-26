@@ -63,6 +63,9 @@ export default {
   },
   computed:{
     render_history:function(){
+      let data = [{date:1485360000000,item:['aaaaaaaaaaaaa','bbbbbbbbbbbbbbb','ccccccccccccc']},
+                  {date:1485360000000,item:['aaaaaaaaaaaaa','bbbbbbbbbbbbbbb','ccccccccccccc']},
+                 ]
       return '<p>123123123</p>'
     }
   },
