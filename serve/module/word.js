@@ -5,7 +5,14 @@ var throwError = require('../error.js').throwError
 var CONSTANT = require('../constant.js')
 var DAY = CONSTANT.DAY
 var CODE = CONSTANT.CODE
-const QUERY_BASE = {'is_move':{$ne:true}}
+var METHOD = require('../method.js')
+let BASE_QUERY = {}
+Object.defineProperty( BASE_QUERY, "WORD", {
+  value: Object.freeze({'is_move':{$ne:true}}),
+  writable: false,
+  enumerable: true,
+  configurable: true
+});
 function* add (next){
     let word = this.request.fields.word
     let describe = this.request.fields.describe
@@ -14,7 +21,7 @@ function* add (next){
     let now_time = new Date()
     let end_time = now_time.getTime()
 
-    let insert_obj = objectAssign({word,describe,sentence,end_time},this.login_status)
+    let insert_obj = objectAssign({word,describe,sentence,end_time,is_move:false},this.login_status)
     let res = yield this.mongo
                         .db('BeiDanChi')
                         .collection('word_list')
@@ -33,9 +40,7 @@ function* list (next){
     // 获取所有 end_time 小于当天的单词
     let now_time = new Date()
     let time = now_time.getTime()
-
-    let query_filter = objectAssign({ "end_time":{ $lt: time }},QUERY_BASE,this.login_status)
-
+    let query_filter = objectAssign({ "end_time":{ $lt: time }},BASE_QUERY.WORD,this.login_status)
     let list = yield this.mongo 
                             .db('BeiDanChi')
                             .collection('word_list')
@@ -53,9 +58,7 @@ function* list (next){
 function* all(next){
     let page_index = this.request.fields.page_index
     let page_number = this.request.fields.page_number
-    // this.login_status
-    let query_filter = objectAssign(QUERY_BASE,this.login_status)
-
+    let query_filter = objectAssign({},BASE_QUERY.WORD,this.login_status)
     let list = yield this.mongo 
                             .db('BeiDanChi')
                             .collection('word_list')
@@ -73,9 +76,7 @@ function* all(next){
 function* id(next){
 
     let id = this.request.fields.id
-
-    let query_filter = objectAssign({'_id':ObjectId(id)},QUERY_BASE)
-
+    let query_filter = objectAssign({'_id':ObjectId(id)},BASE_QUERY.WORD)
     let word = yield this.mongo 
                             .db('BeiDanChi')
                             .collection('word_list')
@@ -84,10 +85,6 @@ function* id(next){
     console.log('/word/id：',word)
     if(word === null){
         throwError(CODE.WORD_NOT_FIND,id)
-        // return this.body = {
-        //     status:false,
-        //     msg:'未查询到: '+ObjectId(id)
-        // }
     }
     this.body = objectAssign({
       status:true},
@@ -148,8 +145,6 @@ function* move(next){
 // 修改单词
 function* alter(next){
     let id = ""
-    // let end_time = this.request.fields.end_time
-
     let word = this.request.fields.word
     let describe = this.request.fields.describe
     let sentence = this.request.fields.sentence
@@ -174,6 +169,43 @@ function* alter(next){
       res
     }
 }
+function* sentence_clear(next){
+    let id = ""
+
+    let sentence = this.request.fields.sentence
+    // let now = new Date()
+    // let time = now.getTime()
+
+    try{
+        id = ObjectId(this.request.fields.id)
+    }catch(e) {
+        return this.body = {
+                  status:false,
+                  msg:"id 类型无效"
+                }
+    }
+
+    let word_result = yield this.mongo
+    .db('BeiDanChi')
+    .collection('word_list')
+    .findOne({'_id':id})
+
+
+    let history = METHOD.historyAdd(word_result.history,sentence)
+
+    let update_result = yield this.mongo
+    .db('BeiDanChi')
+    .collection('word_list')
+    .update({_id: word_result._id},
+            {$set: {history: history,
+                    sentence:""}})
+
+    this.body = {
+                status:true,
+                update_result
+            }
+}
+
 module.exports = {
     add,
     list,
@@ -181,5 +213,6 @@ module.exports = {
     id,
     hide,
     move,
-    alter
+    alter,
+    sentence_clear
 }

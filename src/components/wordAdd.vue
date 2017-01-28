@@ -23,10 +23,15 @@
           </ul>
         </section>
         <section class="detail_wrap">
-          <textarea v-show="tabs_index===0" v-model="sentence" name="" id="" cols="30" rows="10"></textarea>
-          <textarea v-show="tabs_index===1" v-model="describe" name="" id="" cols="30" rows="10"></textarea >
-          <div v-show="tabs_index===2">
-            单词历史纪录
+          <div v-show="tabs_index===0" >
+            <textarea v-model="sentence" name="" id="" cols="30" rows="10"></textarea>
+            <a class="btn_prime green" v-tap="sentence_clear">清空</a>
+          </div>
+          <div v-show="tabs_index===1" >
+            <textarea v-model="describe" name="" id="" cols="30" rows="10"></textarea >
+          </div>
+          <div v-if="tabs_index===2" class="history">
+            {{{render_history}}}
           </div>
         </section>
       </content>
@@ -39,26 +44,62 @@ import navbar from './common/navbar'
 import card from './common/card'
 import loadmore from 'mint-loadmore'
 import * as API from '../api/main.js'
+
+var method = require('../../serve/method.js')
+
 export default {
   props:{
     show:false,
     callback:Function,
     word:undefined,
+    // data:{default:function(){return {history:""}}},
     describe:"",
     _id:"",
     mode:{default:"add"},
     index:0,
     nvabarBtnRight:Function,
     sentence:undefined,
-    history:undefined
+    history:{cache: false,default:"123"}
   },
   components:{
     navbar
   },
   computed:{
-    
+    render_history:function(){
+      if(typeof this.history != 'object'){
+        return "<p class='p1'>EMPTY</p>"
+      }
+      let data = this.history
+      console.log(11)
+      // [{date:1485360000000,item:['aaaaaaaaaaaaa','bbbbbbbbbbbbbbb','ccccccccccccc']},
+      //             {date:1485446400000,item:['aaaaaaaaaaaaa','bbbbbbbbbbbbbbb','ccccccccccccc']},
+      //            ]
+      let result = ""
+      for (let i = data.length - 1; i >= 0; i--) {
+          let today = new Date(data[i].date)
+
+          result += `<p class='p1'>${today.toLocaleDateString()}</p>`
+          for (var c = data[i].item.length - 1; c >= 0; c--) {
+              result += `<p class='p2'>${data[i].item[c]}</p>`
+          }
+      }
+      return result
+    }
   },
   methods:{
+    sentence_clear:function(){
+      let self = this
+      API
+      .word_sentence_clear(this._id,this.sentence)
+      .then(function(res){
+        self.history = method.historyAdd(self.history,self.sentence)
+        self.sentence = ""
+      })
+      .catch(function(err){
+        self.$root.popup_text = err
+        self.$root.show_popup = true
+      })
+    },
     calc_title:function(){
       console.log(2332323)
       // return "123"
@@ -69,6 +110,7 @@ export default {
     },
     navbar_btn_left:function(){
       this.show = false
+      this.history=undefined
     },
     addword:function(){
       let self = this
