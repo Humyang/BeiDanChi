@@ -1,11 +1,14 @@
-.wordadd .container { background-color: #36474F; overflow: auto; display: block;height: 100%; padding-bottom: 50px;}
+.wordadd .container { background-color: #36474F; overflow: auto; display: block; height: 100%; padding-bottom: 50px; }
 .wordadd .container .search_wrap { margin-top: 1rem; }
-.wordadd .container .search_wrap p { background-color: white; margin: 0 auto; width: 6.2rem; height: 45px;border-radius: 2px; }
+.wordadd .container .search_wrap p { background-color: white; margin: 0 auto; width: 6.2rem; height: 45px; border-radius: 2px; }
 .wordadd .container .search_wrap img { padding: 14px; float: left; }
-.wordadd .container .search_wrap input[type="text"] { font-size: 14px; line-height: 45px; padding: 0; margin: 0; color: #000000;width: 5.2rem; border: 0;margin-left: 20px;}
+.wordadd .container .search_wrap input[type="text"] { font-size: 14px; line-height: 45px; padding: 0; margin: 0; color: #000000; width: 5.2rem; border: 0; margin-left: 20px; }
 .wordadd .container .detail_tabs ul { overflow: hidden; background-color: #00BBD3; border-radius: 1px; }
 .wordadd .container .detail_tabs { margin-top: 10px; }
 .wordadd .container .detail_tabs ul li { font-size: 18px; float: left; width: 2.13rem; text-align: center; color: white; padding: 15px 0; }
 .wordadd .container .detail_tabs li.active { border-bottom: 2px solid #FFFF8C; }
 .wordadd .detail_wrap { margin-top: 40px; }
 .wordadd .detail_wrap textarea { width: 6.3rem; border: 0; margin: 0; padding: 0; background-color: #36474f; border-bottom: 2px solid #80CBC4; margin-left: 5px; color: white; font-size: 16px; }
+.wordadd .detail_wrap .history { margin: 0 15px; }
+.wordadd .detail_wrap .history .p1 { font-size: 28px; color: white; }
+.wordadd .detail_wrap .history .p2 { font-size: 18px; color: white; margin-left: 25px; }

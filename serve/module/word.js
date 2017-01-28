@@ -5,6 +5,7 @@ var throwError = require('../error.js').throwError
 var CONSTANT = require('../constant.js')
 var DAY = CONSTANT.DAY
 var CODE = CONSTANT.CODE
+var METHOD = require('../method.js')
 let BASE_QUERY = {}
 Object.defineProperty( BASE_QUERY, "WORD", {
   value: Object.freeze({'is_move':{$ne:true}}),
@@ -172,8 +173,8 @@ function* sentence_clear(next){
     let id = ""
 
     let sentence = this.request.fields.sentence
-    let now = new Date()
-    let time = now.getTime()
+    // let now = new Date()
+    // let time = now.getTime()
 
     try{
         id = ObjectId(this.request.fields.id)
@@ -189,12 +190,9 @@ function* sentence_clear(next){
     .collection('word_list')
     .findOne({'_id':id})
 
-    let history = ""
-    if(word_result.history != undefined){
-        history = word_result.history + sentence
-    }else{
-        history = sentence
-    }
+
+    let history = METHOD.historyAdd(word_result.history,sentence)
+
     let update_result = yield this.mongo
     .db('BeiDanChi')
     .collection('word_list')
