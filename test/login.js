@@ -79,7 +79,8 @@ describe('注册流程测试', function() {
     })
 
 })
-
+global.localStorage = {}
+global.localStorage.setItem=function(){}
 describe('登录流程测试', function() {
 
     it('注册后立即登录',function(done){
@@ -131,6 +132,7 @@ describe('登录流程测试', function() {
             expect(login2.status).toBe(true,'再次登录，使旧token失效')
             //使用旧 token 获取数据，反馈失败
             var listall2 = yield API.listGetAll(0,20,login.token)
+            console.log('listall2',listall2)
             done('出现错误，token应失效，无法获取数据')
             
         }).catch(function(err){
