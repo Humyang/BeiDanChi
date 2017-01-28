@@ -164,9 +164,8 @@ export const login = function(username,password,verify_code,token){
         device:'html5',
         token
     }
-    return mFetch('/login',
-        data).then(
-        function(res){
+    return mFetch('/login',data)
+        .then(function(res){
             saveUsername(username)
             return res
         })

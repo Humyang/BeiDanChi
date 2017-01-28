@@ -135,6 +135,7 @@ function* login(next){
         // ,
         // device:fields.device
     }
+    console.log('new_token',new_token)
     //使旧 token 失效
     // let _remove_token = yield this.mongo
     //                             .db('BeiDanChi')
