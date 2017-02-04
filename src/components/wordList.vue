@@ -23,13 +23,13 @@
       </content>
       <add-word :show.sync="ui.addword" :callback="addWord()"></add-word>
       <add-word :show.sync="ui.editword"
-                :data="edit"
                 :callback="editWord()"
                 :_id="edit.id"
                 :index="edit.index"
                 :word="edit.word"
                 :describe="edit.describe"
                 :sentence="edit.sentence"
+                :history="edit.history"
                 mode="edit"></add-word>
   </div>
 </template>
@@ -92,13 +92,15 @@ export default {
       let self = this
       return function(id,index){
         let item = self.lists[index]
-        self.edit.id = id
-        self.edit.word = item.word
-        self.edit.sentence = item.sentence
-        self.edit.describe = item.describe
-        self.edit.history = JSON.stringify(item.history)
-        self.edit.index = index
-        // console.log(describe)
+
+        self.edit = Object.assign({},{
+          id:id,
+          word:item.word,
+          sentence:item.sentence,
+          describe:item.describe,
+          history:item.history,
+          index:index
+        })
         self.ui.editword = true
       }
     },

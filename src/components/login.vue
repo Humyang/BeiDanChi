@@ -4,8 +4,8 @@
     <div><input v-model="password" type="password" placeholder="密码"></div>
     <!-- <div>请输入验证码：{{verify_img}} <a v-tap="refresh_verifycode" href="#">更换</a></div>
     <div><input v-model="verifycode" type="password" placeholder="验证码"></div> -->
-    <a class="btn_" v-tap="login" href="#" >登录</a>
-    <a class="btn_" v-tap="regiest" href="#" >注册</a>
+    <a class="btn_" v-tap.prevent="login" href="#" >登录</a>
+    <a class="btn_" v-tap.prevent="regiest" href="#" >注册</a>
   </div>
   
 </template>

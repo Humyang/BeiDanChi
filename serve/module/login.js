@@ -28,7 +28,13 @@ function* username_check(self,username){
 }
 function* regiest(next){
     let fields = this.request.fields
-    
+    // let fields = this.request.fields
+    //验证码
+    let username = fields.username
+    let password = fields.password
+    if(!VERIFY.loginVerify(username,password)){
+        throwError(CODE.LOGIN_EMPTY)
+    }
     //验证码检查
     // let verifycode = yield verify_code(this,fields.token,fields.verify_code)
     // console.log('verifycode',verifycode)
@@ -50,7 +56,7 @@ function* regiest(next){
     }
 
     let salt = md5(Math.random()*1000000)
-    let password = encryptPassword(fields.password,salt)
+    password = encryptPassword(fields.password,salt)
     let now = new Date()
 
     let uid2 = uid(40)
@@ -129,6 +135,7 @@ function* login(next){
         // ,
         // device:fields.device
     }
+    console.log('new_token',new_token)
     //使旧 token 失效
     // let _remove_token = yield this.mongo
     //                             .db('BeiDanChi')
