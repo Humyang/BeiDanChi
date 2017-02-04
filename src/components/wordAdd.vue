@@ -26,6 +26,7 @@
           <div v-show="tabs_index===0" >
             <textarea v-model="sentence" name="" id="" cols="30" rows="10"></textarea>
             <a class="btn_prime green" v-tap="sentence_clear">清空</a>
+            <a class="btn_prime green" v-tap="sentence_moveword">填空</a>
           </div>
           <div v-show="tabs_index===1" >
             <textarea v-model="describe" name="" id="" cols="30" rows="10"></textarea >
@@ -65,11 +66,16 @@ export default {
   },
   computed:{
     render_history:function(){
-      let history = JSON.parse(this.history)
+      let history = {}
+      try{
+        history = JSON.parse(this.history)
+      }catch(err){
+        return "<p class='p1'>EMPTY</p>"
+      }
+      // let history = JSON.parse(this.history)
       if(typeof history != 'object'){
         return "<p class='p1'>EMPTY</p>"
       }
-      console.log(history)
       let data = history
       let result = ""
       for (let i = data.length - 1; i >= 0; i--) {
@@ -84,6 +90,18 @@ export default {
     }
   },
   methods:{
+    sentence_moveword:function(){
+      let history = {}
+      try{
+        history = JSON.parse(this.history)
+      }catch(err){
+        return "<p class='p1'>EMPTY</p>"
+      }
+      // $vm0.lists[1].history[0].item[0]
+      let history_last = history[history.length-1]
+
+      this.sentence = history_last.item[history_last.item.length-1]
+    },
     sentence_clear:function(){
       let self = this
       API

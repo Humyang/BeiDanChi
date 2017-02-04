@@ -34,6 +34,7 @@
   </div>
 </template>
 
+
 <script>
 import '../css/wordlist.css'
 import navbar from './common/navbar'
