@@ -69,7 +69,8 @@ export default {
         index:0,
         word:"",
         describe:"",
-        sentence:""
+        sentence:"",
+        history:""
       }
     }
   },
@@ -95,7 +96,7 @@ export default {
         self.edit.word = item.word
         self.edit.sentence = item.sentence
         self.edit.describe = item.describe
-        self.edit.history = item.history
+        self.edit.history = JSON.stringify(item.history)
         self.edit.index = index
         // console.log(describe)
         self.ui.editword = true
