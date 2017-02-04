@@ -9,6 +9,6 @@
 .wordadd .container .detail_tabs li.active { border-bottom: 2px solid #FFFF8C; }
 .wordadd .detail_wrap { margin-top: 40px; }
 .wordadd .detail_wrap textarea { width: 6.3rem; border: 0; margin: 0; padding: 0; background-color: #36474f; border-bottom: 2px solid #80CBC4; margin-left: 5px; color: white; font-size: 16px; }
-.wordadd .detail_wrap .history { margin: 0 15px; }
+.wordadd .detail_wrap .history { margin: 0 15px;word-break: break-all; }
 .wordadd .detail_wrap .history .p1 { font-size: 28px; color: white; }
 .wordadd .detail_wrap .history .p2 { font-size: 18px; color: white; margin-left: 25px; }

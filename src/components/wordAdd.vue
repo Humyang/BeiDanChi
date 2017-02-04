@@ -52,28 +52,25 @@ export default {
     show:false,
     callback:Function,
     word:undefined,
-    // data:{default:function(){return {history:""}}},
     describe:"",
     _id:"",
     mode:{default:"add"},
     index:0,
     nvabarBtnRight:Function,
     sentence:undefined,
-    history:{cache: false,default:"123"}
+    history:""
   },
   components:{
     navbar
   },
   computed:{
     render_history:function(){
-      if(typeof this.history != 'object'){
+      let history = JSON.parse(this.history)
+      if(typeof history != 'object'){
         return "<p class='p1'>EMPTY</p>"
       }
-      let data = this.history
-      console.log(11)
-      // [{date:1485360000000,item:['aaaaaaaaaaaaa','bbbbbbbbbbbbbbb','ccccccccccccc']},
-      //             {date:1485446400000,item:['aaaaaaaaaaaaa','bbbbbbbbbbbbbbb','ccccccccccccc']},
-      //            ]
+      console.log(history)
+      let data = history
       let result = ""
       for (let i = data.length - 1; i >= 0; i--) {
           let today = new Date(data[i].date)
@@ -92,7 +89,7 @@ export default {
       API
       .word_sentence_clear(this._id,this.sentence)
       .then(function(res){
-        self.history = method.historyAdd(self.history,self.sentence)
+        self.history = JSON.stringify(method.historyAdd(JSON.parse(self.history),self.sentence))
         self.sentence = ""
       })
       .catch(function(err){
@@ -110,7 +107,6 @@ export default {
     },
     navbar_btn_left:function(){
       this.show = false
-      this.history=undefined
     },
     addword:function(){
       let self = this
@@ -138,10 +134,6 @@ export default {
       .alterWord(id,word,sentence,describe)
       .then(function(res){
         self.callback(null,{_id:res._id,index:self.index,word:self.word,sentence:self.sentence,describe:self.describe})
-        // self.word = ""
-        // self.describe = ""
-        // self.sentence = ""
-        // self.history = ""
       })
       .catch(function(err){
         self.$root.popup_text = err.MSG

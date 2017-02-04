@@ -98,7 +98,7 @@ export default {
           word:item.word,
           sentence:item.sentence,
           describe:item.describe,
-          history:item.history,
+          history:﻿JSON.stringify(item.history),
           index:index
         })
         self.ui.editword = true
