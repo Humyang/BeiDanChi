@@ -34,6 +34,7 @@
   </div>
 </template>
 
+
 <script>
 import '../css/wordlist.css'
 import navbar from './common/navbar'
@@ -69,7 +70,8 @@ export default {
         index:0,
         word:"",
         describe:"",
-        sentence:""
+        sentence:"",
+        history:""
       }
     }
   },
@@ -91,23 +93,15 @@ export default {
       let self = this
       return function(id,index){
         let item = self.lists[index]
+
         self.edit = Object.assign({},{
           id:id,
           word:item.word,
           sentence:item.sentence,
           describe:item.describe,
-          history:item.history,
+          history:﻿JSON.stringify(item.history),
           index:index
         })
-        // self.edit.id = id
-        // self.edit.word = item.word
-        // self.edit.sentence = item.sentence
-        // self.edit.describe = item.describe
-
-        // self.edit.history = Object.assign({},item.history) 
-        // console.log(1111)
-        // self.edit.index = index
-        // console.log(describe)
         self.ui.editword = true
       }
     },

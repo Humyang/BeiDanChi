@@ -11,6 +11,13 @@ var historyAdd = function(object,sentence){
     var now = new Date()
     var localstring = new Date(now.toLocaleDateString()).getTime()
     var history = object
+    if (typeof history === 'string') {
+        try {
+            history = JSON.parse(history)
+        } catch (err) {
+
+        }
+    }
     if(history != undefined && typeof history === 'object'){
         if(localstring > history[history.length - 1].date){
             history.push({date:localstring,item:[sentence]})
@@ -22,10 +29,10 @@ var historyAdd = function(object,sentence){
             history.push({date:localstring,item:[sentence]})
         }
     }else{
+        
         history = []
         history.push({date:localstring,item:[sentence]})
     }
-    console.log(history)
     return history
 }
 module.exports = {
