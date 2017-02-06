@@ -111,7 +111,7 @@ export default {
 
           let number = 0
           do {
-            number = Math.round(Math.random()*random)
+            number = Math.round(Math.random()*sentences.length)
           }while(randomArray.indexOf(number) != -1)
 
           randomArray.push(number)
