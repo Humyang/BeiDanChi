@@ -25,7 +25,7 @@
         <section class="detail_wrap">
           <div v-show="tabs_index===0" >
             <textarea v-model="sentence" name="" id="" cols="30" rows="10"></textarea>
-            <a class="btn_prime green" v-tap="sentence_clear">清空</a>
+            <a class="btn_prime green" v-tap="sentence_clear">记住了</a>
             <a class="btn_prime green" v-tap="sentence_moveword">填空</a>
           </div>
           <div v-show="tabs_index===1" >
@@ -100,17 +100,50 @@ export default {
       // $vm0.lists[1].history[0].item[0]
       let history_last = history[history.length-1]
 
-      this.sentence = history_last.item[history_last.item.length-1]
+      let sentence = history_last.item[history_last.item.length-1]
+      
+      // split word
+      let sentences = sentence.split(' ')
+      var random = Math.round((sentences.length * 0.6))
+      var randomArray = []
+      
+      for (let i = random - 1; i >= 0; i--) {
+
+          let number = 0
+          do {
+            number = Math.round(Math.random()*random)
+          }while(randomArray.indexOf(number) != -1)
+
+          randomArray.push(number)
+
+          console.log(randomArray)
+          let repalce_str = "" 
+          for (let i = sentences[number].length - 1; i >= 0; i--) {
+            repalce_str += "_"
+          }
+          sentences[number] = repalce_str
+
+
+      }
+
+      let result = ""
+      for (var i = 0; i < sentences.length; i++) {
+        result = result + " " + sentences[i]
+      }
+
+      this.sentence = result
     },
     sentence_clear:function(){
       let self = this
       API
       .word_sentence_clear(this._id,this.sentence)
       .then(function(res){
-        self.history = JSON.stringify(method.historyAdd(JSON.parse(self.history),self.sentence))
+
+        self.history = JSON.stringify(method.historyAdd(self.history,self.sentence))
         self.sentence = ""
       })
       .catch(function(err){
+        console.log(err)
         self.$root.popup_text = err
         self.$root.show_popup = true
       })
