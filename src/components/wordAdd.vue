@@ -24,9 +24,14 @@
         </section>
         <section class="detail_wrap">
           <div v-show="tabs_index===0" >
-            <textarea v-model="sentence" name="" id="" cols="30" rows="10"></textarea>
+            <textarea id="sentence" name="" id="" cols="30" rows="10"></textarea>
             <a class="btn_prime green" v-tap="sentence_clear">记住了</a>
-            <a class="btn_prime green" v-tap="sentence_moveword">填空</a>
+            <div class="d1">
+              <a class="btn_prime blue" v-tap="sentence_moveword">填空</a>
+              <a class="btn_prime blue" @click="sentence_moveword_left"><</a>
+              <a class="btn_prime blue" v-tap="sentence_moveword_right">></a>
+            </div>
+            
           </div>
           <div v-show="tabs_index===1" >
             <textarea v-model="describe" name="" id="" cols="30" rows="10"></textarea >
@@ -90,6 +95,21 @@ export default {
     }
   },
   methods:{
+    sentence_moveword_left:function(){
+      document.getElementById("sentence").focus();
+      // setTimeout(function() {
+        // var textarea = document.getElementById("sentence")
+        // textarea.focus()
+        // textarea.setAttribute('selectionStart', 5)
+      console.log(123)
+      // }, 2000);
+      
+      // textarea.selectionStart = 5
+      
+    },
+    sentence_moveword_right:function(){
+
+    },
     sentence_moveword:function(){
       let history = {}
       try{
@@ -111,7 +131,7 @@ export default {
 
           let number = 0
           do {
-            number = Math.round(Math.random()*sentences.length)
+            number = Math.round(Math.random()*(sentences.length-1))
           }while(randomArray.indexOf(number) != -1)
 
           randomArray.push(number)
@@ -199,7 +219,9 @@ export default {
   },
   data () {
     return {
-      tabs_index:0
+      tabs_index:0,
+      st_selection_index:0,
+      st_focus:false
       // word:this.prop_word||"1234",
       // describe:this.prop_describe||"1234"
     }

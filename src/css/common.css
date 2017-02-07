@@ -1,86 +1,19 @@
-html{
-	background-color: white;
-}
-html,body{
-	height: 100%;
-}
-body{
-	max-width: 640px;
-	margin:0 auto;
-	// background-color: #36474F;
-}
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-    outline: none;
-}
-ul{
-	margin:0;
-	padding:0;
-}
-li{
-	list-style: none;
-}
-.container { background-color: #36474F; overflow: auto; display: block; height: 100%; padding-bottom: 50px;  }
-.wrapper { height: 100%; overflow: hidden;position: absolute;top: 0; width: 100%;z-index: 9;}
-.mint-loadmore-top {
-    font-size: 0.16rem;
-    color: white;
-    text-align: center;
-    height: 0.9rem;
-}
-.popup .content{
-    width: 5.8rem;
-    height: 3rem;
-    background-color: white;
-    z-index: 999;
-    margin: 0 auto;
-    margin: 0 0.3rem;
-    margin-top: 4rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 99999;
-    border-radius: 10px;
-    animation-duration: 0.5s;
-    overflow: hidden;
-}
-.popup .zhezhao{
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: black;
-    z-index: 9999;
-    opacity: 0.3;
-    animation-duration: 0s;
-}
-.popup footer{
-    font-size: 0.28rem;
-    position: absolute;
-    bottom: 0;
-    text-align: center;
-    width: 100%;
-    color: white;
-    background-color: #00bdac;
-    font-weight: 600;
-    padding: 0;
-    margin: 0;
-}
-a.btn_prime{
-    display: block;
-    width: 200px;
-    height: 40px;
-    line-height: 40px;
-    margin: 0 auto;
-    text-align: center;
-    font-size: 20px;
-    margin-top: 30px;
-}
-a.btn_prime.green {
-    box-shadow: 2px 2px 8px 0px #4c7120;
-    background-color: #4CAF50;
+html { background-color: white; }
+html, body { height: 100%; }
+body { max-width: 640px; margin: 0 auto;  }
+input:focus, select:focus, textarea:focus, button:focus { outline: none; }
+ul { margin: 0; padding: 0; }
+li { list-style: none; }
+.container { background-color: #36474F; overflow: auto; display: block; height: 100%; padding-bottom: 50px; }
+.wrapper { height: 100%; overflow: hidden; position: absolute; top: 0; width: 100%; z-index: 9; }
+.mint-loadmore-top { font-size: 0.16rem; color: white; text-align: center; height: 0.9rem; }
+.popup .content { width: 5.8rem; height: 3rem; background-color: white; z-index: 999; margin: 0 auto; margin: 0 0.3rem; margin-top: 4rem; position: absolute; top: 0; left: 0; z-index: 99999; border-radius: 10px; animation-duration: 0.5s; overflow: hidden; }
+.popup .zhezhao { position: absolute; top: 0; left: 0; height: 100%; width: 100%; background-color: black; z-index: 9999; opacity: 0.3; animation-duration: 0s; }
+.popup footer { font-size: 0.28rem; position: absolute; bottom: 0; text-align: center; width: 100%; color: white; background-color: #00bdac; font-weight: 600; padding: 0; margin: 0; }
+a.btn_prime { display: block; width: 200px; height: 40px; line-height: 40px; margin: 0 auto; text-align: center; font-size: 20px; margin-top: 30px; }
+a.btn_prime.green { box-shadow: 2px 2px 8px 0px #4c7120; background-color: #4CAF50; color: white; }
+a.btn_prime.blue {
+    box-shadow: 2px 2px 8px 0px #009fb3;
+    background-color: #00bbd3;
     color: white;
 }

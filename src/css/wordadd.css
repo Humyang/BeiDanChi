@@ -12,3 +12,4 @@
 .wordadd .detail_wrap .history { margin: 0 15px;word-break: break-all; }
 .wordadd .detail_wrap .history .p1 { font-size: 28px; color: white; }
 .wordadd .detail_wrap .history .p2 { font-size: 18px; color: white; margin-left: 25px; }
+.wordadd .detail_wrap .d1 a {width:100px;display: inline-block;}
