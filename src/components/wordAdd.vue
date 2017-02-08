@@ -1,5 +1,5 @@
 <template>
-  <div v-show="show"  class=" wrapper wordadd">
+  <div v-if="show"  class=" wrapper wordadd">
       <navbar 
       :title="calc_title()"
       :left="navbar_btn_left" 
@@ -24,9 +24,18 @@
         </section>
         <section class="detail_wrap">
           <div v-show="tabs_index===0" >
-            <textarea v-model="sentence" name="" id="" cols="30" rows="10"></textarea>
+            <textarea v-show="sentence_show" id="sentence"  v-model="sentence" name="" id="" cols="30" rows="10"></textarea>
+            <div v-show="!sentence_show" class="d2">
+              <p id="sentence_moveword_p">{{{moveword}}}</p>
+              
+              <a class="btn_prime blue" v-tap="sentence_show=true">返回</a>
+            </div>
             <a class="btn_prime green" v-tap="sentence_clear">记住了</a>
-            <a class="btn_prime green" v-tap="sentence_moveword">填空</a>
+            <div class="d1">
+              <a class="btn_prime blue" v-tap="sentence_moveword">填空</a>
+              <a class="btn_prime blue" @click="sentence_moveword_left"><</a>
+              <a class="btn_prime blue" v-tap="sentence_moveword_right">></a>
+            </div>
           </div>
           <div v-show="tabs_index===1" >
             <textarea v-model="describe" name="" id="" cols="30" rows="10"></textarea >
@@ -90,6 +99,21 @@ export default {
     }
   },
   methods:{
+    sentence_moveword_left:function(){
+      document.getElementById("sentence").focus();
+      // setTimeout(function() {
+        // var textarea = document.getElementById("sentence")
+        // textarea.focus()
+        // textarea.setAttribute('selectionStart', 5)
+        // console.log(123)
+      // }, 2000);
+      
+      // textarea.selectionStart = 5
+      
+    },
+    sentence_moveword_right:function(){
+
+    },
     sentence_moveword:function(){
       let history = {}
       try{
@@ -111,7 +135,7 @@ export default {
 
           let number = 0
           do {
-            number = Math.round(Math.random()*sentences.length)
+            number = Math.round(Math.random()*(sentences.length-1))
           }while(randomArray.indexOf(number) != -1)
 
           randomArray.push(number)
@@ -121,32 +145,56 @@ export default {
           for (let i = sentences[number].length - 1; i >= 0; i--) {
             repalce_str += "_"
           }
-          sentences[number] = repalce_str
+          sentences[number] = {length:sentences[number].length,type:"REPLACE_STR"}
 
 
       }
 
       let result = ""
       for (var i = 0; i < sentences.length; i++) {
-        result = result + " " + sentences[i]
+        if(typeof sentences[i] === 'object'){
+          result = result + ` <input class="moveword${sentences[i].length}" type="text" name="" value=""> `
+        }else{
+          result = result + ` <span>${sentences[i]}</span> ` 
+        }
+        
       }
-
-      this.sentence = result
+      this.sentence_show = false
+      this.moveword = result
     },
     sentence_clear:function(){
       let self = this
-      API
-      .word_sentence_clear(this._id,this.sentence)
-      .then(function(res){
-
-        self.history = JSON.stringify(method.historyAdd(self.history,self.sentence))
-        self.sentence = ""
-      })
-      .catch(function(err){
-        console.log(err)
-        self.$root.popup_text = err
-        self.$root.show_popup = true
-      })
+      let sentence = ""
+      if(this.sentence_show){
+        sentence = self.sentence
+      }else{
+        var element = document.getElementById('sentence_moveword_p')
+        for (var i = element.children.length - 1; i >= 0; i--) {
+            let sub_el = element.children[i]
+            if(sub_el.tagName === 'SPAN'){
+              sentence = sentence + sub_el.textContent + " "
+            }
+            if(sub_el.tagName === 'INPUT'){
+              let sub_el_value = ""
+              if(sub_el.value===""){
+                sub_el_value = "___"
+              }else{
+                sub_el_value = sub_el.value
+              }
+              sentence = sentence + sub_el_value + " "
+            }
+        }
+      }
+      console.log(sentence)
+      self.history = JSON.stringify(method.historyAdd(self.history,sentence))
+      // self.sentence = ""
+      // API
+      // .word_sentence_clear(this._id,sentence)
+      // .catch(function(err){
+      //   console.log(err)
+      //   self.$root.popup_text = err
+      //   self.$root.show_popup = true
+      // })
     },
     calc_title:function(){
       console.log(2332323)
@@ -199,7 +247,11 @@ export default {
   },
   data () {
     return {
-      tabs_index:0
+      tabs_index:0,
+      st_selection_index:0,
+      st_focus:false,
+      moveword:"",
+      sentence_show:true
       // word:this.prop_word||"1234",
       // describe:this.prop_describe||"1234"
     }

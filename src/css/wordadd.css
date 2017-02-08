@@ -12,3 +12,35 @@
 .wordadd .detail_wrap .history { margin: 0 15px;word-break: break-all; }
 .wordadd .detail_wrap .history .p1 { font-size: 28px; color: white; }
 .wordadd .detail_wrap .history .p2 { font-size: 18px; color: white; margin-left: 25px; }
+.wordadd .detail_wrap .d1 a {width:100px;display: inline-block;}
+
+.wordadd .detail_wrap .d2 {
+    color: white;
+    font-size: 18px;
+}
+.wordadd .detail_wrap .d2 input{
+    display: inline-block;
+    background-color: #36474f;
+    border: 0;
+    border-bottom: 1px solid #fff;
+    text-align: center;
+    color: white;
+}
+
+.wordadd .detail_wrap .d2 input.moveword0 {width: 10px;}
+.wordadd .detail_wrap .d2 input.moveword1 {width: 10px;}
+.wordadd .detail_wrap .d2 input.moveword2 {width: 20px;}
+.wordadd .detail_wrap .d2 input.moveword3 {width: 30px;}
+.wordadd .detail_wrap .d2 input.moveword4 {width: 40px;}
+.wordadd .detail_wrap .d2 input.moveword5 {width: 50px;}
+.wordadd .detail_wrap .d2 input.moveword6 {width: 60px;}
+.wordadd .detail_wrap .d2 input.moveword7 {width: 70px;}
+.wordadd .detail_wrap .d2 input.moveword8 {width: 80px;}
+.wordadd .detail_wrap .d2 input.moveword9 {width: 90px;}
+.wordadd .detail_wrap .d2 input.moveword10 {width: 100px;}
+.wordadd .detail_wrap .d2 input.moveword11 {width: 110px;}
+.wordadd .detail_wrap .d2 input.moveword12 {width: 120px;}
+.wordadd .detail_wrap .d2 input.moveword13 {width: 130px;}
+.wordadd .detail_wrap .d2 input.moveword14 {width: 140px;}
+.wordadd .detail_wrap .d2 input.moveword16 {width: 150px;}
+.wordadd .detail_wrap .d2 input.moveword17 {width: 160px;}
