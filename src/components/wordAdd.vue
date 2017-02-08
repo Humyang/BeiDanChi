@@ -33,8 +33,8 @@
             <a class="btn_prime green" v-tap="sentence_clear">记住了</a>
             <div class="d1">
               <a class="btn_prime blue" v-tap="sentence_moveword">填空</a>
-              <a class="btn_prime blue" @click="sentence_moveword_left"><</a>
-              <a class="btn_prime blue" v-tap="sentence_moveword_right">></a>
+              <a class="btn_prime blue" @click="sentence_moveword_left">&lt;</a>
+              <a class="btn_prime blue" v-tap="sentence_moveword_right">&gt;</a>
             </div>
           </div>
           <div v-show="tabs_index===1" >
