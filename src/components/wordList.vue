@@ -30,6 +30,7 @@
                 :describe="edit.describe"
                 :sentence="edit.sentence"
                 :history="edit.history"
+                :moveword_real="edit.moveword_real"
                 mode="edit"></add-word>
   </div>
 </template>
@@ -71,7 +72,8 @@ export default {
         word:"",
         describe:"",
         sentence:"",
-        history:""
+        history:"",
+        moveword_real:""
       }
     }
   },
@@ -100,7 +102,8 @@ export default {
           sentence:item.sentence,
           describe:item.describe,
           history:﻿JSON.stringify(item.history),
-          index:index
+          index:index,
+          moveword_real:item.moveword_real
         })
         self.ui.editword = true
       }
@@ -112,6 +115,7 @@ export default {
         self.lists[res.index].word=res.word
         self.lists[res.index].describe=res.describe
         self.lists[res.index].sentence=res.sentence
+        self.lists[res.index].moveword_real=res.moveword_real
         self.ui.editword = false
       }
     },
