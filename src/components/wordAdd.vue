@@ -33,8 +33,8 @@
             <a class="btn_prime green" v-tap="sentence_clear">记住了</a>
             <div class="d1">
               <a class="btn_prime blue" v-tap="sentence_moveword">填空</a>
-              <a class="btn_prime blue" @click="sentence_moveword_left"><</a>
-              <a class="btn_prime blue" v-tap="sentence_moveword_right">></a>
+              <a class="btn_prime blue" @click="sentence_moveword_left">&lt;</a>
+              <a class="btn_prime blue" v-tap="sentence_moveword_right">&gt;</a>
             </div>
           </div>
           <div v-show="tabs_index===1" >
@@ -169,7 +169,7 @@ export default {
         sentence = self.sentence
       }else{
         var element = document.getElementById('sentence_moveword_p')
-        for (var i = element.children.length - 1; i >= 0; i--) {
+        for (var i = 0; i < element.children.length; i++) {
             let sub_el = element.children[i]
             if(sub_el.tagName === 'SPAN'){
               sentence = sentence + sub_el.textContent + " "
@@ -185,16 +185,16 @@ export default {
             }
         }
       }
-      console.log(sentence)
+      // console.log(sentence)
       self.history = JSON.stringify(method.historyAdd(self.history,sentence))
-      // self.sentence = ""
-      // API
-      // .word_sentence_clear(this._id,sentence)
-      // .catch(function(err){
-      //   console.log(err)
-      //   self.$root.popup_text = err
-      //   self.$root.show_popup = true
-      // })
+      self.sentence = ""
+      API
+      .word_sentence_clear(this._id,sentence)
+      .catch(function(err){
+        console.log(err)
+        self.$root.popup_text = err
+        self.$root.show_popup = true
+      })
     },
     calc_title:function(){
       console.log(2332323)
