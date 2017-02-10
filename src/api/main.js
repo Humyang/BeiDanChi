@@ -81,6 +81,15 @@ export const word_sentence_clear = function(id,sentence){
             ,data
             ) 
 }
+export const set_move_word_real = function(id,sentence){
+    let data = {
+        id,
+        sentence
+    }
+    return mFetch('/word/set_move_word_real'
+            ,data
+            ) 
+}
 // 隐藏单词
 // type
 // 0 1~10 天

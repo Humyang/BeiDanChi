@@ -34,8 +34,8 @@ router.post('/word/move',LOGIN.login_check(),WORD.move)
 // 编辑单词
 router.post('/word/alter',LOGIN.login_check(),WORD.alter)
 // 编辑单词
-router.post('/word/sentence_clear',LOGIN.login_check(),WORD.sentence_clear)
-
+router.post('/word/sentence_clear',LOGIN.login_check(),WORD.sentenceClear)
+router.post('/word/set_move_word_real',LOGIN.login_check(),WORD.setMoveWordReal)
 // 验证账号重复性
 router.all('/valid/username/:username',LOGIN.username_repeat)
 //注册账户

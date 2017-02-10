@@ -82,8 +82,8 @@ describe('单词正删改查模块----', function() {
     }) 
 })
 describe('单词编辑模块',function() {
-    it('清空例句',function(done){
-        co(function*(){
+    let token = ""
+    co(function*(){
             // 生成随机测试帐号
             let username = 'test'+uid(10)
 
@@ -97,12 +97,15 @@ describe('单词编辑模块',function() {
             var login = yield API.login(username,'password1',123456,verify_login.token)
             expect(login.status).toBe(true,'登录')
 
-            let token = login.token
+            token = login.token
 
             BASE.saveToken = expect.createSpy().andReturn(1)
 
             BASE.getToken = expect.createSpy().andReturn(login.token)
+    })
 
+    it('清空例句',function(done){
+        co(function*(){
             // var localhost = {}
 
             let wordAdd = yield API.wordAdd('test word','some sentence on here','some describe on here',token)
@@ -134,6 +137,55 @@ describe('单词编辑模块',function() {
             //     console.log(err)
                 done(err)
             // }
+        })
+    })
+})
+describe('MoveWord',function() {
+    let token = ""
+    co(function*(){
+            // 生成随机测试帐号
+            let username = 'test'+uid(10)
+
+            let verifycode = yield API.verify_code()
+            assert(verifycode.status,true,verifycode)
+            let regiest_res = yield API.regiest(username,'password1',123456,verifycode.token)
+            assert(regiest_res.status,true,regiest_res)
+
+            let verify_login = yield API.verify_code()
+            expect(verify_login.status).toBe(true,'获取登录验证码')
+            var login = yield API.login(username,'password1',123456,verify_login.token)
+            expect(login.status).toBe(true,'登录')
+
+            token = login.token
+
+            BASE.saveToken = expect.createSpy().andReturn(1)
+
+            BASE.getToken = expect.createSpy().andReturn(login.token)
+    })
+    it('设置realword', function(done) {
+        co(function*(){
+            let wordAdd = yield API.wordAdd('test word','some sentence on here','some describe on here',token)
+            expect(wordAdd.status).toBe(true,'添加单词')
+
+            let listGet = yield API.listGet(0,20,token)
+            expect(listGet.status).toBe(true,'获取显示列表')
+            console.log('获取显示列表11: ',listGet)
+
+            let wordId = yield API.wordId(listGet.list[0]._id,token)
+            assert(wordId.status,true,wordId,'查询单个单词 ----- 设置前')
+            console.log('查询单个单词 ----- 设置前',wordId)
+
+            let alterWord = yield API.set_move_word_real(listGet.list[0]._id,'set true word',token)
+            assert(alterWord.status,true,alterWord,'查询单个单词 ----- 设置后')
+
+            let wordId2 = yield API.wordId(listGet.list[0]._id,token)
+            assert(wordId2.status,true,wordId2,'查询单个单词 ----- 设置后')
+            console.log('查询单个单词 ----- 设置后',wordId2)
+
+            done()
+        }).catch(function(err){
+            console.log(err)
+            done(err)
         })
     })
 })

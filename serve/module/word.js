@@ -169,7 +169,7 @@ function* alter(next){
       res
     }
 }
-function* sentence_clear(next){
+function* sentenceClear(next){
     let id = ""
 
     let sentence = this.request.fields.sentence
@@ -205,7 +205,29 @@ function* sentence_clear(next){
                 update_result
             }
 }
+function* setMoveWordReal(next){
+    let id = ""
+    let sentence = this.request.fields.sentence
+    try{
+        id = ObjectId(this.request.fields.id)
+    }catch(e) {
+        return this.body = {
+                  status:false,
+                  msg:"id 类型无效"
+                }
+    }
 
+    let update_result = yield this.mongo
+    .db('BeiDanChi')
+    .collection('word_list')
+    .update({_id: id},
+            {$set: {movewordreal: sentence}})
+
+    this.body = {
+                status:true,
+                update_result
+            }
+}
 module.exports = {
     add,
     list,
@@ -214,5 +236,6 @@ module.exports = {
     hide,
     move,
     alter,
-    sentence_clear
+    sentenceClear,
+    setMoveWordReal
 }

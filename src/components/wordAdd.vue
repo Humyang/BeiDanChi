@@ -41,7 +41,15 @@
             <textarea v-model="describe" name="" id="" cols="30" rows="10"></textarea >
           </div>
           <div v-if="tabs_index===2" class="history">
-            {{{render_history}}}
+            <!-- {{{render_history}}} -->
+            <template v-if="objHistory!=undefined" >
+              <p v-tap="setTextarea" class="p1 green">{{movewordreal}}</p>
+              <template v-for="item in objHistory | reverse" >
+                <p class='p1'>{{(new Date(item.date)).toLocaleDateString()}}</p>
+                <p v-tap="setMoveWordReal(subitem)"  v-for="subitem in item.item | reverse" track-by="$index" class='p2'>{{subitem}}</p>
+              </template>
+            </template>
+            <p v-else class='p1'>EMPTY</p>
           </div>
         </section>
       </content>
@@ -68,12 +76,23 @@ export default {
     index:0,
     nvabarBtnRight:Function,
     sentence:undefined,
-    history:""
+    history:"",
+    movewordreal:""
   },
   components:{
     navbar
   },
   computed:{
+    objHistory:function(){
+      let history = {}
+      try{
+        history = JSON.parse(this.history)
+      }catch(err){
+        return undefined
+      }
+      console.log(history)
+      return history
+    },
     render_history:function(){
       let history = {}
       try{
@@ -99,6 +118,23 @@ export default {
     }
   },
   methods:{
+    setTextarea:function(){
+      this.sentence = this.movewordreal
+    },
+    setMoveWordReal:function(sentence){
+      // self.sentence = ""
+      let self = this
+      API
+      .set_move_word_real(this._id,sentence)
+      .then(function(){
+        self.movewordreal = sentence
+      })
+      .catch(function(err){
+        console.log(err)
+        self.$root.popup_text = err
+        self.$root.show_popup = true
+      })
+    },
     sentence_moveword_left:function(){
       document.getElementById("sentence").focus();
       // setTimeout(function() {
@@ -121,10 +157,19 @@ export default {
       }catch(err){
         return "<p class='p1'>EMPTY</p>"
       }
-      // $vm0.lists[1].history[0].item[0]
-      let history_last = history[history.length-1]
+      // 取正确句子
+      
+      let sentence = ""
+      if(this.movewordreal != "" && this.movewordreal != undefined)
+      {
+        sentence = this.movewordreal
+      }else{
+        let history_last = ""
+        history_last = history[history.length-1]
+        sentence = history_last.item[history_last.item.length-1]
+      }
 
-      let sentence = history_last.item[history_last.item.length-1]
+      
       
       // split word
       let sentences = sentence.split(' ')
@@ -146,8 +191,6 @@ export default {
             repalce_str += "_"
           }
           sentences[number] = {length:sentences[number].length,type:"REPLACE_STR"}
-
-
       }
 
       let result = ""
@@ -156,8 +199,7 @@ export default {
           result = result + ` <input class="moveword${sentences[i].length}" type="text" name="" value=""> `
         }else{
           result = result + ` <span>${sentences[i]}</span> ` 
-        }
-        
+        } 
       }
       this.sentence_show = false
       this.moveword = result
@@ -213,7 +255,11 @@ export default {
       API
       .wordAdd(this.word,this.sentence,self.describe)
       .then(function(res){
-        self.callback(null,{_id:res._id,word:self.word,sentence:self.sentence,describe:self.describe})
+        self.callback(null,
+          {_id:res._id,
+          word:self.word,
+          sentence:self.sentence,
+          describe:self.describe})
         self.word = ""
         self.describe = ""
       })
@@ -232,7 +278,13 @@ export default {
       API
       .alterWord(id,word,sentence,describe)
       .then(function(res){
-        self.callback(null,{_id:res._id,index:self.index,word:self.word,sentence:self.sentence,describe:self.describe})
+        self.callback(null,{_id:res._id,
+          index:self.index,
+          word:self.word,
+          sentence:self.sentence,
+          describe:self.describe,
+          movewordreal:self.movewordreal
+        })
       })
       .catch(function(err){
         self.$root.popup_text = err.MSG
