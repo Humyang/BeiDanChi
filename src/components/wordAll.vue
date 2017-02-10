@@ -2,7 +2,7 @@
   <div class="wrapper wordall">
       <navbar title="所有单词" :left="navbar_btn_left" :right="navbar_btn_right"></navbar>
       <content class="container">
-        <loadmore :top-method="loadTop" >
+        <!-- <loadmore :top-method="loadTop" > -->
           <section id="word_card" class="word_card">
             <div 
             v-for="item in lists"
@@ -23,7 +23,7 @@
               </template>
             </div>
           </section>
-        </loadmore>
+        <!-- </loadmore> -->
       </content>
       <add-word :show.sync="edit.show" 
                 :callback="editWord()"

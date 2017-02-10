@@ -6,7 +6,7 @@
         :right="navbar_btn_right"
       ></navbar>
       <content class="container">
-        <loadmore :top-method="loadTop" >
+        <!-- <loadmore :top-method="loadTop" > -->
           <section id="word_card" class="word_card">
             <card 
             v-for="item in liste_filter" 
@@ -19,7 +19,7 @@
             :events="hideWord()"
             ></card>
           </section>
-        </loadmore>
+        <!-- </loadmore> -->
       </content>
       <add-word :show.sync="ui.addword" :callback="addWord()"></add-word>
       <add-word :show.sync="ui.editword"
