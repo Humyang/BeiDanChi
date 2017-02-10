@@ -30,7 +30,7 @@
                 :describe="edit.describe"
                 :sentence="edit.sentence"
                 :history="edit.history"
-                :moveword_real="edit.moveword_real"
+                :movewordreal="edit.movewordreal"
                 mode="edit"></add-word>
   </div>
 </template>
@@ -103,7 +103,7 @@ export default {
           describe:item.describe,
           history:﻿JSON.stringify(item.history),
           index:index,
-          moveword_real:item.moveword_real
+          movewordreal:item.movewordreal
         })
         self.ui.editword = true
       }

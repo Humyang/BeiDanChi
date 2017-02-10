@@ -13,6 +13,10 @@ import login from './components/login.vue'
 // install router
 Vue.use(Router)
 Vue.use(vueTap)
+Vue.filter('reverse', function(value) {
+  // slice to make a copy of array, then reverse the copy
+  return value.slice().reverse();
+})
 // routing
 var router = new Router()
 

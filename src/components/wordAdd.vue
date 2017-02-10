@@ -43,9 +43,10 @@
           <div v-if="tabs_index===2" class="history">
             <!-- {{{render_history}}} -->
             <template v-if="objHistory!=undefined" >
-              <template v-for="item in objHistory" >
+              <p v-tap="setTextarea" class="p1 green">{{movewordreal}}</p>
+              <template v-for="item in objHistory | reverse" >
                 <p class='p1'>{{(new Date(item.date)).toLocaleDateString()}}</p>
-                <p on-tap="setMoveWordReal(subitem)"  v-for="subitem in item.item" track-by="$index" class='p2'>{{subitem}}</p>
+                <p v-tap="setMoveWordReal(subitem)"  v-for="subitem in item.item | reverse" track-by="$index" class='p2'>{{subitem}}</p>
               </template>
             </template>
             <p v-else class='p1'>EMPTY</p>
@@ -76,7 +77,7 @@ export default {
     nvabarBtnRight:Function,
     sentence:undefined,
     history:"",
-    moveword_real:""
+    movewordreal:""
   },
   components:{
     navbar
@@ -117,10 +118,17 @@ export default {
     }
   },
   methods:{
+    setTextarea:function(){
+      this.sentence = this.movewordreal
+    },
     setMoveWordReal:function(sentence){
-      self.sentence = ""
+      // self.sentence = ""
+      let self = this
       API
       .set_move_word_real(this._id,sentence)
+      .then(function(){
+        self.movewordreal = sentence
+      })
       .catch(function(err){
         console.log(err)
         self.$root.popup_text = err
@@ -150,16 +158,18 @@ export default {
         return "<p class='p1'>EMPTY</p>"
       }
       // 取正确句子
-      let history_last = ""
+      
       let sentence = ""
-      if(this.moveword_real != "" && this.moveword_real != undefined)
+      if(this.movewordreal != "" && this.movewordreal != undefined)
       {
-        history_last = this.moveword_real
+        sentence = this.movewordreal
       }else{
+        let history_last = ""
         history_last = history[history.length-1]
+        sentence = history_last.item[history_last.item.length-1]
       }
 
-      sentence = history_last.item[history_last.item.length-1]
+      
       
       // split word
       let sentences = sentence.split(' ')
@@ -273,7 +283,7 @@ export default {
           word:self.word,
           sentence:self.sentence,
           describe:self.describe,
-          moveword_real:self.moveword_real
+          movewordreal:self.movewordreal
         })
       })
       .catch(function(err){

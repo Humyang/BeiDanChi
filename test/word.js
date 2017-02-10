@@ -172,11 +172,19 @@ describe('MoveWord',function() {
             console.log('获取显示列表11: ',listGet)
 
             let wordId = yield API.wordId(listGet.list[0]._id,token)
-            assert(wordId.status,true,wordId,'查询单个单词')
-            console.log('查询单个单词22: ',wordId)
+            assert(wordId.status,true,wordId,'查询单个单词 ----- 设置前')
+            console.log('查询单个单词 ----- 设置前',wordId)
 
-            let alterWord = yield API.word_sentence_clear(listGet.list[0]._id,'clear sentence')
+            let alterWord = yield API.set_move_word_real(listGet.list[0]._id,'set true word',token)
+            assert(alterWord.status,true,alterWord,'查询单个单词 ----- 设置后')
+
+            let wordId2 = yield API.wordId(listGet.list[0]._id,token)
+            assert(wordId2.status,true,wordId2,'查询单个单词 ----- 设置后')
+            console.log('查询单个单词 ----- 设置后',wordId2)
+
+            done()
         }).catch(function(err){
+            console.log(err)
             done(err)
         })
     })

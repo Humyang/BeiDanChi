@@ -169,7 +169,7 @@ function* alter(next){
       res
     }
 }
-function* sentence_clear(next){
+function* sentenceClear(next){
     let id = ""
 
     let sentence = this.request.fields.sentence
@@ -223,6 +223,10 @@ function* setMoveWordReal(next){
     .update({_id: id},
             {$set: {movewordreal: sentence}})
 
+    this.body = {
+                status:true,
+                update_result
+            }
 }
 module.exports = {
     add,
@@ -232,6 +236,6 @@ module.exports = {
     hide,
     move,
     alter,
-    sentence_clear,
-    set_move_word_real
+    sentenceClear,
+    setMoveWordReal
 }
