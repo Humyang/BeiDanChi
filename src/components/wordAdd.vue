@@ -25,13 +25,13 @@
         <section class="detail_wrap">
           <div v-show="tabs_index===0" >
             <textarea v-show="sentence_show" id="sentence"  v-model="sentence" name="" id="" cols="30" rows="10"></textarea>
-            <div v-show="!sentence_show" class="d2">
+            <div v-show="!sentence_show && mode==='edit'" class="d2">
               <p id="sentence_moveword_p">{{{moveword}}}</p>
               
               <a class="btn_prime blue" v-tap="sentence_show=true">返回</a>
             </div>
-            <a class="btn_prime green" v-tap="sentence_clear">记住了</a>
-            <div class="d1">
+            <a v-if="mode==='edit'" class="btn_prime green" v-tap="sentence_clear">记住了</a>
+            <div v-if="mode==='edit'" class="d1">
               <a class="btn_prime blue" v-tap="sentence_moveword">填空</a>
               <a class="btn_prime blue" @click="sentence_moveword_left">&lt;</a>
               <a class="btn_prime blue" v-tap="sentence_moveword_right">&gt;</a>
@@ -248,6 +248,9 @@ export default {
     },
     navbar_btn_left:function(){
       this.show = false
+      this.word = ""
+      this.describe = ""
+      this.sentence = ""
     },
     addword:function(){
       let self = this
@@ -262,6 +265,7 @@ export default {
           describe:self.describe})
         self.word = ""
         self.describe = ""
+        self.sentence = ""
       })
       .catch(function(err){
         self.$root.popup_text = err.MSG

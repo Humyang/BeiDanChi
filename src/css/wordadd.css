@@ -27,7 +27,9 @@
     text-align: center;
     color: white;
 }
-
+.wordadd .detail_wrap .d2 input{
+    font-size:18px
+}
 .wordadd .detail_wrap .d2 input.moveword0 {width: 10px;}
 .wordadd .detail_wrap .d2 input.moveword1 {width: 10px;}
 .wordadd .detail_wrap .d2 input.moveword2 {width: 20px;}
