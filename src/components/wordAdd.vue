@@ -33,8 +33,6 @@
             <a v-if="mode==='edit'" class="btn_prime green" v-tap="sentence_clear">记住了</a>
             <div v-if="mode==='edit'" class="d1">
               <a class="btn_prime blue" v-tap="sentence_moveword">填空</a>
-              <a class="btn_prime blue" @click="sentence_moveword_left">&lt;</a>
-              <a class="btn_prime blue" v-tap="sentence_moveword_right">&gt;</a>
             </div>
           </div>
           <div v-show="tabs_index===1" >
@@ -134,21 +132,6 @@ export default {
         self.$root.popup_text = err
         self.$root.show_popup = true
       })
-    },
-    sentence_moveword_left:function(){
-      document.getElementById("sentence").focus();
-      // setTimeout(function() {
-        // var textarea = document.getElementById("sentence")
-        // textarea.focus()
-        // textarea.setAttribute('selectionStart', 5)
-        // console.log(123)
-      // }, 2000);
-      
-      // textarea.selectionStart = 5
-      
-    },
-    sentence_moveword_right:function(){
-
     },
     sentence_moveword:function(){
       let history = {}
