@@ -1,5 +1,4 @@
-// import $ from 'jquery';
-// https://github.com/github/fetch
+
 require('es6-promise').polyfill();
 var fetch = require('isomorphic-fetch');
 import * as BASE from './base.js'
@@ -64,7 +63,6 @@ const mFetch = function(path,data,token) {
                 MSG:ex.message
             })
         });
-    })
-    
+    })   
 };
 export default mFetch

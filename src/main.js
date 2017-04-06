@@ -5,6 +5,9 @@ import wordList from './components/wordList.vue'
 import vueTap from './vendor/v-tap'
 import wordAll from './components/wordAll.vue'
 import login from './components/login.vue'
+
+import '../favicon.ico'
+
 /* eslint-disable no-new */
 // new Vue({
 //   el: 'body',

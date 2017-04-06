@@ -71,6 +71,14 @@ module.exports = {
         }
       },
       {
+        test: /\.(ico)(\?.*)?$/,
+        loader: 'file-loader',
+        query: {
+          limit: 10000,
+          name: utils.assetsPath('../[name].[ext]')
+        }
+      },
+      {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url',
         query: {

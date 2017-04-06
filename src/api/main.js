@@ -39,14 +39,6 @@ export const listGetAll = function(index,number){
         page_index:index,
         page_number:number
     }
-    // function preSet(err,res){
-    //     if(res){
-    //     for (var i = res.list.length - 1; i >= 0; i--) {
-    //             res.list[i].end_time = M.timeFormat(res.list[i].end_time)
-    //         }
-    //     }
-    //     callback(err,res)
-    // }
     return mFetch('/word/all'
             ,data
             ).then(function(res){
