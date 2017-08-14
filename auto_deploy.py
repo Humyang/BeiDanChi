@@ -40,8 +40,8 @@ if sync_github == 1:
             print 'build production -- success'
             # close static serve and api serve
             print 'close serve -- begin'
-            close_static = get_pid_close(80)
-            close_api = get_pid_close(8081)
+            close_static = get_pid_close(8100)
+            close_api = get_pid_close(8101)
             if close_static == 1 and close_api == 1:
                 print 'close serve -- success'
             else:
