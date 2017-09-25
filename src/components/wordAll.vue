@@ -31,6 +31,7 @@
                 :index="edit.index"
                 :word="edit.word"
                 :describe="edit.describe"
+                :sentence="edit.sentence"
                 mode="edit"></add-word>
 
   </div>
@@ -59,7 +60,8 @@ export default {
         id:"",
         index:0,
         word:"",
-        describe:""
+        describe:"",
+        sentence:""
       }
     }
   },
@@ -78,6 +80,7 @@ export default {
         this.edit.id = this.lists[index]._id
         this.edit.word = this.lists[index].word
         this.edit.describe = this.lists[index].describe
+        this.edit.sentence = this.lists[index].sentence
         this.edit.index = index
         this.edit.show = true
       // }
@@ -88,6 +91,7 @@ export default {
         // id,index,word,describe,
         self.lists[res.index].word=res.word
         self.lists[res.index].describe=res.describe
+        self.lists[res.index].sentence=res.sentence
         self.edit.show = false
       }
     },
