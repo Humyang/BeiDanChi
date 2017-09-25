@@ -6,5 +6,8 @@
 .wordall .list .p3 { color: #ffbda9; text-align: right; margin-bottom: 0.15rem; }
 .wordall .list .p3.green { color: green; }
 .wordall .list footer { overflow: hidden; margin: 0.12rem 0; }
-.wordall .list footer a { width: 50%; display: block; float: left; text-align: center; color: #009688; text-decoration: none; }
+.wordall .list footer a { width: 50%; display: block; float: left; text-align: center; color: #009688; text-decoration: none;    font-size: 0.3rem; }
 .wordall .list .line { height: 0.02rem; width: 150%; background-color: #bfbaba; overflow: hidden; margin-left: -0.3rem; }
+section#word_card {
+    margin-top: 1rem;
+}

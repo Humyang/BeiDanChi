@@ -1,16 +1,14 @@
 <template>
   <div 
-    :class="size"
     class="card">
-    <p v-tap="wordclick(id,index)">
-    {{word}}
-    <br/>
-    {{sentence}}
-    </p>
+    <div v-tap="wordclick(id,index)">
+      <p class="title">{{word}}</p>
+      <p class="preview">例句：{{sentence}}</p>
+    </div>
     <footer>
-      <a v-tap="events[0](id,index)" ><img :src="img1" alt=""></a>
-      <a v-tap="events[1](id,index)" ><img :src="img2" alt=""></a>
-      <a v-tap="events[2](id,index)" ><img :src="img3" alt=""></a>
+      <a v-tap="events[0](id,index)" >1~10 天</a>
+      <a class="middleBtn" v-tap="events[1](id,index)" >10~100 天</a>
+      <a v-tap="events[2](id,index)" >9999 天</a>
     </footer>
   </div>
 </template>

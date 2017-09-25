@@ -1,15 +1,83 @@
-/* 单词列表 */
-.card { color: white; display: inline-block; background-color: #009688; border-radius: 2px; overflow: hidden; float: left; }
-.card p { word-break: break-all; margin: 0; }
-.card footer { background-color: white; margin: 0; }
-.card footer a { width: 50px; float: left; text-align: center; height: 20px; margin: 5px 0; }
-.card.middle { width: 150px; height: 150px; margin: 5px; }
-.card.middle p { padding: 10px; height: 100px; font-size: 16px; overflow: hidden; }
-.card.middle footer { height: 30px; }
-.card.middle footer a { width: 50px; }
-.card.middle footer a img { width: 18px; height: 18px; }
-.card.small { width: 60px; height: 70px; margin: 5px; }
-.card.small p { font-size: 10px; padding: 5px; margin: 0; height: 40px; }
-.card.small footer { height: 20px; }
-.card.small footer a { width: 20px; text-align: center; margin-top: 4px; }
-.card.small footer a img { height: 12px; }
+.card {
+	color: white;
+	background-color: #009688;
+	border-radius: 2px
+}
+
+.card p {
+	word-break: break-all;
+	margin: 0
+}
+
+.card footer {
+	background-color: white;
+	margin: 0
+}
+
+.card footer a {
+	width: 50px;
+	float: left;
+	text-align: center
+}
+
+.card {
+	margin: 5px
+}
+
+.card div {
+	padding: 10px;
+	height: 100px;
+	font-size: 16px;
+	overflow: hidden
+}
+
+.card footer {
+	overflow: hidden
+}
+
+.card footer a {
+	width: 33.1%;
+	color: black;
+	font-size: 0.38rem;
+	line-height: 0.8rem;
+	margin: 0;
+	padding: 0
+}
+
+.card footer a.middleBtn {
+	border: 1px solid #ddd;
+	border-top: 0;
+	border-bottom: 0
+}
+
+.card footer a img {
+	width: 18px;
+	height: 18px
+}
+
+.card.small {
+	width: 60px;
+	height: 70px;
+	margin: 5px
+}
+
+.card.small p {
+	font-size: 10px;
+	padding: 5px;
+	margin: 0;
+	height: 40px
+}
+
+.card.small footer {
+	height: 20px
+}
+
+.card.small footer a {
+	width: 20px;
+	text-align: center;
+	margin-top: 4px
+}
+
+.card.small footer a img {
+	height: 12px
+}

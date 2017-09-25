@@ -2,8 +2,8 @@
   <header class="nav_bar">
       <div class="_btn left">
         <p v-tap="back">
-          <img v-if="left_type==='hambraug'" :src="img_url2" alt="">
-          <img v-if="left_type==='back'" :src="img_url3" alt="">
+          <span v-if="left_type==='hambraug'" >汉堡</span>
+          <span v-if="left_type==='back'">返回</span>
           <span v-if="left_type==='close'" >关闭</span>
         </p>
       </div>
@@ -12,7 +12,7 @@
       </div>
       <div class="_btn right">
         <p v-tap="go">
-          <img v-if="right_type==='add'" :src="img_url" alt="">
+          <span v-if="right_type==='add'" >添加</span>
           <span v-if="right_type==='done'">完成</span>
           <!-- <span v-if="right_type==='add'">添加</span> -->
           <span v-if="right_type==='save'">保存</span>
