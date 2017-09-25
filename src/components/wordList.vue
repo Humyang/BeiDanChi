@@ -22,7 +22,7 @@
         <!-- </loadmore> -->
       </content>
       <add-word :show.sync="ui.addword" :callback="addWord()"></add-word>
-      <add-word :show.sync="ui.editword"
+      <add-word :is_show.sync="ui.editword"
                 :callback="editWord()"
                 :_id="edit.id"
                 :index="edit.index"
@@ -111,7 +111,6 @@ export default {
     editWord:function(){
       var self = this
       return function(err,res){
-        // id,index,word,describe,
         self.lists[res.index].word=res.word
         self.lists[res.index].describe=res.describe
         self.lists[res.index].sentence=res.sentence

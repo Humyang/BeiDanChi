@@ -1,5 +1,5 @@
 <template>
-  <div v-if="show"  class=" wrapper wordadd">
+  <div v-show="is_show"  class=" wrapper wordadd">
       <navbar 
       :title="calc_title()"
       :left="navbar_btn_left" 
@@ -65,7 +65,7 @@ var method = require('../../serve/method.js')
 
 export default {
   props:{
-    show:false,
+    is_show:false,
     callback:Function,
     word:undefined,
     describe:"",
@@ -230,10 +230,10 @@ export default {
       return this.mode==='add'?this.addword:this.editword
     },
     navbar_btn_left:function(){
-      this.show = false
-      this.word = ""
-      this.describe = ""
-      this.sentence = ""
+      this.is_show = false
+      // this.word = ""
+      // this.describe = ""
+      // this.sentence = ""
     },
     addword:function(){
       let self = this
@@ -274,7 +274,8 @@ export default {
         })
       })
       .catch(function(err){
-        self.$root.popup_text = err.MSG
+
+        self.$root.popup_text = err.MSG || err
         self.$root.show_popup = true
       })
     },
