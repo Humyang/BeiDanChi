@@ -25,13 +25,14 @@
           </section>
         <!-- </loadmore> -->
       </content>
-      <add-word :show.sync="edit.show" 
+      <add-word :is_show.sync="edit.show" 
                 :callback="editWord()"
                 :_id="edit.id"
                 :index="edit.index"
                 :word="edit.word"
                 :describe="edit.describe"
                 mode="edit"></add-word>
+
   </div>
 
 </template>

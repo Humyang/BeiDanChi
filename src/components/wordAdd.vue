@@ -34,6 +34,7 @@
             <div v-if="mode==='edit'" class="d1">
               <a class="btn_prime blue" v-tap="sentence_moveword">填空</a>
             </div>
+            <a v-if="mode==='edit'" class="btn_prime green" v-tap="sentence_clear">使用说明</a>
           </div>
           <div v-show="tabs_index===1" >
             <textarea v-model="describe" name="" id="" cols="30" rows="10"></textarea >

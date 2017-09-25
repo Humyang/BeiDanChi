@@ -7,8 +7,9 @@
       ></navbar>
       <content class="container">
         <!-- <loadmore :top-method="loadTop" > -->
-          <section id="word_card" class="word_card">
+          <section id="word_card" class="word_card" >
             <card 
+            transition="slide" class="animated board"
             v-for="item in liste_filter" 
             :word="item.word"
             :index="$index"
@@ -21,7 +22,7 @@
           </section>
         <!-- </loadmore> -->
       </content>
-      <add-word :show.sync="ui.addword" :callback="addWord()"></add-word>
+      <add-word :is_show.sync="ui.addword" :callback="addWord()"></add-word>
       <add-word :is_show.sync="ui.editword"
                 :callback="editWord()"
                 :_id="edit.id"
