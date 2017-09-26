@@ -184,9 +184,19 @@
 }
 
 .wordadd .detail_wrap .d2 input.moveword16 {
-	width: 0.150rem;
+	width: 6rem;
 }
 
 .wordadd .detail_wrap .d2 input.moveword17 {
-	width: 0.160rem;
+	width: 6.4rem;
+}
+
+textarea#sentence {
+    line-height: 0.8rem;
+    background-color: transparent;
+    background-image: linear-gradient(#eee 1px,transparent 1px);
+    background-attachment: local;
+    background-size: 100% 0.8rem;
+    border: 0;
+    z-index: 1;
 }
