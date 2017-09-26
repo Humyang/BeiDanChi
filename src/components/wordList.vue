@@ -190,6 +190,7 @@ export default {
       console.log("返回数据",res)
     })
     .catch(function(err){
+      console.log(err)
       self.$root.pageHandle(err)
     })
   }

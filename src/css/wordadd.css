@@ -1,49 +1,192 @@
-.wordadd .container { background-color: #36474F; overflow: auto; display: block; height: 100%; padding-bottom: 50px; }
-.wordadd .container .search_wrap { margin-top: 1rem; }
-.wordadd .container .search_wrap p { background-color: white; margin: 0 auto; width: 6.2rem; height: 45px; border-radius: 2px; }
-.wordadd .container .search_wrap img { padding: 14px; float: left; }
-.wordadd .container .search_wrap input[type="text"] { font-size: 14px; line-height: 45px; padding: 0; margin: 0; color: #000000; width: 5.2rem; border: 0; margin-left: 20px; }
-.wordadd .container .detail_tabs ul { overflow: hidden; background-color: #00BBD3; border-radius: 1px; }
-.wordadd .container .detail_tabs { margin-top: 10px; }
-.wordadd .container .detail_tabs ul li { font-size: 18px; float: left; width: 2.13rem; text-align: center; color: white; padding: 15px 0; }
-.wordadd .container .detail_tabs li.active { border-bottom: 2px solid #FFFF8C; }
-.wordadd .detail_wrap { margin-top: 40px;margin-bottom: 130px;}
-.wordadd .detail_wrap textarea { width: 6.3rem; border: 0; margin: 0; padding: 0; background-color: #36474f; border-bottom: 2px solid #80CBC4; margin-left: 5px; color: white; font-size: 16px; }
-.wordadd .detail_wrap .history { margin: 0 15px;word-break: break-all; }
-.wordadd .detail_wrap .history .p1 { font-size: 28px; color: white; }
-.wordadd .detail_wrap .history .p1.green {color: #e2f900;}
-.wordadd .detail_wrap .history .p2 { font-size: 18px; color: white; margin-left: 25px; }
-.wordadd .detail_wrap .d1 a {width:100px;display: inline-block;}
-.wordadd .detail_wrap .d1 {text-align:center}
-.wordadd .detail_wrap .d2 {
-    color: white;
-    font-size: 18px;
+.wordadd .container {
+	background-color: #36474F;
+	overflow: auto;
+	display: block;
+	height: 100%;
+	padding-bottom: 50px;
 }
-.wordadd .detail_wrap .d2 input{
-    display: inline-block;
-    background-color: #36474f;
+
+.wordadd .container .search_wrap {
+	margin-top: 1rem;
+}
+
+.wordadd .container .search_wrap p {
+	background-color: white;
+    margin: 0 auto;
+    width: 6.2rem;
+    height: 1rem;
+    border-radius: 2px;
+    line-height: 1.2rem;
+}
+
+.wordadd .container .search_wrap img {
+	padding: 14px;
+	float: left;
+}
+
+.wordadd .container .search_wrap input[type="text"] {
+    font-size: 0.58rem;
+    line-height: 45px;
+    padding: 0;
+    margin: 0;
+    color: #000000;
+    width: 5.2rem;
     border: 0;
-    border-bottom: 1px solid #fff;
-    text-align: center;
+    margin-left: 20px;
+}
+
+.wordadd .container .detail_tabs ul {
+	overflow: hidden;
+	background-color: #00BBD3;
+	border-radius: 1px;
+}
+
+.wordadd .container .detail_tabs {
+	margin-top: 10px;
+}
+
+.wordadd .container .detail_tabs ul li {
+	font-size: 18px;
+	float: left;
+	width: 2.13rem;
+	text-align: center;
+	color: white;
+	padding: 15px 0;
+}
+
+.wordadd .container .detail_tabs li.active {
+	border-bottom: 2px solid #FFFF8C;
+}
+
+.wordadd .detail_wrap {
+	margin-top: 40px;
+	margin-bottom: 130px;
+}
+
+.wordadd .detail_wrap textarea {
+	width: 6.3rem;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background-color: #36474f;
+    border-bottom: 2px solid #80CBC4;
+    margin-left: 5px;
     color: white;
+    font-size: 0.8rem;
+    height: 5rem;
 }
-.wordadd .detail_wrap .d2 input{
-    font-size:18px
+
+.wordadd .detail_wrap .history {
+	margin: 0 15px;
+	word-break: break-all;
 }
-.wordadd .detail_wrap .d2 input.moveword0 {width: 10px;}
-.wordadd .detail_wrap .d2 input.moveword1 {width: 10px;}
-.wordadd .detail_wrap .d2 input.moveword2 {width: 20px;}
-.wordadd .detail_wrap .d2 input.moveword3 {width: 30px;}
-.wordadd .detail_wrap .d2 input.moveword4 {width: 40px;}
-.wordadd .detail_wrap .d2 input.moveword5 {width: 50px;}
-.wordadd .detail_wrap .d2 input.moveword6 {width: 60px;}
-.wordadd .detail_wrap .d2 input.moveword7 {width: 70px;}
-.wordadd .detail_wrap .d2 input.moveword8 {width: 80px;}
-.wordadd .detail_wrap .d2 input.moveword9 {width: 90px;}
-.wordadd .detail_wrap .d2 input.moveword10 {width: 100px;}
-.wordadd .detail_wrap .d2 input.moveword11 {width: 110px;}
-.wordadd .detail_wrap .d2 input.moveword12 {width: 120px;}
-.wordadd .detail_wrap .d2 input.moveword13 {width: 130px;}
-.wordadd .detail_wrap .d2 input.moveword14 {width: 140px;}
-.wordadd .detail_wrap .d2 input.moveword16 {width: 150px;}
-.wordadd .detail_wrap .d2 input.moveword17 {width: 160px;}
+
+.wordadd .detail_wrap .history .p1 {
+	font-size: 28px;
+	color: white;
+}
+
+.wordadd .detail_wrap .history .p1.green {
+	color: #e2f900;
+}
+
+.wordadd .detail_wrap .history .p2 {
+	font-size: 18px;
+	color: white;
+	margin-left: 25px;
+}
+
+.wordadd .detail_wrap .d1 a {
+	width: 100px;
+	display: inline-block;
+}
+
+.wordadd .detail_wrap .d1 {
+	text-align: center
+}
+
+.wordadd .detail_wrap .d2 {
+	color: white;
+	font-size: 18px;
+}
+
+.wordadd .detail_wrap .d2 input {
+	display: inline-block;
+	background-color: #36474f;
+	border: 0;
+	border-bottom: 1px solid #fff;
+	text-align: center;
+	color: white;
+}
+
+.wordadd .detail_wrap .d2 input {
+	font-size: 0.4rem;
+}
+
+.wordadd .detail_wrap .d2 input.moveword0 {
+	width: 0.4rem;
+}
+
+.wordadd .detail_wrap .d2 input.moveword1 {
+	width: 0.4rem;
+}
+
+.wordadd .detail_wrap .d2 input.moveword2 {
+	width: 0.8rem;
+}
+
+.wordadd .detail_wrap .d2 input.moveword3 {
+	width: 1.2rem;
+}
+
+.wordadd .detail_wrap .d2 input.moveword4 {
+	width: 1.6rem;
+}
+
+.wordadd .detail_wrap .d2 input.moveword5 {
+	width: 2.0rem;
+}
+
+.wordadd .detail_wrap .d2 input.moveword6 {
+	width: 2.4rem;
+}
+
+.wordadd .detail_wrap .d2 input.moveword7 {
+	width: 2.8rem;
+}
+
+.wordadd .detail_wrap .d2 input.moveword8 {
+	width: 3.2rem;
+}
+
+.wordadd .detail_wrap .d2 input.moveword9 {
+	width: 3.6rem;
+}
+
+.wordadd .detail_wrap .d2 input.moveword10 {
+	width: 4rem;
+}
+
+.wordadd .detail_wrap .d2 input.moveword11 {
+	width: 4.4rem;
+}
+
+.wordadd .detail_wrap .d2 input.moveword12 {
+	width: 4.8rem;
+}
+
+.wordadd .detail_wrap .d2 input.moveword13 {
+	width: 5.2rem;
+}
+
+.wordadd .detail_wrap .d2 input.moveword14 {
+	width: 5.6rem;
+}
+
+.wordadd .detail_wrap .d2 input.moveword16 {
+	width: 0.150rem;
+}
+
+.wordadd .detail_wrap .d2 input.moveword17 {
+	width: 0.160rem;
+}
